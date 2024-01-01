@@ -1,6 +1,7 @@
 import './App.css';
 import {Routes,Route}from 'react-router-dom';
 import {Nav} from './Contents/JSFiles/Home/Navigation/Nav.js';
+import {Footer} from './Contents/JSFiles/Home/Navigation/Footer.js';
 import "react-toastify/dist/ReactToastify.css";
 import {BrowserRouter}from 'react-router-dom';
 import {Admin} from './Contents/JSFiles/Home/Admin.js'
@@ -20,7 +21,8 @@ function App() {
         <Route path='/' exact element={<HeroSection/>}/>
         <Route path='/AboutMe' exact element={<AboutMe/>}/>
       </Routes> 
-      </ BrowserRouter >    
+      </ BrowserRouter > 
+      <Footer />    
     </div> 
   );
 }

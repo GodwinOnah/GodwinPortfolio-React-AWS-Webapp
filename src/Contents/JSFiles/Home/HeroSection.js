@@ -1,6 +1,7 @@
 import React from 'react';
-import { ContactMe } from './ContactMe';
-import { Pictures } from './Pictures';
+import { ContactMe } from './ContactMe.js';
+import { Pictures } from './Pictures.js';
+import { Projects } from './Projects.js';
 import '../../../Contents/CSSFiles/HeroSection.css';
 import image1 from '../../Images/Obande3.jpeg'
 
@@ -13,9 +14,6 @@ export const HeroSection = () => {
                    
                     <hr />
                     <div class="divC"><ContactMe/></div>
-                    <div class="profile">
-                       
-                    </div>
                     
                     <div class="row"  style={{margin:"50px"}}>
                     <div class="col-6 full-stack">
@@ -41,12 +39,29 @@ export const HeroSection = () => {
                     </div>
                     </div>
                    
-                    
-                    <div class="pictures">
-                        <h1>Images</h1>
-                    <Pictures/>
-                    </div>
+                <div>  
+                <h2>Images</h2>
+                <div class="images">               
+                <Pictures/>
                 </div>
+                </div>  
+
+                <div>  
+                <h2>Skills</h2>
+                <div class="images">               
+                <Pictures/>
+                </div>
+                </div>  
+
+                <div>
+                <h2>Projects</h2>
+                <div class="projects"> 
+                <Projects/>
+                </div>
+                </div>
+                    
+                </div>
+            
                 </div>
                                 );
                                 }

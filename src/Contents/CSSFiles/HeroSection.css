@@ -1,15 +1,19 @@
-.addToCart{
-    margin: 10px;
-}
+.images{
+    padding: 5px;
+    border: 3px solid black;
+    margin-left: auto;
+    margin-right: auto;
+     margin: 10px;
+ }
 
-.clothings{
-   justify-content: center;
+
+.projects{
+    margin: 10px;
     padding: 5%;
-    margin-left: 0;
-   display:grid;
-    grid-template-columns: repeat(auto-fill,minmax(30%,1fr));
-   grid-template-rows: repeat(auto-fill,minmax(15%,1fr)); 
-    place-items: center;
+    margin-left: auto;
+    margin-right: auto;
+   padding: 5px;
+   border: 3px solid black;
 }
 .divC{
     margin: 20px;

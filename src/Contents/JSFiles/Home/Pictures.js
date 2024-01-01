@@ -1,6 +1,8 @@
 // import axios from 'axios';
 import {useState, useEffect} from 'react';
 import '../../../Contents/CSSFiles/HeroSection.css';
+import {Picture} from './Picture.js';
+
 
 
 
@@ -16,11 +18,11 @@ export const Pictures = () => {
      },[]);
 
      return(
-      <div class="clothings">
+      <div>
         { pictures?.map((picture,index)=>
          (
           <div >
-         <Pictures pictures={picture} index={index} />
+         <Picture picture={picture} index={index} />
          </div>
          )
       )
