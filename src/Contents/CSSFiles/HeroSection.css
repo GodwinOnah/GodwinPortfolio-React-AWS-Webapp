@@ -1,0 +1,21 @@
+.addToCart{
+    margin: 10px;
+}
+
+.clothings{
+   justify-content: center;
+    padding: 5%;
+    margin-left: 0;
+   display:grid;
+    grid-template-columns: repeat(auto-fill,minmax(30%,1fr));
+   grid-template-rows: repeat(auto-fill,minmax(15%,1fr)); 
+    place-items: center;
+}
+.divC{
+    margin: 20px;
+}
+
+.Image{
+   max-height: 800px;  max-width: 90%;
+   margin: 50px;
+}
