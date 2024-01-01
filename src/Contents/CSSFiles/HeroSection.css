@@ -16,6 +16,21 @@
 }
 
 .Image{
-   max-height: 800px;  max-width: 90%;
-   margin: 50px;
+   width:45%;
+}
+
+.full-stack{
+    width: 45%;
+}
+
+.profile{
+   
+    border: solid 2px black;
+   margin-left: 5%;
+   margin-right:5%;
+    text-align: center;
+    justify-content: center;
+    height: auto;
+    align-items: center;
+    text-justify: newspaper;
 }

@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React from 'react';
 import {Link } from "react-router-dom";
 import '../../../../Contents/CSSFiles/Nav.css'; 
 import {Login} from '../../Home/Login.js'
@@ -22,7 +22,7 @@ export const Nav = () => {
           
             </li>
            
-         <div class="divC"><Login/></div>
+         <div class="navItem1"><Login/></div>
           </ul>
          
         </div>

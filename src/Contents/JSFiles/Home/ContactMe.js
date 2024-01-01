@@ -135,7 +135,7 @@ export const ContactMe = () =>{
                 Cancel
               </Button>
               <Button type="submit" variant="primary">
-                Submit
+                Send
               </Button>
             </Modal.Footer>
             </form>

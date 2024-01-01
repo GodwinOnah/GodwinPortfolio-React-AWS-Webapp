@@ -1,5 +1,5 @@
  import {useState, useEffect} from 'react';
-import React,{useCallback} from 'react';
+import React from 'react';
 
 export const Messages=()=>{
 
@@ -7,13 +7,14 @@ export const Messages=()=>{
 
     useEffect(()=>{
         fetch('https://obandeclothapp-60d299435905.herokuapp.com/messages').then(res =>{
-          if(res) setMessages(res); 
+          if(res) setMessages(res.data); 
           return;
       })
       },[]);
 
       const userY = () =>{
         return (
+          <div class="listOfCustomers" >
           <table class="table table-hover">
            <thead>
                <tr>
@@ -40,11 +41,8 @@ export const Messages=()=>{
                   }           
                   </tbody>
                  </table>  
+                 </div>
         )}
       
-        return(
-            <div class="listOfCustomers" >
-            {userY()}
-           </div>
-        )
+        
 }

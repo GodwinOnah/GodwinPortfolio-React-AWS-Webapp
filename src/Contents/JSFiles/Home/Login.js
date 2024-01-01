@@ -33,7 +33,7 @@ const handleSubmit = (e) =>{
   ).then(res =>{
           SetIsLoggingIn(false);
           if(res){
-            return (<Link to="/Messages"/>)
+            return (<Link to="/Admin"/>)
           }
           return "You are not Authorize";      
        })
@@ -74,9 +74,9 @@ const handleSubmit = (e) =>{
 
         return (
           <div style={{cursor:"pointer"}}>
-            <button onClick={handleShow}>
-          My Messages
-            </button>
+            <p onClick={handleShow}>
+         Admin
+            </p>
       
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
