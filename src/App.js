@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import {BrowserRouter}from 'react-router-dom';
 import {Admin} from './Contents/JSFiles/Home/Admin.js'
 import {HeroSection} from './Contents/JSFiles/Home/HeroSection.js'
-import {AboutMe} from './Contents/JSFiles/AboutMe/AboutMe.js'
+import {AboutMe} from './Contents/JSFiles/Home/AboutMe.js'
 
 
 
@@ -20,6 +20,7 @@ function App() {
       <Routes>
         <Route path='/' exact element={<HeroSection/>}/>
         <Route path='/AboutMe' exact element={<AboutMe/>}/>
+        <Route path='/Admin' exact element={<Admin/>}/>
       </Routes> 
       </ BrowserRouter > 
       <Footer />    

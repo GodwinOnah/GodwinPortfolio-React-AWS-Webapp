@@ -6,7 +6,7 @@ export const Messages=()=>{
     const [messages,setMessages] = useState("");
 
     useEffect(()=>{
-        fetch('https://obandeclothapp-60d299435905.herokuapp.com/messages').then(res =>{
+        fetch('http://localhost:3002/messages').then(res =>{
           if(res) setMessages(res.data); 
           return;
       })

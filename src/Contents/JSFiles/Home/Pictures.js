@@ -2,28 +2,36 @@
 import {useState, useEffect} from 'react';
 import '../../../Contents/CSSFiles/HeroSection.css';
 import {Picture} from './Picture.js';
+import {Images} from './Images.js';
+import { Carousel } from 'react-responsive-carousel';
+
 
 
 
 
 export const Pictures = () => {
 
-  const [pictures,SetPictures] = useState([]);
+  const [pictures,SetPictures] = useState(Images);
 
-     useEffect(()=>{
-      fetch('https://obandeclothapp-60d299435905.herokuapp.com/pictures').then(res =>{
-        if(res)SetPictures(res.data);
-        return
-       })
-     },[]);
+  const images = []
+
+    //  useEffect(()=>{
+    //   fetch('https://obandeclothapp-60d299435905.herokuapp.com/pictures').then(res =>{
+    //     if(res)SetPictures(res.data);
+    //     return
+    //    })
+    //  },[]);
 
      return(
       <div>
-        { pictures?.map((picture,index)=>
+        { pictures?.map((picture)=>
          (
-          <div >
-         <Picture picture={picture} index={index} />
+          <Carousel>
+           <div >
+         <Picture picture={picture} />
          </div>
+         </Carousel>  
+         
          )
       )
          }

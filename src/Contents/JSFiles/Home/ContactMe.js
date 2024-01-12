@@ -20,12 +20,10 @@ export const ContactMe = () =>{
       const handleSubmit = (e) =>{
         e.preventDefault();
         SetIsSigningIn(true);
-  
-    
-      const datax = {name,email,phone,companyName,message};
-      SetData(datax);
+        const datax = {name,email,phone,companyName,message};
+        SetData(datax);
 
-      fetch('https://obandeclothapp-60d299435905.herokuapp.com/userx',
+      fetch('http://localhost:3002/messages',
      {
       method:'POST',
       headers:{
@@ -43,11 +41,19 @@ export const ContactMe = () =>{
                })
          
       }
-
-  const SignupModal = ()=>{
+      return (
+        <div style={{cursor:"pointer"}}>
+          <a onClick={handleShow}>
+          Contact Me
+          </a>
     
-      return(
-          <div class="modal1">
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Message</Modal.Title>
+            </Modal.Header>
+            <form onSubmit={handleSubmit}>
+            <Modal.Body>
+            <div class="modal1">
             <ToastContainer
                   position='top-right'
                   autoClose={2000}
@@ -66,44 +72,34 @@ export const ContactMe = () =>{
                 <div  class="col-12 login">
                     <input 
                     value={name}
-                    onChange = {(e)=>SetName(e.target.value)}
+                    onChange = {e=>SetName(e.target.value)}
                     type='text' placeholder="Name" />
                 </div>
                 
                 <div  class="col-12 login">
                     <input 
                     value={email}
-                    onChange = {(e)=>SetEmail(e.target.value)}
+                    onChange = {e=>SetEmail(e.target.value)}
                     type='email' placeholder="Email" />
                 </div>
                 <div class="col-12 login">
                     <input 
                     value={phone}
-                    onChange = {(e)=>SetPhone(e.target.value)}type='text' placeholder="Phone" />
+                    onChange = {e=>SetPhone(e.target.value)} type='text' 
+                    placeholder="Phone" />
                  </div>
                  <div class="col-12 login">
                     <input 
                     value={companyName}
-                    onChange = {(e)=>SetCompanyName(e.target.value)}type='text' placeholder="Company Name" />
+                    onChange = {e=>SetCompanyName(e.target.value)} type='text'
+                     placeholder="Company Name" />
                  </div>
                 <div  class="col-12 login">
                     <textarea 
                     value={message}
-                    onChange = {(e)=>SetMessage(e.target.value)}
+                    onChange = {e=>SetMessage(e.target.value)}
                     type='text' placeholder="Type  message..." />
                 </div>
-               
-                 {/* <div class="col-12 login">
-                    <input 
-                    value={password}
-                    onChange = {(e)=>SetPassword(e.target.value)}type='password' placeholder="Choose Password" />
-                 </div>
-                 <div class="col-12 login">
-                    <input 
-                    value={confirmPassword}
-                    onChange = {(e)=>SetConfirmPassword(e.target.value)}
-                    type='password' placeholder="Confirm Password" />
-                 </div> */}
                  <div >
                   <div class="col-12 login">                
                     {isSigningIn && <strong>Sending message...</strong>}
@@ -113,22 +109,6 @@ export const ContactMe = () =>{
               </div>
              
               </div>
-              );
-            };
-    
-      return (
-        <div style={{cursor:"pointer"}}>
-          <button onClick={handleShow}>
-           Contact Me
-          </button>
-    
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Message</Modal.Title>
-            </Modal.Header>
-            <form onSubmit={handleSubmit}>
-            <Modal.Body>
-              <SignupModal/>
               </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>

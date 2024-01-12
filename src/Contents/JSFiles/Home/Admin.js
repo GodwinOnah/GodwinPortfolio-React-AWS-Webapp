@@ -32,7 +32,7 @@ const formSubmitSkill= (e) => {
 
     if(formData == null) setMessage("No File attached");
 
-    fetch('https://obandeclothapp-60d299435905.herokuapp.com/skill',
+    fetch('http://localhost:3002/skills',
     {  
       method:'POST', 
       headers:{
@@ -55,7 +55,7 @@ const formSubmitSkill= (e) => {
     e.preventDefault();
     const datax = {projectTittle,projectDescription,projectLink};
 
-    fetch('https://obandeclothapp-60d299435905.herokuapp.com/project',
+    fetch('http://localhost:3002/project',
     {  
       method:'POST', 
       headers:{
@@ -79,7 +79,7 @@ const formSubmitSkill= (e) => {
 
     if(formData == null) setMessage("No File attached");
 
-      axios.post(`http://https://obandeclothapp-60d299435905.herokuapp.com:8080/api/image/${imageId}/images/uploads`,
+      axios.post(`http://localhost:3002/image/${imageId}/images/uploads`,
       formData,
             {
               onUploadProgress : (progressEvent) => {
@@ -117,7 +117,7 @@ const formSubmitSkill= (e) => {
               pauseOnHover
               theme='light'
               />
-              <h1 style={{color:'Blue', margin:'100px'}}>Welcome Admin</h1>
+              <h1 style={{color:'gold', margin:'100px'}}>Welcome Admin</h1>
               <div>
               <h3>My Messages</h3>
               <hr/>
@@ -126,8 +126,9 @@ const formSubmitSkill= (e) => {
               </div>
               </div>
       
-              <h3>New Skills</h3>
-              <hr/>
+                <hr />
+                    <h2 class="header1">Add Skill</h2>
+                    <hr />
               <div class="container">
                 <form  post ="" onSubmit={formSubmitSkill}>
                 <div class="row addPro ">
@@ -165,7 +166,9 @@ const formSubmitSkill= (e) => {
                       </form>
                 </div>  
 
-                <h3>New Project</h3>
+                    <hr />
+                    <h2 class="header1">Add Projects</h2>
+                    <hr />
               <hr/>
               <div class="container">
                 <form  post ="" onSubmit={formSubmitProject}>
@@ -197,8 +200,9 @@ const formSubmitSkill= (e) => {
                 </div>  
 
 
-                <h3>New Image</h3>
-              <hr/>
+                  <hr />
+                    <h2 class="header1">Add Your Photo</h2>
+                    <hr />
               <div class="container">
                 <form  post ="" onSubmit={formSubmitImage}>
                 <div class="row addPro ">
