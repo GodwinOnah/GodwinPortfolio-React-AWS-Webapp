@@ -40,7 +40,13 @@
 }
 
 .Image{
-   width:45%;
+ border-radius: 50%;
+ height: 600px;
+ width: auto;
+ background-image: url("../Images/Obande2.jpeg");
+ justify-content: center;
+ align-content: center;
+ 
 }
 
 .full-stack{
@@ -61,6 +67,11 @@
 
 .div1{
     margin-top: 120px;
+    border-radius: 30px;
+}
+.div2{
+    margin-bottom: 500px;
+   
 }
 
 .hireMe{
@@ -105,6 +116,8 @@
   background-color: pink;
   color: midnightblue;
   border-radius: 29px;
+  border: 2px solid black;
   width: 80%;
   margin: 0 10%;
 }
+

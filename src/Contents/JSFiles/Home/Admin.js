@@ -12,6 +12,7 @@ const [projectTittle,setProjectTittle] = useState("");
 const [projectLink,setProjectLink] = useState("");
 const [projectDescription,setProjectDescription] = useState("");
 const [image,setImage] = useState(null);
+const [phone,setPhone] = useState("");
 const [imageId,setImageId] = useState("");
 const [progress,setProgress] = useState({started:false, pc:0});
 const [message,setMessage] = useState("");
@@ -26,11 +27,35 @@ const formData = new FormData();
       formData.append('file',file);
 }}
 
+const formSubmitPhone= (e) => {
+  e.preventDefault();
+  const datax = {phone};
+  if(datax == null) setMessage("Enter a phone number");
+
+  fetch('http://localhost:3002/phone',
+  {  
+    method:'POST', 
+    headers:{
+    "Access-Control-Allow-Origin":"*",
+    "Content-Type": "application/json"
+           },
+    body: JSON.stringify(datax)
+  },
+    ).then(res =>{
+          return res.text();      
+                }).then(res=>{
+                  setPhone("");
+                  toast.success(res);
+                             }).catch(error=>{
+                                 toast.warning("Phone number not added");
+                                           });
+}
+
+
 const formSubmitSkill= (e) => {
     e.preventDefault();
     const datax = {skill};
-
-    if(formData == null) setMessage("No File attached");
+    if(datax == null) setMessage("Enter a skill");
 
     fetch('http://localhost:3002/skills',
     {  
@@ -54,7 +79,7 @@ const formSubmitSkill= (e) => {
   const formSubmitProject= (e) => {
     e.preventDefault();
     const datax = {projectTittle,projectDescription,projectLink};
-
+    if(datax == null) setMessage("Enter a project");
     fetch('http://localhost:3002/project',
     {  
       method:'POST', 
@@ -67,7 +92,9 @@ const formSubmitSkill= (e) => {
       ).then(res =>{
             return res.text();      
                   }).then(res=>{
-                    setSkill("");
+                    setProjectLink("");
+                    setProjectTittle("");
+                    setProjectDescription("");
                     toast.success(res);
                                }).catch(error=>{
                                    toast.warning("Project not added");
@@ -79,7 +106,7 @@ const formSubmitSkill= (e) => {
 
     if(formData == null) setMessage("No File attached");
 
-      axios.post(`http://localhost:3002/image/${imageId}/images/uploads`,
+      axios.post(`http://localhost:3002/image/${imageId}/images/photo`,
       formData,
             {
               onUploadProgress : (progressEvent) => {
@@ -104,8 +131,9 @@ const formSubmitSkill= (e) => {
 
         
           return(
-            <div>
-               <ToastContainer
+            <>
+            <div class="admin_bg">
+              <ToastContainer
               position='top-right'
               autoClose={2000}
               hideProgressBar={false}
@@ -119,17 +147,36 @@ const formSubmitSkill= (e) => {
               />
               <h1 style={{color:'gold', margin:'100px'}}>Welcome Admin</h1>
               <div>
-              <h3>My Messages</h3>
-              <hr/>
+              <h3>Recieved Messages</h3>
               <div class="listOfCustomers" >
                <Messages/>
               </div>
               </div>
       
-                <hr />
-                    <h2 class="header1">Add Skill</h2>
-                    <hr />
-              <div class="container">
+             
+              
+              <div class="containerAdmin">
+              <h2 class="header1">Add Phone</h2>
+              <hr/>
+                <form  post ="" onSubmit={formSubmitPhone}>
+                <div class="row addPro ">
+                  <div  class="col-12 addPro2">
+                      <input type='text' name="Phone" 
+                     value={phone}
+                     onChange = {(e)=>setPhone(e.target.value)}
+                     placeholder="Add Phone" />
+                  </div>
+                    <div class="col-12 addPro2">                      
+                      <button header1 type='submit'>Add</button>
+                    </div>
+                      </div>
+                      </form>
+                </div>  
+              
+             
+              <div class="containerAdmin">
+              <h2 class="header1">Add Skill</h2>
+              <hr/>
                 <form  post ="" onSubmit={formSubmitSkill}>
                 <div class="row addPro ">
                   <div  class="col-12 addPro2">
@@ -138,39 +185,18 @@ const formSubmitSkill= (e) => {
                      onChange = {(e)=>setSkill(e.target.value)}
                      placeholder="Add skill" />
                   </div>
-                  {/* <div class="col-12 addPro2">
-                      <input type='text' name="clothPrice" 
-                      value={clothPrice}
-                      onChange = {(e)=>setClothPrice(e.target.value)}
-                      placeholder="Price" />
-                   </div>
-                   <div class="col-12 addPro2">
-                      <div class="drop">
-                      <input type='file' name="clothPictureId"
-                       value={clothPicture}
-                       onChange = {uploadFile}
-                       placeholder="Upload Picture" />
-                       <div>
-                        {progress.started && <progress max="100" value={progress.pc}></progress>}
-                        </div>
-                    <div>
-                      {message && <span>{message}</span>}
-                    </div>
-                      </div> 
-                    </div>
-                     */}
                     <div class="col-12 addPro2">                      
-                      <button type='submit'>Add</button>
+                      <button header1 type='submit'>Add</button>
                     </div>
                       </div>
                       </form>
                 </div>  
 
-                    <hr />
-                    <h2 class="header1">Add Projects</h2>
-                    <hr />
+                   
+              
+              <div class="containerAdmin">
+              <h2  class="header1">Add Projects</h2>
               <hr/>
-              <div class="container">
                 <form  post ="" onSubmit={formSubmitProject}>
                 <div class="row addPro ">
                   <div  class="col-12 addPro2">
@@ -193,20 +219,20 @@ const formSubmitSkill= (e) => {
                    </div>
                 
                     <div class="col-12 addPro2">                      
-                      <button type='submit'>Add</button>
+                      <button  class="btn btn-primary" type='submit'>Add</button>
                     </div>
                       </div>
                       </form>
                 </div>  
 
 
-                  <hr />
-                    <h2 class="header1">Add Your Photo</h2>
-                    <hr />
-              <div class="container">
+               
+                              
+              <div class="containerAdmin">
+              <h2 class="header1">Add Your Photo</h2> 
+              <hr/>
                 <form  post ="" onSubmit={formSubmitImage}>
-                <div class="row addPro ">
-                  
+                <div class="row addPro ">                 
                    <div class="col-12 addPro2">
                       <div class="drop">
                       <input type='file' name="image"
@@ -223,11 +249,12 @@ const formSubmitSkill= (e) => {
                     </div>
                
                     <div class="col-12 addPro2">                      
-                      <button type='submit'>Upload</button>
+                      <button class="btn btn-primary" type='submit'>Upload</button>
                     </div>
                       </div>
                       </form>
                 </div>               
             </div>
+            </>
           )
 }

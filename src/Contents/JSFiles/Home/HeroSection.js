@@ -1,12 +1,15 @@
 import React from 'react';
-import { Pictures } from './Pictures.js';
+import  EmailContactForm  from './EmailJs.js';
 import { Skills } from './Skills.js';
 import { Projects } from './Projects.js';
 import '../../../Contents/CSSFiles/HeroSection.css';
 import image1 from '../../Images/Obande3.jpeg'
+import image2 from '../../Images/portfolio_bg.avif'
 import { ContactMe } from './ContactMe.js';
 import Typical  from 'react-typical';
-import { FaFacebook, FaWhatsapp, FaInstagram} from 'react-icons/fa';
+import { FaFacebook, FaWhatsapp, FaInstagram, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { MdMarkEmailUnread } from "react-icons/md";
+
 
 
 export const HeroSection = () => {
@@ -39,6 +42,16 @@ export const HeroSection = () => {
                             <a class="icons-icons" href="https://www.instagram.com/billions_deal/" target="blank">
                             <FaInstagram />
                             </a>
+                            <a class="icons-icons" href="https://github.com/GodwinOnah" target="blank">
+                            <FaGithub/>
+                            </a>
+                            <a class="icons-icons" href="https://www.linkedin.com/in/godwin-onah-120b8221a/" target="blank">
+                            <FaLinkedin/>
+                            </a>
+                            <a class="icons-icons" href="mailto:thisaremyfiles@gmail.com" target="blank">
+                            <MdMarkEmailUnread/>
+                            </a>
+                            
                             
                         </div>
                         <h2 style={{ fontSize: "40px", cursor: "pointer" }}>
@@ -61,39 +74,36 @@ export const HeroSection = () => {
                 
                         <div>
                             <button class="hireMe"><ContactMe/></button>
-                            <button class="Resume"><a href="ONAH_GOWIN_CV_REACT.pdf" download="ONAH_GOWIN_CV_REACT.pdf" 
+                            <button class="Resume"><a href="ONAH_GODWIN_RESUME.pdf" download="ONAH_GOWIN_CV_REACT.pdf" 
                             title='Download resume'>Get Resume</a>
                             </button>
                         </div>
                     </div>
-                    <div class="col-6 Image">
-                        <div>
-                            <img src={image1} height="500px" width="500px" alt=" here.." />
+                    <div class="col-6">
+                        
+                        <div class="Image">
+                           
                         </div>
                         <div>
                             <strong>Hard work pays</strong>
                         </div>
                     </div>
                 </div>
-
+                <div >
                 <div class="div1">
-                    <hr />
                     <h2 class="header1">Skills</h2>
-                    <hr />
                     <div>
                         <Skills />
                     </div>
                 </div>
 
-                <div class="div1">
-                <hr />
+                <div class="div1 div2">
                     <h2 class="header1">Projects</h2>
-                    <hr />
-                    <div >
+                    <div>
                         <Projects />
                     </div>
                 </div>
-
+                </div>
             </div>
 
         </div>

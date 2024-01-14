@@ -64,8 +64,6 @@ const handleSubmit = (e) =>{
               <form onSubmit={handleSubmit}>
               <Modal.Body>
               <div class="modal1">
-				<h1>Login</h1>
-        <hr/>
         <form onSubmit={handleSubmit}>
         <div class="container">
           <div class="row  ">

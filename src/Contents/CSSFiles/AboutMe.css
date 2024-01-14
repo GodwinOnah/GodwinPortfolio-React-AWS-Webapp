@@ -12,8 +12,10 @@ hr{
 
 .tab{
     margin-top: 100px;
-    background-color: aquamarine;
+    background-color: skyblue;
     padding: 20px;
+    margin: 20px;
+    border-radius: 60px;
 }
 li {
     list-style: none;
@@ -24,6 +26,7 @@ h1{color: blue; font-weight: bolder;}
 table{
     border: 2px solid blue;
     border-collapse: collapse;
+   
     width: 100%;
     text-align: center;
     padding: 10px;
@@ -45,3 +48,10 @@ table tr th, table tr td{
 }
 
 
+.photos{
+    height: auto;
+    width: auto;
+    border: 3px solid gold;
+    padding: 5px;
+    margin-top: 50px;
+}

@@ -2,23 +2,33 @@ import React, { useContext } from 'react';
 import '../../../Contents/CSSFiles/project.css';
 
 
+export const Project = ({project}) =>{
+   const projectWebsite = project["website"]
+   const strinx = "Visit website"
+   let websiteAvailable = true
 
-export const Project = ({project,index}) =>{
+   if(projectWebsite==""){
+    websiteAvailable=false
+   }
 
-    return(
-        <div class="container" key={index}>
+
+    return(     
         <div class="d-flex containerL">  
         <div class="card cardL">
-        <h2>{project.projectTittle}</h2> 
+          <div class="title">
+          <h5><strong>{project["title"]}</strong></h5> 
+          </div>      
         <div class="card-body">        
-        <strong class="pricing">{project.projectDescription}</strong>
+        <strong>{project["description"]}</strong>
         </div>
-        <div>
-        <a target="blank" href={project.projectLink} class="link">Website</a>
-         </div>
+        <div class="website">
+        <a target="blank" href={projectWebsite} class="link">
+          <strong>{websiteAvailable && strinx}</strong>
+          </a>
+        </div>
        </div> 
 
            </div>
-         </div>
+       
     )
 }

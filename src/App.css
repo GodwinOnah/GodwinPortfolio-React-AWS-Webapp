@@ -1,7 +1,10 @@
 .App {
   text-align: center;
-  background-color: midnightblue;
+  background-image: url("./../src/Contents/Images/portfolio_bg.avif");
   color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .App-logo {

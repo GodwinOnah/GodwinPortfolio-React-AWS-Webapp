@@ -33,6 +33,18 @@ table tr th, table tr td{
     padding: 10px;
 }
 
+.admin_bg{
+    background-image: url("../../Contents/Images/portfolio2.avif");
+    background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
+.containerAdmin{
+    border: 2px solid blue;
+    margin: 50px;
+    background-color: skyblue;
+    border-radius: 40px;
+}
 
 

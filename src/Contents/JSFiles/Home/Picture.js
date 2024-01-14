@@ -7,13 +7,9 @@ export const Picture = ({picture}) =>{
 
     return(
         <div>
-       
-      
             <div class="container">
                 <img src={picture} alt="image.." class="section1"/>      
-            </div>
-     
-          
+            </div>         
         </div>
 
     );}

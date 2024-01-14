@@ -9,7 +9,8 @@
 
 .skills-a{
     text-decoration: none;
-    color: gold;
+    color: white;
+    background-color: black;
 }
 
 .skills-a:hover{

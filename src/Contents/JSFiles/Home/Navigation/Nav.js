@@ -8,7 +8,7 @@ import {View} from './../View.js'
 
 export const Nav = () => {
 
-  let resume ="ONAH_GOWIN_CV_REACT.pdf";
+  let resume ="ONAH_GODWIN_RESUME.pdf";
 
     return (
       <nav class="navbar navbar-expand-lg bg-body-tertiary  sticky-top">
@@ -36,7 +36,7 @@ export const Nav = () => {
             </li> 
             <li class="nav-item navItem1" >
             <View image={resume} what="Resume"/>
-            </li>    
+            </li>   
             <li class="nav-item"  title='Page management'>
             <div class="navItem1"><Login/></div>
                </li>         

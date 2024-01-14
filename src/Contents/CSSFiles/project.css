@@ -1,8 +1,27 @@
 .containerL{
     width: 150%;
-    margin: 40%;
+    height: 350px; 
+ 
 }
 
 .cardL{
-    width: 100%;
+    width: 400px;
+    margin: 30px;
+    padding: 5px;  
+}
+.card-body{
+    height: 80px;
+    overflow: scroll;
+    border: 2px solid blue;
+    border-radius: 20px;
+    background-color: skyblue;
+}
+.title{
+    color: purple;
+    font-weight: bold;
+    height: 70px;
+}
+
+.website{
+    height: 20px;
 }

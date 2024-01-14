@@ -23,6 +23,8 @@ export const Skills = () => {
        "AWS",
        "Heroku",
        "Spring Boot",
+       "Microservices",
+       "Docker",
        "Critical Thinking",
        "Team Spirit",
        "Good communication and social quality",
@@ -30,7 +32,7 @@ export const Skills = () => {
        "Python",
        "Linux",
        "Jenkins"
-        ]
+        ].sort()
 
         // useEffect(()=>{
         //     fetch('https://obandeclothapp-60d299435905.herokuapp.com/skills').then(res =>{

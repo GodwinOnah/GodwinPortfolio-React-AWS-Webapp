@@ -18,9 +18,7 @@
     .navItem1{
         margin-left: 0.5em;
        font-size: 20px;
-       margin-left: 30px;
-       color: gold;
-       
+       margin-left: 30px;      
     } 
 }
 
@@ -30,7 +28,7 @@
 }
 
 .navi {
-background:midnightblue;
+background:black;
 margin-bottom: -10px;
 padding: 20px;
 }

@@ -9,7 +9,6 @@ import {HeroSection} from './Contents/JSFiles/Home/HeroSection.js'
 import {AboutMe} from './Contents/JSFiles/Home/AboutMe.js'
 
 
-
 function App() {
   return (
    

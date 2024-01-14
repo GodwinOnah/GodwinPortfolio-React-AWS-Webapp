@@ -6,8 +6,8 @@ import { Pictures } from './Pictures';
 export const AboutMe = ()=>{
   let udemyUrl ="https://www.udemy.com/course/"
   let amigoscodeUrl="https://app.amigoscode.com/courses/686693/lectures/"
-  let webDevelopment= "The Complete Web Developer in 2022; zero to Master"
-  let ecommerceWbsite="Learn to build an e-commerce website using .NET and Angular"
+  let webDevelopment= ["The Complete Web Developer in 2022; zero to Master","UC-945cc944-83e7-477b-b09b-2b614bc1025f.pdf"]
+  let ecommerceWbsite=["Learn to build an e-commerce website using .NET and Angular","UC-5c8ed034-295e-4c6f-a7f1-131964bc7655.pdf"]
   let SpringBootAmigoscode=["Getting started with Spring Boot, React , and AWS ",
             "certificate-of-completion-for-getting-started-with-spring-boot.pdf"]
   let JavaEssencialsAmigoscode=["Java Essentials","certificate-of-completion-for-java-essentials.pdf"]
@@ -16,7 +16,7 @@ export const AboutMe = ()=>{
 
 return(
   <div  class="body">
-
+   
     {/* Education */}
     <div class="tab">
     <h1>Education</h1>   
@@ -81,24 +81,24 @@ return(
                <tr >   
                <td>
                 <a href={udemyUrl+webDevelopment} target="blank">
-                {webDevelopment}
+                {webDevelopment[0]}
                 </a>
                 </td>           
                <td>Udemy</td>
                <td>udemy.com</td>
-               <td><a>View</a></td>
+               <td><View image={webDevelopment[1]} what="View"/></td>
                <td>2022</td>          
                </tr>    
 
                <tr >   
                <td>
-                <a href={udemyUrl+ecommerceWbsite} target="blank">
-                { ecommerceWbsite}
+                <a href={udemyUrl+[ecommerceWbsite[0]]} target="blank">
+                { ecommerceWbsite[0]}
                 </a>
                 </td>           
                <td>Udemy</td>
                <td>udemy.com</td>
-               <td><a>View</a></td>
+               <td><View image={ecommerceWbsite[1]} what="View"/></td>
                <td>2023</td>          
                </tr> 
 
@@ -141,16 +141,15 @@ return(
       ))}
   </div>
   </div>
-  <div>
+  <div>  
+  </div>
+
   <div class="tab">
-     <h1>Photos</h1> 
-     < Pictures/>
-     <button>
-    
-    </button>
-  </div>
-    
-  </div>
+  <h1>Photos</h1> 
+  <div class="photos">
+    <Pictures/>
+    </div>
+    </div>
   </div>
 );
 }
