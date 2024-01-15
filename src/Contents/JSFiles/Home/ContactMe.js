@@ -16,13 +16,15 @@ export const ContactMe = () =>{
     const [phone,SetPhone] = useState('');
     // const [myPhone,SetMyPhone] = useState([]);
     const [companyName,SetCompanyName] = useState('');
-    const [isSigningIn,SetIsSigningIn] = useState(false)
+    const [sending,SetSending] = useState(false)
+    const [send,SetSend] = useState(false)
     const [data,SetData] = useState({});
     const [show, setShow] = useState(false); 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const myPhoneNumber = "(+44771776483)";
     let allPhoneNumbers = "";
+  
     
 
    const  myPhone = ["+2349062485537","+2349045645676"]
@@ -38,7 +40,7 @@ export const ContactMe = () =>{
     
       const sendEmail = (e) =>{
         e.preventDefault();
-        SetIsSigningIn(true);
+        SetSending(true);
         const datax = {name,email,phone,companyName,message};
         SetData(datax);
 
@@ -47,16 +49,24 @@ export const ContactMe = () =>{
       //  Send message to email
       emailjs.sendForm('service_9n124vv', 'template_pmpo23n', form.current)
      .then((res) => {
-      if(res)
-      toast.success("Message sent to thisaremyfiles@gmail.com");
-      SetIsSigningIn(false); 
-      handleClose();    
+      SetSending(false);
+      SetName(""); 
+      SetEmail("");
+      SetPhone("");
+      SetMessage("");
+      SetCompanyName(""); 
+      SetSubject("");  
+      SetSend(true);
+      setTimeout(() => {
+        handleClose();
+        SetSend(false); 
+      }, 2000); 
+      
+       
      }, (error) => {
       toast.success(error);
      });
-
-
-
+     
     //    //  Send message to database
     //   fetch('http://localhost:3002/messages',
     //  {
@@ -91,7 +101,7 @@ export const ContactMe = () =>{
             <div class="modal1">
             <ToastContainer
                   position='top-right'
-                  autoClose={2000}
+                  autoClose={4000}
                   hideProgressBar={false}
                   newestOnTop={false}
                   closeOnClick
@@ -114,7 +124,7 @@ export const ContactMe = () =>{
                 
                 <div  class="col-12 login">
                     <input 
-                    name="to"
+                    name="senderEmail"
                     value={email}
                     onChange = {e=>SetEmail(e.target.value)}
                     type='email' placeholder="Your email" />
@@ -154,7 +164,8 @@ export const ContactMe = () =>{
                 </div>
                  <div >
                   <div class="col-12 login">                
-                    {isSigningIn && <strong>Sending message...</strong>}
+                    {sending && <strong style={{color:'red'}}>Sending message...</strong>}
+                    {send && <strong style={{color:'green'}}>Message Sent</strong>}
                   </div>
                     </div>
               </div>
