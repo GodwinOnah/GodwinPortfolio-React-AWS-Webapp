@@ -16,7 +16,7 @@ export const View= ({image,what}) =>{
           <a href="#" onClick={handleShow}>
             {what}
           </a>  
-          <Modal show={show} onHide={handleClose} >
+          <Modal show={show} onHide={handleClose} size="xl">
             <Modal.Header>
               <Modal.Title><strong style={{fontSize:'20px',color:'blue',fontFamily:'-moz-initial'}}>
                 {image.split(".")[0].split("-").join(" ").split("_").join(" ")}

@@ -5,6 +5,7 @@ import {useState, useEffect} from 'react';
 import { toast,ToastContainer } from "react-toastify";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Typical  from 'react-typical';
 
 
 export const ContactMe = () =>{
@@ -92,9 +93,23 @@ export const ContactMe = () =>{
           Contact Me
           </a>
     
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={show} onHide={handleClose} size="lg">
             <Modal.Header closeButton>
-              <Modal.Title>Send me a message ...😎</Modal.Title>
+              <Modal.Title>
+                <div class="d-flex">
+                  😎..
+              <Typical
+                    steps={[
+                        "Hey!!", 1000, 
+                        'I\'m patiently waiting for your message', 3500,
+                        'I am passionate about what I do', 5000,
+                        'I love to save cost', 6500
+                    ]}
+                    loop={Infinity}
+                    wrapper="p"
+                        />
+                    </div>
+                 </Modal.Title>
             </Modal.Header>
             <form  ref={form} onSubmit={sendEmail}>
             <Modal.Body>
@@ -148,7 +163,7 @@ export const ContactMe = () =>{
                 <div style={{border:'1px solid blue', width:'fit-content',margin:'0 auto',padding:'10px'}}>
                 <div>
                 <input 
-                    size="40"
+                    size="60"
                     value={subject}
                     name="subject"
                     onChange = {e=>SetSubject(e.target.value)}
