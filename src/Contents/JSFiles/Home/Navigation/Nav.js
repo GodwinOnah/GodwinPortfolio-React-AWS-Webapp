@@ -37,10 +37,10 @@ export const Nav = () => {
             <li class="nav-item navItem1" >
             <View image={resume} what="Resume"/>
             </li>   
-            <li class="nav-item"  title='Page management'>
-            <div class="navItem1"><Login/></div>
-               </li>         
-        
+            <Link to="/Admin" class="navItem1" style={{ textDecoration: 'none' }}
+             title='Visit admin today'>
+             Admin
+              </Link>
           </ul>
          
         </div>

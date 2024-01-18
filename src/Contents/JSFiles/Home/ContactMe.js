@@ -10,12 +10,12 @@ import Typical  from 'react-typical';
 
 export const ContactMe = () =>{
     const form = useRef();
-    const [name,SetName] = useState('');
-    const [email,SetEmail] = useState('');
-    const [subject,SetSubject] = useState('');
-    const [message,SetMessage] = useState('');
-    const [phone,SetPhone] = useState('');
-    // const [myPhone,SetMyPhone] = useState([]);
+    const [name,SetName] = useState("");
+    const [email,SetEmail] = useState("");
+    const [subject,SetSubject] = useState("");
+    const [message,SetMessage] = useState("");
+    const [phone,SetPhone] = useState("");
+    const [myPhone,setMyPhone] = useState([]);
     const [companyName,SetCompanyName] = useState('');
     const [sending,SetSending] = useState(false)
     const [send,SetSend] = useState(false)
@@ -28,22 +28,34 @@ export const ContactMe = () =>{
   
     
 
-   const  myPhone = ["+2349062485537","+2349045645676"]
+  //  const  myPhone = ["+2349062485537","+2349045645676"]
 
-    // useEffect(()=>{
-    //   fetch('http://localhost:3002/phone').then(res =>{
-    //     if(res) SetMyPhone(res.data); 
-    //     return
-    // })   
-    // },[]);
-
-    
+    useEffect(()=>{
+      fetch('http://localhost:3002/phone')
+      .then((res)=>{
+        return res.json();
+     })
+     .then((data) =>{
+        if(data)setMyPhone(data);
+        return
+      })
+      .catch(err=>{
+                console.log(err);
+     })
+    },[]);
     
       const sendEmail = (e) =>{
         e.preventDefault();
+        const datax = {name,email,phone,companyName,subject,message};
+        if(datax == null) {
+           toast.warning("Add a message");
+           return;
+          }
+        if(!name||!email||!phone||!companyName||!subject||!message){
+          toast.warning("Enter all fields");
+          return;
+        }
         SetSending(true);
-        const datax = {name,email,phone,companyName,message};
-        SetData(datax);
 
         (()=>{emailjs.init("4GGWAs8YmyTJJ--jF")})(); //Function call   
 
@@ -62,31 +74,27 @@ export const ContactMe = () =>{
         handleClose();
         SetSend(false); 
       }, 2000); 
-      
-       
+      window.location.reload();            
      }, (error) => {
       toast.success(error);
      });
      
-    //    //  Send message to database
-    //   fetch('http://localhost:3002/messages',
-    //  {
-    //   method:'POST',
-    //   headers:{
-    //     "Access-Control-Allow-Origin":"*",
-    //       "Content-Type": "application/json"
-    //    },
-    //   body: JSON.stringify(data)
-    //   }
-    //   ).then(res =>{
-    //     return res.text();      
-    //        }).then(res =>{           
-    //         toast.success(res);
-    //         SetIsSigningIn(false); 
-    //         handleClose();    
-    //            })
-         
+       //  Send message to database
+      fetch('http://localhost:3002/messages',
+     {
+      method:'POST',
+      headers:{
+        "Access-Control-Allow-Origin":"*",
+        "Content-Type": "application/json"
+       },
+      body: JSON.stringify(datax)
       }
+      ).then(res =>{
+        return res.text();      
+           }).then(res =>{   
+            window.location.reload();     
+      })        
+    }
       return (
         <div style={{cursor:"pointer"}}>
           <a onClick={handleShow}>
@@ -189,8 +197,15 @@ export const ContactMe = () =>{
               </div>
               </Modal.Body>
               <div style={{textAlign:'center', color:'blue', fontWeight:'bolder'}}>
-                <marquee scrollamount="2"><div class="d-flex"><strong>Phone:</strong>{myPhoneNumber}
-                { myPhone?.map((phone)=>(<p>{",("+phone+")"}</p>))}</div>
+                <marquee scrollamount="2">
+                  <div class="d-flex">
+                    <strong>Phone(s):</strong>
+                    {myPhoneNumber}
+                { myPhone?.map((phone)=>(
+                <p>{",("+phone.phone+")"}</p>
+                ))
+                }
+                </div>
                 </marquee>
                 </div>
             <Modal.Footer>

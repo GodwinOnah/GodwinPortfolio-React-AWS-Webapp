@@ -5,8 +5,9 @@ import '../../CSSFiles/Views.css'
 
 
 export const View= ({image,what}) =>{
-        const string1 = image.split('.');
-        const string2 = string1[string1.length-1] 
+
+    const string1 = image.split('.');
+    const string2 = string1[string1.length-1] 
     const [show, setShow] = useState(false); 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true); 

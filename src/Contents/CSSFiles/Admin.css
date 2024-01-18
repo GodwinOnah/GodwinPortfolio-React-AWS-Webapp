@@ -1,5 +1,5 @@
 .addPro {margin-left: auto; margin-right: auto;}
-.addPro2{margin: 40px;}
+.addPro2{margin-left: auto; margin-right: auto; margin-top: 10px; margin-bottom: 20px;}
 .drop{
      margin-left: 25%;
      margin-right:25%;
@@ -10,10 +10,10 @@ li {
     list-style: none;
 }
 
-.listOfCustomers{
-    border: black solid 3px;
-    margin: 10px;
-    margin-bottom: 10%;
+.register{
+    margin: 20px;
+    padding: 20px;
+    background-color: blueviolet;
 }
 
 table{
@@ -45,6 +45,11 @@ table tr th, table tr td{
     margin: 50px;
     background-color: skyblue;
     border-radius: 40px;
+    padding: 10px;
 }
 
-
+.messages{
+   overflow: scroll;
+   max-height: 400px; 
+  
+}

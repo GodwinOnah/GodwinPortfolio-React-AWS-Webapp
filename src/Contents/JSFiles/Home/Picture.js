@@ -1,10 +1,7 @@
 import React, { useContext } from 'react';
 import '../../../Contents/CSSFiles/Picture.css';
 
-
-
 export const Picture = ({picture}) =>{
-
     return(
         <div>
             <div class="container">

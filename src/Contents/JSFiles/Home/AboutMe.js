@@ -2,8 +2,13 @@ import '../../../Contents/CSSFiles/AboutMe.css';
 import React from 'react';
 import {View} from './View.js'
 import { Pictures } from './Pictures';
+import {useState, useEffect} from 'react';
 
 export const AboutMe = ()=>{
+  
+  const [schools,setSchools] = useState([]);
+  const [noSchoolFound, setNoSchoolFound] =  useState("");
+  const [courseLinkPresent, setCourseLinkPresent] =  useState(false);
   let udemyUrl ="https://www.udemy.com/course/"
   let amigoscodeUrl="https://app.amigoscode.com/courses/686693/lectures/"
   let webDevelopment= ["The Complete Web Developer in 2022; zero to Master","UC-945cc944-83e7-477b-b09b-2b614bc1025f.pdf"]
@@ -13,6 +18,22 @@ export const AboutMe = ()=>{
   let JavaEssencialsAmigoscode=["Java Essentials","certificate-of-completion-for-java-essentials.pdf"]
 
   const hobbies = ["Solving coding challenge","Reading books", "Love soccer","love basketball"]
+          
+   // Get Schools
+   useEffect(()=>{
+    fetch('http://localhost:3002/schools').then(res =>{
+        return res.json();
+     })
+     .then((data) =>{
+        if(data)setSchools(data);
+        return
+      })
+     .catch(err=>{setNoSchoolFound('No school data found. Check of database exist');
+                      console.log(err);
+    })
+   },[]);
+
+   
 
 return(
   <div  class="body">
@@ -24,40 +45,29 @@ return(
     <table>
     <thead>
          <tr>
+         <th>ID</th>
          <th>Honor</th>
          <th>School</th>
          <th>Course</th>
-         <th>Year of Graduation</th>
+         <th>Graduation</th>
          </tr>
        </thead>
-       <tbody> 
-               <tr >   
-               <td>MSc</td>           
-               <td>University of Glasgow, Glasgow, United Kingdom</td>
-               <td>Software Development{" | "}
-               <a href='https://www.gla.ac.uk/postgraduate/taught/softwaredevelopment/#tab=structure'
-                target="blank">View
-               </a>
-               </td>
-               <td>2022</td>          
-               </tr>  
-               <tr >   
-               <td>Diploma</td>           
-               <td>
-                Classic Computers, Federal University of Technology, Akure, Nigeria
-                </td>
-               <td>Advance Java and SQL</td>
-               <td>2017</td>          
-               </tr>  
-               <tr >   
-               <td>B.Eng.</td>           
-               <td>Federal University of Agriculture, Makurdi, Nigeria
-               </td>
-               <td>
-                ELectrical and Electronics Engineering{" | "}
-               </td>
-               <td>2016</td>          
-               </tr>                      
+       <tbody style={{fontSize:'13px'}}> 
+       {noSchoolFound ||
+                  schools?.map((school,index)=>(
+                   
+                     <tr key = {index}>              
+                     <th>{index+1}</th>
+                     <td>{school.honor}</td>
+                     <td>{school.school}</td>
+                     <td>{school.course}
+                     {school.courselink.length>0 && <a href={school.courselink}
+                         target="blank">{"| "}View
+                      </a>}
+                     </td> 
+                     <td>{school.graduationyear}</td>                                
+                     </tr>                   
+                  ))}                    
             </tbody>
            </table>  
     </div>

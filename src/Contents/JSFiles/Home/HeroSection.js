@@ -1,5 +1,4 @@
 import React from 'react';
-import  EmailContactForm  from './EmailJs.js';
 import { Skills } from './Skills.js';
 import { Projects } from './Projects.js';
 import '../../../Contents/CSSFiles/HeroSection.css';
