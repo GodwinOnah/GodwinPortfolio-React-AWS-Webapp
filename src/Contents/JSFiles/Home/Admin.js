@@ -3,9 +3,7 @@ import React from 'react';
 import '../../CSSFiles/Admin.css'; 
 import { toast,ToastContainer } from "react-toastify";
 import { Messages } from './../Messages/Messages.js';
-import { Login } from './Login.js';
 import {useState, useEffect} from 'react';
-import { Register } from './Register';
 import {Link } from "react-router-dom";
 
 
@@ -21,26 +19,40 @@ const [phone,setPhone] = useState("");
 const [imageId,setImageId] = useState("");
 const [progress,setProgress] = useState({started:false, pc:0});
 const [message,setMessage] = useState("");
+const [pmessage,setPMessage] = useState("");
+const [pMessages,setPMessages] = useState(null);
 const formData = new FormData();
-const [isLogin,setIsLogin] = useState(false);
 const [myPhone,setMyPhone] = useState([]);
 const [skills,setSkills] = useState(null);
+const [hobbies,setHobbies] = useState(null);
+const [hobby,setHobby] = useState("");
+const [noHobbyFound, setNoHobbyFound] =  useState("");
 const [noSkillFound, setNoSkillFound] =  useState("");
+const [noPMessageFound, setNoPMessageFound] =  useState("");
 const [projects,setProjects] = useState([]);
 const [schools,setSchools] = useState([]);
 const [noProjectFound, setNoProjectFound] =  useState("");
 const [noSchoolFound, setNoSchoolFound] =  useState("");
-const [loginStatus,setLoginStatus] = useState(true);
 const [honor,setHonor] = useState("");
 const [school,setSchool] = useState("");
 const [course,setCourse] = useState("");
 const [courseLink,setCourseLink] = useState("");
 const [graduationYear,setGraduationYear] = useState("");
+const [trainings,setTrainings] = useState([]);
+const [tCourse,setTCourse] = useState("");
+const [tCompany,setTCompany] = useState("");
+const [tCompanyWebsite,setTCompanyWebsite] = useState("");
+const [certificate,setCertificate] = useState("");
+const [tYear,setTYear] = useState("");
+const [noTrainingFound, setNoTrainingFound] =  useState("");
+const [profiles,setProfiles] = useState(null);
+const [profile,setProfile] = useState("");
+const [noProfileFound, setNoProfileFound] =  useState("");
+const [profileAvailable, setProfileAvailable]=  useState(false);
+const [loginStatus,setLoginStatus] = useState(false);
 
 
-
-
-
+// Upload Image
 const uploadFile = (e) =>{  
     if(e.target.files.length>0){ 
       setImage(e.target.value);     
@@ -49,27 +61,29 @@ const uploadFile = (e) =>{
       formData.append('file',file);
 }}
 
+// Get Login
 useEffect(()=>{
+  const data =  window.localStorage.getItem('login')
+  if(data !=null) setLoginStatus(JSON.parse(data));
   fetch('http://localhost:3002/login')
   .then(res =>{
       return res.json();
    })
    .then((data) =>{
-    console.log(data)
-    setLoginStatus(data);
     })
    .catch(err=>{
        console.log(err);
   })
  },[]);
 
+//  PHONE
+// Submit Phone
 const formSubmitPhone= (e) => {
   e.preventDefault();
-  if(phone == "")
+  if(phone === "")
   { toast.warning("Enter a phone number");
   return
 }
-
   fetch('http://localhost:3002/phone',
   {  
     method:'POST', 
@@ -92,14 +106,50 @@ const formSubmitPhone= (e) => {
       });
 }
 
+ // Get Phone
+ useEffect(()=>{
+  fetch('http://localhost:3002/phone')
+  .then((res)=>{
+    return res.json();
+ })
+ .then((data) =>{
+    if(data)setMyPhone(data);
+    return
+  })
+  .catch(err=>{
+            console.log(err);
+ })
+},[]);
 
+//  Delete Phone
+const deletePhone = ((id) => {
+  if(window.confirm("Do you want to delete this item?")){
+    fetch("http://localhost:3002/phone/"+id,
+    {  
+      method:'DELETE', 
+    }
+      ).then(res =>{
+            return res.text();      
+        })
+        .then(res=>{
+            toast.success(res);
+            window.location.reload();
+        })
+        .catch(error=>{
+            toast.warning("Phone not deleted");
+            console.log(error)
+         });
+  }}
+)
+
+// SKILLS
+// Submit Skills
 const formSubmitSkill= (e) => {
     e.preventDefault();
     if(skill== "") {
       toast.warning("Enter a skill");
       return
     }
-
     fetch('http://localhost:3002/skills',
     {  
       method:'POST', 
@@ -122,6 +172,274 @@ const formSubmitSkill= (e) => {
         });
   }
 
+   // Get Skill
+   useEffect(()=>{
+    fetch('http://localhost:3002/skills')
+    .then((res)=>{
+       return res.json();
+    })
+    .then((data) =>{
+       if(data)setSkills(data);
+       return
+     })
+     .catch(err=>{setNoSkillFound("No Skill found. Admin check if database exist");
+                   console.log(err);
+    })
+   },[]);
+
+  
+  // Delete Skill
+  const deleteSkill = ((id) => {
+    if(window.confirm("Do you want to delete this item?")){
+      fetch("http://localhost:3002/skills/"+id,
+      {  
+        method:'DELETE', 
+      }
+        ).then(res =>{
+              return res.text();      
+          })
+          .then(res=>{
+              toast.success(res);
+              window.location.reload();
+          })
+          .catch(error=>{
+              toast.warning("Skill not deleted");
+              console.log(error)
+           });
+    }}
+  )
+
+  // PUBLIC MESSAGES
+// Submit Public Message
+const formSubmitPMessage= (e) => {
+  e.preventDefault();
+  console.log(pmessage)
+  if(pmessage== "") {
+    toast.warning("Enter a message");
+    return
+  }
+  fetch('http://localhost:3002/pmessages',
+  {  
+    method:'POST', 
+    headers:{
+    "Access-Control-Allow-Origin":"*",
+    "Content-Type": "application/json"
+           },
+    body: JSON.stringify({pmessage})
+  }
+    ).then(res =>{
+          return res.json();      
+      })
+    .then(data=>{
+          setPMessage("");
+          toast.success(data);
+          // window.location.reload();
+    })
+    .catch(error=>{
+          toast.warning("Message not added");
+      });
+}
+
+ // Get Public Message
+ useEffect(()=>{
+  fetch('http://localhost:3002/pmessages')
+  .then((res)=>{
+     return res.json();
+  })
+  .then((data) =>{
+     if(data)setPMessages(data);
+     return
+   })
+   .catch(err=>{setNoPMessageFound("No Skill found. Admin check if database exist");
+                 console.log(err);
+  })
+ },[]);
+
+
+// Delete public message
+const deletePMessage = ((id) => {
+  if(window.confirm("Do you want to delete this item?")){
+    fetch("http://localhost:3002/pmessages/"+id,
+    {  
+      method:'DELETE', 
+    }
+      ).then(res =>{
+            return res.text();      
+        })
+        .then(res=>{
+            toast.success(res);
+            window.location.reload();
+        })
+        .catch(error=>{
+            toast.warning("Message not deleted");
+            console.log(error)
+         });
+  }}
+)
+
+  // HOBBIES
+// Submit Hobbies
+const formSubmitHobby= (e) => {
+  e.preventDefault();
+  if(hobby== "") {
+    toast.warning("Enter a hobby");
+    return
+  }
+  fetch('http://localhost:3002/hobbies',
+  {  
+    method:'POST', 
+    headers:{
+    "Access-Control-Allow-Origin":"*",
+    "Content-Type": "application/json"
+           },
+    body: JSON.stringify({hobby})
+  }
+    ).then(res =>{
+          return res.json();      
+      })
+    .then(data=>{
+          setHobby("");
+          toast.success(data);
+          window.location.reload();
+    })
+    .catch(error=>{
+          toast.warning("Hobby not added");
+      });
+}
+
+ // Get Hobby
+ useEffect(()=>{
+  fetch('http://localhost:3002/hobbies')
+  .then((res)=>{
+     return res.json();
+  })
+  .then((data) =>{
+     if(data)setHobbies(data);
+     return
+   })
+   .catch(err=>{setNoHobbyFound("No hobby found. Admin check if database exist");
+                 console.log(err);
+  })
+ },[]);
+
+
+// Delete hobby
+const deleteHobby = ((id) => {
+  if(window.confirm("Do you want to delete this item?")){
+    fetch("http://localhost:3002/hobbies/"+id,
+    {  
+      method:'DELETE', 
+    }
+      ).then(res =>{
+            return res.text();      
+        })
+        .then(res=>{
+            toast.success(res);
+            window.location.reload();
+        })
+        .catch(error=>{
+            toast.warning("Hobby not deleted");
+            console.log(error)
+         });
+  }}
+)
+
+// PROFILE SUMMARY
+// Submit Profile
+const formSubmitProfile= (e) => {
+  e.preventDefault();
+  if(profile== "") {
+    toast.warning("Enter a profile summary");
+    return
+  }
+  fetch('http://localhost:3002/profiles',
+  {  
+    method:'POST', 
+    headers:{
+    "Access-Control-Allow-Origin":"*",
+    "Content-Type": "application/json"
+           },
+    body: JSON.stringify({profile})
+  }
+    ).then(res =>{
+          return res.json();      
+      })
+    .then(data=>{
+          setProfile("");
+          toast.success(data);
+          window.location.reload();
+    })
+    .catch(error=>{
+          toast.warning("Profile not added");
+      });
+}
+
+ // Get Profile Summary
+ useEffect(()=>{
+  fetch('http://localhost:3002/profiles')
+  .then((res)=>{
+     return res.json();
+  })
+  .then((data) =>{
+    if(data.length>0) setProfileAvailable(true);
+     setProfiles(data);
+   })
+   .catch(err=>{setNoProfileFound("No profile summary added. Admin check if database exist");
+                 console.log(err);
+  })
+ },[]);
+
+
+// Update Profile
+const updateProfile = () => {
+  if(window.confirm("Do you want to update your profile?")){
+    fetch(
+      "http://localhost:3002/profiles",
+        {
+          method: 'PUT',
+          headers:{
+            "Access-Control-Allow-Origin":"*",
+              "Content-Type": "application/Json"
+           },
+          body: JSON.stringify({profile})
+          }
+      )
+      .then(res =>{return res.json()})
+      .then(data =>{         
+                toast.success("Profile summary updated");
+                // window.location.reload();
+              return true;   
+           })
+           .catch(err=>{
+              toast.warning("Profile not updated");
+                     console.log(err);
+      }) 
+}}
+
+
+// Delete Profile
+const deleteProfile = ((id) => {
+  if(window.confirm("Do you want to delete this item?")){
+    fetch("http://localhost:3002/profiles/"+id,
+    {  
+      method:'DELETE', 
+    }
+      ).then(res =>{
+            return res.text();      
+        })
+        .then(res=>{
+            toast.success(res);
+            window.location.reload();
+        })
+        .catch(error=>{
+            toast.warning("Profile not deleted");
+            console.log(error)
+         });
+  }}
+)
+
+  // PROJECTS
+  // Submit Project
   const formSubmitProject= (e) => {
     e.preventDefault();
     const datax = {projectTitle,projectDescription,gitHubLink,projectLink};
@@ -154,7 +472,43 @@ const formSubmitSkill= (e) => {
          });
   }
 
-  // Education 
+   // Delete Project
+   const deleteProject = ((id) => {
+    if(window.confirm("Do you want to delete this item?")){
+      fetch("http://localhost:3002/projects/"+id,
+      {  
+        method:'DELETE', 
+      }
+        ).then(res =>{
+              return res.text();      
+          })
+          .then(res=>{
+              toast.success(res);
+              window.location.reload();
+          })
+          .catch(error=>{
+              toast.warning("Project not deleted");
+              console.log(error)
+           });
+    }}
+  )
+    // Get Projects
+  useEffect(()=>{
+    fetch('http://localhost:3002/projects').then(res =>{
+        return res.json();
+     })
+     .then((data) =>{
+        if(data)setProjects(data);
+        return
+      })
+     .catch(err=>{setNoProjectFound('No project data found. Check of database exist');
+                      console.log(err);
+    })
+   },[]);
+
+
+  // EDUCATION 
+  //Submit Schools
   const formSubmitSchool = (e) => {
     e.preventDefault();
     const datax = {honor,school,course,courseLink,graduationYear};
@@ -188,8 +542,115 @@ const formSubmitSkill= (e) => {
         .catch(error=>{
             toast.warning("School not added");
          });
-
   }
+
+   //  Delete School
+   const deleteSchool = ((id) => {
+    if(window.confirm("Do you want to delete this item?")){
+      fetch("http://localhost:3002/schools/"+id,
+      {  
+        method:'DELETE', 
+      }
+        ).then(res =>{
+              return res.text();      
+          })
+          .then(res=>{
+              toast.success(res);
+              window.location.reload();
+          })
+          .catch(error=>{
+              toast.warning("School not deleted");
+              console.log(error)
+           });
+    }}         
+  )
+
+   // Get Schools
+    useEffect(()=>{
+        fetch('http://localhost:3002/schools').then(res =>{
+        return res.json();
+        })
+        .then((data) =>{
+        if(data)setSchools(data);
+        return
+        })
+        .catch(err=>{setNoSchoolFound('No school data found. Check of database exist');
+                      console.log(err);
+        })}
+)
+
+  //Submit Trainings
+  const formSubmitTraining = (e) => {
+    e.preventDefault();
+    const datax = {tCourse,tCompany,tCompanyWebsite,certificate,tYear};
+    console.log(datax)
+    if(!tCourse||!tCompany||!certificate||!tYear){
+      toast.warning('Enter compulsary fields');
+      return;
+}
+
+    fetch('http://localhost:3002/trainings',
+    {  
+      method:'POST', 
+      headers:{
+      "Access-Control-Allow-Origin":"*",
+      "Content-Type": "application/json"
+             },
+      body: JSON.stringify(datax)
+    },
+      ).then(res =>{
+            return res.text();      
+        })
+        .then(res=>{
+            setTCourse("");
+            setTCompany("");
+            setTCompanyWebsite("");
+            setCertificate("");
+            setTYear("");
+            toast.success(res);
+            // window.location.reload();
+        })
+        .catch(error=>{
+            toast.warning("Training not added");
+         });
+  }
+
+   //  Delete Traing
+   const deleteTraining = ((id) => {
+    if(window.confirm("Do you want to delete this item?")){
+      fetch("http://localhost:3002/trainings/"+id,
+      {  
+        method:'DELETE', 
+      }
+        ).then(res =>{
+              return res.text();      
+          })
+          .then(res=>{
+              toast.success(res);
+              window.location.reload();
+          })
+          .catch(error=>{
+              toast.warning("Training not deleted");
+              console.log(error)
+           });
+    }}         
+  )   
+
+  // Get Training
+    useEffect(()=>{
+      fetch('http://localhost:3002/trainings')
+       .then(res =>{
+          return res.json();
+      })
+      .then((data) =>{
+          if(data)setTrainings(data);
+          return
+        })
+      .catch(err=>{setNoTrainingFound('No training data found. Check of database exist');
+                        console.log(err);
+      })}
+)
+
 
   // Upload Image
   const formSubmitImage= (e) => {
@@ -221,151 +682,7 @@ const formSubmitSkill= (e) => {
             toast.warning(error);
           }); 
         }
-
-        // Get Phone
-          useEffect(()=>{
-            fetch('http://localhost:3002/phone')
-            .then((res)=>{
-              return res.json();
-           })
-           .then((data) =>{
-              if(data)setMyPhone(data);
-              return
-            })
-            .catch(err=>{
-                      console.log(err);
-           })
-          },[]);
-
-          // Get Skill
-          useEffect(()=>{
-            setIsLogin(localStorage.getItem('login'));//set localstorage with login status
-            fetch('http://localhost:3002/skills')
-            .then((res)=>{
-               return res.json();
-            })
-            .then((data) =>{
-               if(data)setSkills(data);
-               return
-             })
-             .catch(err=>{setNoSkillFound("No Skill found. Admin check if database exist");
-                           console.log(err);
-            })
-           },[]);
-        
-
-          const deletePhone = ((id) => {
-            if(window.confirm("Do you want to delete this item?")){
-              fetch("http://localhost:3002/phone/"+id,
-              {  
-                method:'DELETE', 
-              }
-                ).then(res =>{
-                      return res.text();      
-                  })
-                  .then(res=>{
-                      toast.success(res);
-                      window.location.reload();
-                  })
-                  .catch(error=>{
-                      toast.warning("Phone not deleted");
-                      console.log(error)
-                   });
-            }}
-          )
-  
-          const deleteSkill = ((id) => {
-            if(window.confirm("Do you want to delete this item?")){
-              fetch("http://localhost:3002/skills/"+id,
-              {  
-                method:'DELETE', 
-              }
-                ).then(res =>{
-                      return res.text();      
-                  })
-                  .then(res=>{
-                      toast.success(res);
-                      window.location.reload();
-                  })
-                  .catch(error=>{
-                      toast.warning("Skill not deleted");
-                      console.log(error)
-                   });
-            }}
-          )
-
-          // Delete Project
-          const deleteProject = ((id) => {
-            if(window.confirm("Do you want to delete this item?")){
-              fetch("http://localhost:3002/projects/"+id,
-              {  
-                method:'DELETE', 
-              }
-                ).then(res =>{
-                      return res.text();      
-                  })
-                  .then(res=>{
-                      toast.success(res);
-                      window.location.reload();
-                  })
-                  .catch(error=>{
-                      toast.warning("Project not deleted");
-                      console.log(error)
-                   });
-            }}
-          )
-            // Get Projects
-          useEffect(()=>{
-            fetch('http://localhost:3002/projects').then(res =>{
-                return res.json();
-             })
-             .then((data) =>{
-                if(data)setProjects(data);
-                return
-              })
-             .catch(err=>{setNoProjectFound('No project data found. Check of database exist');
-                              console.log(err);
-            })
-           },[]);
-
-          //  Delete School
-           const deleteSchool = ((id) => {
-            if(window.confirm("Do you want to delete this item?")){
-              fetch("http://localhost:3002/schools/"+id,
-              {  
-                method:'DELETE', 
-              }
-                ).then(res =>{
-                      return res.text();      
-                  })
-                  .then(res=>{
-                      toast.success(res);
-                      window.location.reload();
-                  })
-                  .catch(error=>{
-                      toast.warning("School not deleted");
-                      console.log(error)
-                   });
-            }}         
-          )
-
-           // Get Schools
-   useEffect(()=>{
-    fetch('http://localhost:3002/schools').then(res =>{
-        return res.json();
-     })
-     .then((data) =>{
-        if(data)setSchools(data);
-        return
-      })
-     .catch(err=>{setNoSchoolFound('No school data found. Check of database exist');
-                      console.log(err);
-    })}
-   )
-
-          
-         
-
+     
           return(
             <>
             <div class="admin_bg">
@@ -388,7 +705,7 @@ const formSubmitSkill= (e) => {
               <h2 class="header1">Set Admin</h2>
               <div class="messages">
               <Link to="/Register"  style={{ textDecoration: 'none', fontSize:'20px'}}>
-             <button>Register an Admin</button> 
+             <button>Become the Admin Here</button> 
               </Link>
               </div>      
               </div>
@@ -410,16 +727,16 @@ const formSubmitSkill= (e) => {
               <hr/>
 
               <h5 style={{color:'Black'}}>Avialable phone numbers</h5>
-              <div style={{overflow:'scroll', maxHeight:'100px',
-              color:'red', border:'2px solid black',width:'300px',
-              marginLeft:'auto',marginRight:'auto',
-              marginBottom:'20px',padding:'10px'}}>
+              <div class="adminSection">
               { myPhone?.map((phone)=>(
                 <div>                  
                   {phone.phone}                
-                  <button onClick={()=>deletePhone(phone.id)}>
+                  {loginStatus && < button class="btn btn-primary" onClick={()=>deletePhone(phone.id)}>
                   DELETE
-                 </button>
+                 </button>  } 
+                 {!loginStatus && < button class="btn btn-primary" disabled>
+                  DELETE
+                 </button>  }              
                   </div>
             ))}               
               </div>
@@ -432,8 +749,8 @@ const formSubmitSkill= (e) => {
                      placeholder="Add Phone"/>
                   </div>
                     <div class="col-12 addPro2">                      
-                     {loginStatus && <button header1 type='submit'>Add</button>}
-                     {!loginStatus && <button disabled header1 type='submit'>Only Admin can edit this</button>}
+                     {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
+                     {!loginStatus && <button disabled class="btn btn-primary">Only Admin can edit this</button>}
                     </div>
                       </div>
                       </form>
@@ -444,16 +761,16 @@ const formSubmitSkill= (e) => {
               <h2 class="header1">Skill Section</h2>
               <hr/>
               <h5 style={{color:'Black'}}>Avialable Skills</h5>
-              <div style={{overflow:'scroll', maxHeight:'100px',
-              color:'red', border:'2px solid black',width:'300px',
-              marginLeft:'auto',marginRight:'auto',
-              marginBottom:'20px',padding:'10px'}}>
+              <div class="adminSection">
               { skills?.map((skill)=>(
                 <div>                  
-                  {skill.skill}                
-                  <button onClick={()=>deleteSkill(skill.id)}>
+                  {skill.skill} 
+                  {loginStatus && < button class="btn btn-primary" onClick={()=>deleteSkill(skill.id)}>
                   DELETE
-                 </button>
+                 </button>  } 
+                 {!loginStatus && <button class="btn btn-primary" disabled>
+                  DELETE
+                 </button>  }                 
                   </div>
             ))}               
               </div>
@@ -467,27 +784,150 @@ const formSubmitSkill= (e) => {
                      placeholder="Add skill" />
                   </div>
                     <div class="col-12 addPro2">                      
-                      <button header1 type='submit'>Add</button>
+                    {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
+                     {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                       </div>
                       </form>
                 </div>  
-             
+
+             {/* Hobby Section            */}
+             <div class="containerAdmin">
+              <h2 class="header1">Hobby Section</h2>
+              <hr/>
+              <h5 style={{color:'Black'}}>Avialable Hobbies</h5>
+              <div class="adminSection">
+              { hobbies?.map((hobby)=>(
+                <div>                  
+                  {hobby.hobby} 
+                  {loginStatus && < button class="btn btn-primary" onClick={()=>deleteHobby(hobby.id)}>
+                  DELETE
+                 </button>  } 
+                 {!loginStatus && < button class="btn btn-primary" disabled>
+                  DELETE
+                 </button>  }                 
+                  </div>
+            ))}               
+              </div>
+
+                <form onSubmit={formSubmitHobby}>
+                <div class="row addPro ">
+                  <div  class="col-12 addPro2">
+                      <input type='text' name="hobby" 
+                     value={hobby}
+                     onChange = {(e)=>setHobby(e.target.value)}
+                     placeholder="Add hobby" />
+                  </div>
+                    <div class="col-12 addPro2">                      
+                    {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
+                     {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
+                    </div>
+                      </div>
+                      </form>
+                </div>  
+
+    {/* Public Message Section */}
+    <div class="containerAdmin">
+                  <h2 class="header1">Public Message Section</h2>
+                  <hr/>
+                  <h5 style={{color:'Black'}}>Avialable Messages</h5>
+                  <div class="adminSection">
+                  { pMessages?.map((pMessage)=>(
+                    <div>                  
+                      {pMessage.pmessage} 
+                      {loginStatus && < button class="btn btn-primary" onClick={()=>deletePMessage(pMessage.id)}>
+                      DELETE
+                    </button>  } 
+                    {!loginStatus && < button class="btn btn-primary" disabled>
+                      DELETE
+                    </button>  }                 
+                      </div>
+                ))}               
+                  </div>
+
+                    <form onSubmit={formSubmitPMessage}>
+                    <div class="row addPro ">
+                      <div  class="col-12 addPro2">
+                        <textarea type='text' name="pmessage" 
+                        value={pmessage}
+                        style={{width: '50%', height:'150px', marginTop:'5px'}}
+                        onChange = {(e)=>setPMessage(e.target.value)}
+                        placeholder="Add Message" />
+                      </div>
+                        <div class="col-12 addPro2">                      
+                        {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
+                        {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
+                        </div>
+                          </div>
+                          </form>
+                    </div>  
+
+                 {/* Profile Section            */}
+             <div class="containerAdmin">
+              <h2 class="header1">Profile Section</h2>
+              <hr/>
+              <h5  style={{color:'Black'}}>Avialable Profile</h5>
+              <div class="adminSection">
+              { profiles?.map((profile)=>(
+                <div>                  
+                  {profile.profile} 
+                  {loginStatus && < button class="btn btn-primary" onClick={()=>deleteProfile(profile.id)}>
+                  DELETE
+                 </button>  } 
+                 {!loginStatus && < button class="btn btn-primary" disabled>
+                  DELETE
+                 </button>  }                  
+                  </div>
+            ))}               
+              </div>
+
+                <form>
+                <div class="row addPro ">
+                  <div  class="col-12 addPro2">
+                      <textarea type='text' name="profile" 
+                     value={profile}
+                     style={{width: '50%', height:'150px', marginTop:'5px'}}
+                     onChange = {(e)=>setProfile(e.target.value)}
+                     placeholder="Add profile summary" />
+                  </div>
+                  {loginStatus && <div>
+                  <div class="col-12 addPro2">                      
+                  {!profileAvailable && <button  class="btn btn-primary" onClick={formSubmitProfile}>
+                        Add
+                  </button>}
+                  </div>
+                  <div class="col-12 addPro2">                                   
+                  {profileAvailable && <button  class="btn btn-primary" onClick={updateProfile}>
+                        Update
+                  </button>}                   
+                     
+                    </div>
+                    </div>
+                    }
+                     <div class="col-12 addPro2"> 
+                    {            
+                    !loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>                   
+                    }
+                     </div>
+                      </div>
+                      </form>
+                </div>  
+                          
              {/* Project Section */}
               <div class="containerAdmin">
               <h2  class="header1">Projects Section</h2>
               <hr/>
               <h5 style={{color:'Black'}}>Avialable Projects</h5>
-              <div style={{overflow:'scroll', maxHeight:'100px',
-              color:'red', border:'2px solid black',width:'auto',
-              marginLeft:'auto',marginRight:'auto',
-              marginBottom:'20px',padding:'10px'}}>
+              <div class="adminSection">
               { projects?.map((project)=>(
                 <div>                  
-                  {project["projecttitle"]}                
-                  <button onClick={()=>deleteProject(project.id)}>
+                  {project["projecttitle"]} 
+                  {loginStatus && < button class="btn btn-primary" onClick={()=>deleteProject(project.id)}>
                   DELETE
-                 </button>
+                 </button>  } 
+                 {!loginStatus && < button class="btn btn-primary" disabled>
+                  DELETE
+                 </button>  }                   
                   </div>
             ))} 
             </div>
@@ -525,28 +965,30 @@ const formSubmitSkill= (e) => {
                       placeholder="Website Link" />
                    </div>                
                     <div class="col-12 addPro2">                      
-                      <button  class="btn btn-primary" type='submit'>Add</button>
+                    {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
+                     {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                       </div>
                       </form>
                 </div>  
 
-                {/* Education Section */}
+                {/* EDUCATION */}
+                {/* Schools */}
               <div class="containerAdmin">
-              <h2  class="header1">Education Section</h2>
+              <h2  class="header1">School Section</h2>
               <hr/>
               <h5 style={{color:'Black'}}>Avialable Schools</h5>
-              <div style={{overflow:'scroll', maxHeight:'100px',
-              color:'red', border:'2px solid black',width:'auto',
-              marginLeft:'auto',marginRight:'auto',
-              marginBottom:'20px',padding:'10px'}}>
+              <div class="adminSection">
 
               { schools?.map((school)=>(
                 <div>                  
-                  {school.school}                
-                  <button onClick={()=>deleteSchool(school.id)}>
+                  {school.school}
+                  {loginStatus && < button class="btn btn-primary"  onClick={()=>deleteSchool(school.id)}>
                   DELETE
-                 </button>
+                 </button>  } 
+                 {!loginStatus && < button class="btn btn-primary" disabled>
+                  DELETE
+                 </button>  }                    
                   </div>
             ))} 
             </div>
@@ -593,7 +1035,76 @@ const formSubmitSkill= (e) => {
                       placeholder="Graduation Year" />
                    </div>                
                     <div class="col-12 addPro2">                      
-                      <button  class="btn btn-primary" type='submit'>Add</button>
+                    {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
+                     {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
+                    </div>
+                      </div>
+                      </form>
+                </div>  
+
+                {/* Trainings */}
+                <div class="containerAdmin">
+              <h2  class="header1">Training Section</h2>
+              <hr/>
+              <h5 style={{color:'Black'}}>Avialable Training</h5>
+              <div class="adminSection">
+              {trainings?.map((training)=>(
+                <div>                  
+                  {training.course}
+                  {loginStatus && < button class="btn btn-primary"  onClick={()=>deleteTraining(training.id)}>
+                  DELETE
+                 </button>  } 
+                 {!loginStatus && < button class="btn btn-primary" disabled>
+                  DELETE
+                 </button>  }                  
+                  </div>
+            ))} 
+            </div>
+
+                <form  onSubmit={formSubmitTraining}>
+                <div class="row addPro ">
+                  <div  class="col-12 addPro2">
+                      <input type='text' name="tCourse" 
+                      size="50"
+                      required
+                     value={tCourse}
+                     onChange = {(e)=>setTCourse(e.target.value)}
+                     placeholder="Course" />
+                  </div>
+                  <div class="col-12 addPro2">
+                      <input type='text' name="tCompany" 
+                      required
+                      value={tCompany}
+                      size="50"
+                      onChange = {(e)=>setTCompany(e.target.value)}
+                      placeholder="Company" />
+                   </div> 
+                   <div class="col-12 addPro2">
+                      <input type='text' name="tCompanyWebsite" 
+                      required
+                      value={tCompanyWebsite}
+                      size="50"
+                      onChange = {(e)=>setTCompanyWebsite(e.target.value)}
+                      placeholder="Company website" />
+                   </div> 
+                   <div class="col-12 addPro2">
+                      <input type='text' name="certificate" 
+                       size="50"
+                       required
+                      value={certificate}
+                      onChange = {(e)=>setCertificate(e.target.value)}
+                      placeholder="Certificate"/>
+                   </div>
+                   <div class="col-12 addPro2">
+                      <input type='text' name="tYear" 
+                       size="50"
+                      value={tYear}
+                      onChange = {(e)=>setTYear(e.target.value)}
+                      placeholder="Graduation" />
+                   </div>             
+                    <div class="col-12 addPro2">                      
+                    {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
+                     {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                       </div>
                       </form>
@@ -621,7 +1132,8 @@ const formSubmitSkill= (e) => {
                     </div>
                
                     <div class="col-12 addPro2">                      
-                      <button class="btn btn-primary" type='submit'>Upload</button>
+                    {loginStatus && <button class="btn btn-primary" type='submit'>Upload</button>}
+                     {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                       </div>
                       </form>

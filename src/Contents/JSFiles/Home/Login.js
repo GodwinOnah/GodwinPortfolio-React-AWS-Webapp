@@ -4,23 +4,18 @@ import {useState, useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { toast,ToastContainer } from "react-toastify";
-
-
+import bcrypt from 'bcryptjs-react';
 
 export const Login = () =>{
   
   const [email,SetEmail] = useState('');
   const [password,SetPassword] = useState('');
   const [isLoggingIn,SetIsLoggingIn] = useState(false);
-  const [isRegistered,setIsRegistered] = useState(false);
   const [show, setShow] = useState(false); 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true); 
   const [data,SetData] = useState('');
-  const [loginStatus,setLoginStatus] = useState(false);
- 
-
-  const navigate = useNavigate()
+  const [hash, setHash] = useState(false);
 
   useEffect(()=>{
     fetch('http://localhost:3002/register')
@@ -41,57 +36,42 @@ export const Login = () =>{
         return res.json();
      })
      .then((data) =>{
-      console.log(data)
-      setLoginStatus(data);
       })
      .catch(err=>{
          console.log(err);
     })
    },[]);
 
-
 const handleSubmit = (e) =>{
   e.preventDefault();
+  SetIsLoggingIn(true);
   const datax = {email, password};
   if(!email||!password) 
   return toast.warning("Enter all fields");
 
-  data.map((data)=>{
-    if(email != data.email || password!=data.password){
+  data?.map((data)=>{
+    bcrypt.compare(password,data.password).then((result)=>{setHash(result)})//Hashing password here
+
+    if(email != data.email && !hash){
         toast.warning("Wrong Password!!")
+        SetIsLoggingIn(false);
         return
       }
       else{ 
-        fetch(
-          "http://localhost:3002/login",
-            {
-              method: 'PUT',
-              headers:{
-                  "Content-Type": "application/json"
-               },
-              body: JSON.stringify({loginStatus})
-              })
-          .then(res =>{return res.json()})
-          .then(data =>{
-            
-          })
         toast.success("Logged in");
-        SetIsLoggingIn(false)
+        window.localStorage.setItem('login',JSON.stringify(true))
+        SetIsLoggingIn(false);
         setTimeout(() => {
        handleClose();
-    }, 2000);
+       window.location.reload();
+    }, 2000);  
     } })
-
-  SetIsLoggingIn(true);
-
 };
         return (
-          <div style={{cursor:"pointer"}}>
-           
+          <div style={{cursor:"pointer"}}>          
             <button class="btn btn-primary" type='submit' onClick={handleShow}>
-            Login
-            </button>
-      
+            Admin Login
+            </button>     
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title>Login</Modal.Title>
@@ -147,8 +127,8 @@ const handleSubmit = (e) =>{
               </form>
             </Modal>
           </div>
-        );
-      }
+ );
+}
       
      
   

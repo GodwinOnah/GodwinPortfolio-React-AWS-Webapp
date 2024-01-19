@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react';
 import { toast,ToastContainer } from "react-toastify";
 import { Login } from './Login.js';
 import  {ForgottenPassword}  from './ForgottenPassword.js';
+import bcrypt from 'bcryptjs-react';
 
 
 export const Register = () =>{
@@ -15,16 +16,27 @@ export const Register = () =>{
   const [confirmPassword,SetConfirmPassword] = useState('');
   const [isRegistering,setIsRegistering] = useState(false);
   const [isRegistered,setIsRegistered] = useState(false);
+  const [loginStatus,setLoginStatus] = useState(false);
  
-  const navigate = useNavigate()
+  
+ 
+  useEffect(()=>{
+  const data = window.localStorage.getItem('login')
+  if(data != null)  setLoginStatus(JSON.parse(data))
+  },[loginStatus]);
+  
+const logout =()=>{
+  window.localStorage.setItem('login',JSON.stringify(false));
+  window.location.reload();
+}
 
   useEffect(()=>{
+   
     fetch('http://localhost:3002/register')
     .then(res =>{
         return res.json();
      })
      .then((data) =>{
-       
        if(data.length>0) setIsRegistered(true);
       })
      .catch(err=>{
@@ -34,7 +46,8 @@ export const Register = () =>{
 
 const handleSubmit = (e) =>{
   e.preventDefault();
-  const datax = {name, email, maidenName, password};
+  const hash=bcrypt.hashSync(password);//Hashing password here
+  const datax = {name, email, maidenName, hash};
   if(!name||!email||!maidenName||!password||!confirmPassword) 
   return toast.success("Enter all field");
   if(password!=confirmPassword) {
@@ -59,18 +72,23 @@ const handleSubmit = (e) =>{
       body: JSON.stringify(datax)
       })
   .then(res =>{return res.json()})
-  .then(data =>{
-          if(data==false){
+  .then(data =>{      
             SetName("");
             SetEmail("");
             setMaidenName("");
             SetPassword("");
             SetConfirmPassword("")
-            setIsRegistering(false);
+            toast.success("Registeration successful")
+            setIsRegistering(false); 
+            setTimeout(() => {           
             window.location.reload();
-          }
-          return "You are not Authorize";      
+           }, 2000);    
        })
+       .catch(err=>{
+            toast.warning("Registeration failed");
+            setIsRegistering(false);
+            console.log(err);
+    })
       };
  
         return (
@@ -136,8 +154,9 @@ const handleSubmit = (e) =>{
                 </div>
           </form>
           <div class="d-flex justify-content-center" style={{margin:'20px'}}>
-                <ForgottenPassword/>
-                <Login/>               
+            {!loginStatus && <ForgottenPassword/>}
+            {!loginStatus && <Login/>}
+             {loginStatus &&  <button onClick={logout}>Logout</button>}             
             </div>
           </div>
                

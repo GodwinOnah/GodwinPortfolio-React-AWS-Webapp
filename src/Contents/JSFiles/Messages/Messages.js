@@ -11,8 +11,11 @@ export const Messages=()=>{
 
     const [messages,setMessages] = useState([]);
     const [noMessageFound, setNoMessageFound] =  useState("");
+    const [loginStatus,setLoginStatus] = useState(false);
 
     useEffect(()=>{
+      const data =  window.localStorage.getItem('login')
+      if(data !=null) setLoginStatus(JSON.parse(data));
         fetch('http://localhost:3002/messages')
         .then((res)=>{
           return res.json();
@@ -64,8 +67,15 @@ export const Messages=()=>{
                 <th></th>
                 </tr>
               </thead>
-             <tbody style={{fontSize:'20px'}}> 
-                {noMessageFound ||
+              
+              {<strong style={{color:'White'}}>
+                Sorry for the inconvinience!! Only Admin can view messages
+                </strong> 
+                }
+             
+             
+            {loginStatus && <tbody style={{fontSize:'20px'}}> 
+               {noMessageFound ||
                   messages?.map((message,index)=>(
                    
                      <tr key = {index}>              
@@ -105,7 +115,7 @@ export const Messages=()=>{
                   
                   ))
                   }           
-                  </tbody>
+                  </tbody>}
                  </table>  
                  </div>
         )}

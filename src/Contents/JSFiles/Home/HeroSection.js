@@ -1,23 +1,49 @@
 import React from 'react';
+import {useState, useEffect} from 'react';
 import { Skills } from './Skills.js';
 import { Projects } from './Projects.js';
+import { Profile } from './Profile.js';
 import '../../../Contents/CSSFiles/HeroSection.css';
-import image1 from '../../Images/Obande3.jpeg'
-import image2 from '../../Images/portfolio_bg.avif'
 import { ContactMe } from './ContactMe.js';
 import Typical  from 'react-typical';
 import { FaFacebook, FaWhatsapp, FaInstagram, FaGithub, FaLinkedin } from 'react-icons/fa';
 import { MdMarkEmailUnread } from "react-icons/md";
 
-
-
 export const HeroSection = () => {
+
+    const [pMessages,setPMessages] = useState(null);
+    
+    let message1 = ""
+
+    {pMessages?.map((message)=>{
+    
+            message1+=message.pmessage+".........."
+       
+    })} 
+
+    // Get Public Message
+ useEffect(()=>{
+    fetch('http://localhost:3002/pmessages')
+    .then((res)=>{
+       return res.json();
+    })
+    .then((data) =>{
+       if(data)setPMessages(data);
+       return
+     })
+     .catch(err=>{ console.log(err);
+    })
+   },[]);
+
     let url = "https://www.google.com/search?q="
     let fullstackdeveloper = "Full-Stack Developer"
     return (
-        <div style={{marginTop:'85px'}}>
-
-       
+        <div style={{marginTop:'85px'}}>                     
+            <marquee scrollamount="3">                      
+              <strong style={{color:'blue', fontSize:'20px', fontWeight:'bolder'}}>
+                {message1}
+                </strong>                     
+            </marquee>         
                <div> 
                 <div class="row" style={{ margin: "50px" }}>
                     <div class="col-6 full-stack">
@@ -32,26 +58,24 @@ export const HeroSection = () => {
                     wrapper="p"
                         />
                         <div class="d-flex icons">
-                            <a class="icons-icons" href="https://www.facebook.com/obande2" target="blank">
+                            <a class="icons-icons" href="https://www.facebook.com/obande2" target="blank" title='Facebook'>
                             <FaFacebook />
                             </a>
-                            <a class="icons-icons" href=" https://wa.me/+447751776483">
+                            <a class="icons-icons" href=" https://wa.me/+447751776483" title='Whatsapp'>
                             <FaWhatsapp />
                             </a>
-                            <a class="icons-icons" href="https://www.instagram.com/billions_deal/" target="blank">
+                            <a class="icons-icons" href="https://www.instagram.com/billions_deal/" target="blank" title='Instagram'>
                             <FaInstagram />
                             </a>
-                            <a class="icons-icons" href="https://github.com/GodwinOnah" target="blank">
+                            <a class="icons-icons" href="https://github.com/GodwinOnah" target="blank" title='GitHub'>
                             <FaGithub/>
                             </a>
-                            <a class="icons-icons" href="https://www.linkedin.com/in/godwin-onah-120b8221a/" target="blank">
+                            <a class="icons-icons" href="https://www.linkedin.com/in/godwin-onah-120b8221a/" target="blank" title='LinkedIn'>
                             <FaLinkedin/>
                             </a>
-                            <a class="icons-icons" href="mailto:thisaremyfiles@gmail.com" target="blank">
+                            <a class="icons-icons" href="mailto:thisaremyfiles@gmail.com" target="blank" title='Email'>
                             <MdMarkEmailUnread/>
-                            </a>
-                            
-                            
+                            </a>                        
                         </div>
                         <h2 style={{ fontSize: "40px", cursor: "pointer" }}>
                             <a style={{ textDecoration: "none" ,color:'gold',fontSize:'30px'}} href={url + fullstackdeveloper} target="blank">
@@ -59,18 +83,8 @@ export const HeroSection = () => {
                             </a>
                         </h2>
                         <p>
-                            A hard worker with team spirit, a good qualification,
-                            and track records of completed projects working in full-stack
-                            development. I have undergone several trainings with Udemy and
-                            Amigoscode, which have improved my skills by 90%. I have
-                            produced several front-end applications as well as APIs for
-                            the back-end. I have deployed projects on Azure, AWS, Digital
-                            Ocean, and Heroku cloud services and used SQL databases for
-                            years. I developed an Android mobile application using Java.
-                            I am calm under pressure and open to learning.
-
-                        </p>
-                
+                            <Profile/>
+                        </p>               
                         <div>
                             <button class="hireMe"><ContactMe/></button>
                             <button class="Resume"><a href="ONAH_GODWIN_RESUME.pdf" download="ONAH_GOWIN_CV_REACT.pdf" 
@@ -78,10 +92,8 @@ export const HeroSection = () => {
                             </button>
                         </div>
                     </div>
-                    <div class="col-6">
-                        
-                        <div class="Image">
-                           
+                    <div class="col-6">                        
+                        <div class="Image">                           
                         </div>
                         <div>
                             <strong>Hard work pays</strong>
@@ -92,14 +104,14 @@ export const HeroSection = () => {
                 <div class="div1">
                     <h2 class="header1">Skills</h2>
                     <div>
-                        <Skills />
+                        <Skills/>
                     </div>
                 </div>
 
                 <div class="div1 div2">
                     <h2 class="header1">Projects</h2>
                     <div>
-                        <Projects />
+                        <Projects/>
                     </div>
                 </div>
                 </div>

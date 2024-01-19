@@ -4,6 +4,7 @@ import '../../../../Contents/CSSFiles/Nav.css';
 import {Login} from '../../Home/Login.js'
 import { ContactMe } from './../ContactMe.js';
 import {View} from './../View.js'
+import { CiSettings } from "react-icons/ci";
 
 
 export const Nav = () => {
@@ -14,7 +15,7 @@ export const Nav = () => {
       <nav class="navbar navbar-expand-lg bg-body-tertiary  sticky-top">
       <div class="container-fluid navi">   
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <Link to="/AboutMe" class="logo"style={{ textDecoration: 'none',color:'gold', 
+        <Link to="/" class="logo"style={{ textDecoration: 'none',color:'gold', 
         fontFamily:'fantasy',fontSize:'50px',fontWeight:'bolder',padding:'20px' }}> 
           <strong>ONAH GODWIN</strong>
           </Link> 
@@ -39,7 +40,7 @@ export const Nav = () => {
             </li>   
             <Link to="/Admin" class="navItem1" style={{ textDecoration: 'none' }}
              title='Visit admin today'>
-             Admin
+            <CiSettings />
               </Link>
           </ul>
          

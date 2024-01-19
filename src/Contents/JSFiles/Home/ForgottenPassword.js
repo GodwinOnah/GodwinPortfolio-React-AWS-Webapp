@@ -3,25 +3,24 @@ import {Link, useNavigate} from "react-router-dom";
 import {useState, useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { toast,ToastContainer } from "react-toastify";
 
 
 export const ForgottenPassword = () =>{
   
-    const [email,SetEmail] = useState('');
+    const [email,setEmail] = useState('');
     const [maidenName,setMaidenName] = useState('');
-    const [password,SetPassword] = useState('');
+    const [password,setPassword] = useState('');
     const [confirmPassword,SetConfirmPassword] = useState('');
     const [show, setShow] = useState(false); 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true); 
     const [isChecking,SetIsChecking] = useState(false);
-    const [data,SetData] = useState('');
+    const [data,setData] = useState('');
+    const form = useRef();
     let counter = 0;
-
-
-
 
   const navigate = useNavigate()
 
@@ -31,10 +30,10 @@ export const ForgottenPassword = () =>{
         return res.json();
      })
      .then((data) =>{
-       SetData(data);
+       setData(data);
       })
      .catch(err=>{
-                      console.log(err);
+          console.log(err);
     })
    },[]);
 
@@ -42,7 +41,7 @@ const handleSubmit = (e) =>{
   e.preventDefault();
   const datax = {email,maidenName,password};
   if(!email||!maidenName||!confirmPassword||!password) 
-  return toast.success("Enter all field");
+  return toast.warning("Enter all field");
 
   if(password!=confirmPassword) {
     toast.warning("Password missmatch")
@@ -62,45 +61,31 @@ const handleSubmit = (e) =>{
 //   }
  
 
-  data.map((data)=>{
-    if(email != data.email || maidenName!=data.maidenname){
-        // counter++;
-        toast.warning("You are not the Admin")
-        return
-      }
-      else{ 
-        fetch(
-            "http://localhost:3002/register",
-              {
-                method: 'PUT',
-                headers:{
-                    "Content-Type": "application/Json"
-                 },
-                body: JSON.stringify(datax)
-                }
-            )
-            .then(res =>{return res.json()})
-            .then(data =>{
-                   
-                      toast.success("Admin Password updated");
-                      SetIsChecking(false);
-                      handleClose()
-                      window.location.reload();
-                    return true;   
-                 })
-                 .catch(err=>{
-                    toast.warning("Admin Password not updated");
-                           console.log(err);
-            })
-        SetIsChecking(false)
-        setTimeout(() => {
-       handleClose();
-    }, 2000);
-    }
-})
+                                                                                                                                                                                                                                                                                                        (()=>{emailjs.init("4GGWAs8YmyTJJ--jF")})(); //Function call   
 
-  SetIsChecking(true);
+              //  Send message to email
+
+        if(counter==5 ){       
+          if(window.confirm("Login details to be sent to your email?")){
+             emailjs.sendForm('service_9n124vv', 'template_pmpo23n', form.current)
+              .then((res) => { 
+                toast.success("Login details send to your registered email");                 
+              setEmail("");
+              setMaidenName("");
+              setPassword("");            
+              setTimeout(() => {
+                handleClose();
+              }, 2000); 
+              window.location.reload();            
+              }, (error) => {
+              toast.warning(error);
+              });}
+            }
 };
+
+
+
+
         return (
           <div style={{cursor:"pointer", marginRight:"20px"}}>
            
@@ -112,7 +97,7 @@ const handleSubmit = (e) =>{
               <Modal.Header closeButton>
                 <Modal.Title>Recover Password</Modal.Title>
               </Modal.Header>
-              <form onSubmit={handleSubmit}>
+              <form  ref={form} onSubmit={handleSubmit}>
               <Modal.Body>
               <div class="modal1">
        
@@ -121,13 +106,15 @@ const handleSubmit = (e) =>{
             <div  class="col-12 login">
                 <input 
                 value={email}
-                onChange = {(e)=>SetEmail(e.target.value)}
+                name="email"
+                onChange = {(e)=>setEmail(e.target.value)}
                 type='email' 
                 placeholder="Email" />
             </div>
             <div class="col-12 login">
             <input 
                 value={maidenName}
+                name="maidenName"
                 onChange = {(e)=>setMaidenName(e.target.value)}
                 type='text' 
                 placeholder="Maiden Name" />
@@ -135,7 +122,8 @@ const handleSubmit = (e) =>{
              <div class="col-12 login">
                 <input 
                 value={password}
-                onChange = {(e)=>SetPassword(e.target.value)}
+                name="password"
+                onChange = {(e)=>setPassword(e.target.value)}
                 type='password' 
                 placeholder="New Password" />
              </div>

@@ -23,12 +23,7 @@ export const ContactMe = () =>{
     const [show, setShow] = useState(false); 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const myPhoneNumber = "(+44771776483)";
-    let allPhoneNumbers = "";
-  
-    
-
-  //  const  myPhone = ["+2349062485537","+2349045645676"]
+    const myPhoneNumber = "(+447751776483)";
 
     useEffect(()=>{
       fetch('http://localhost:3002/phone')
