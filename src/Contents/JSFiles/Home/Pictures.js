@@ -7,6 +7,7 @@ import { Carousel } from 'react-responsive-carousel';
 import image1 from '../../Images/Obande1.jpeg'
 import image2 from '../../Images/Obande2.jpeg'
 import image3 from '../../Images/Obande3.jpeg'
+import { toast,ToastContainer } from "react-toastify";
 
 
 
@@ -15,14 +16,11 @@ import image3 from '../../Images/Obande3.jpeg'
 export const Pictures = () => {
 
   const [pictures,SetPictures] = useState(Images);
+  const [uploading,setUploading] = useState(false);; 
+  
   const images = [];
 
-    //  useEffect(()=>{
-    //   fetch('https://obandeclothapp-60d299435905.herokuapp.com/pictures').then(res =>{
-    //     if(res)SetPictures(res.data);
-    //     return
-    //    })
-    //  },[]);
+    
 
      return(
       <div class="container">    

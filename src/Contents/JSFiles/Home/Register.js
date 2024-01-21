@@ -1,5 +1,4 @@
 import '../../../Contents/CSSFiles/Login.css';
-import {Link, useNavigate} from "react-router-dom";
 import {useState, useEffect} from 'react';
 import { toast,ToastContainer } from "react-toastify";
 import { Login } from './Login.js';
@@ -16,6 +15,7 @@ export const Register = () =>{
   const [confirmPassword,SetConfirmPassword] = useState('');
   const [isRegistering,setIsRegistering] = useState(false);
   const [isRegistered,setIsRegistered] = useState(false);
+  const [data,setData] = useState(false);
   const [loginStatus,setLoginStatus] = useState(false);
  
   
@@ -37,6 +37,7 @@ const logout =()=>{
         return res.json();
      })
      .then((data) =>{
+      if(data) setData(true);
        if(data.length>0) setIsRegistered(true);
       })
      .catch(err=>{
@@ -49,8 +50,8 @@ const handleSubmit = (e) =>{
   const hash=bcrypt.hashSync(password);//Hashing password here
   const datax = {name, email, maidenName, hash};
   if(!name||!email||!maidenName||!password||!confirmPassword) 
-  return toast.success("Enter all field");
-  if(password!=confirmPassword) {
+  return toast.warning("Enter all field");
+  if(password!==confirmPassword) {
     toast.warning("Password missmatch")
     return
   }
@@ -149,14 +150,16 @@ const handleSubmit = (e) =>{
               <div class="col-12 login">
                 {isRegistering && <strong>Registration going on...</strong>}
               </div>
+              <div class="col-12 login">
              {!isRegistered && <button class="btn btn-primary">Register</button>}
-             {isRegistered && <button disabled class="btn btn-primary">Admin Already Registered</button>}
+             {isRegistered && <button disabled class="btn btn-primary">Admin Registered</button>}
+                </div>
                 </div>
           </form>
           <div class="d-flex justify-content-center" style={{margin:'20px'}}>
             {!loginStatus && <ForgottenPassword/>}
             {!loginStatus && <Login/>}
-             {loginStatus &&  <button onClick={logout}>Logout</button>}             
+            {loginStatus &&  <button class="btn btn-primary" onClick={logout}>Logout</button>}             
             </div>
           </div>
                

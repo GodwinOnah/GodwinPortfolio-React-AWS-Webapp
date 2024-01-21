@@ -50,7 +50,13 @@ const [profile,setProfile] = useState("");
 const [noProfileFound, setNoProfileFound] =  useState("");
 const [profileAvailable, setProfileAvailable]=  useState(false);
 const [loginStatus,setLoginStatus] = useState(false);
+const [adminName,setAdminName] = useState('');
 
+
+useEffect(()=>{
+  const data = window.localStorage.getItem('Admin')
+  if(data != null)  setAdminName(data)
+  },[adminName]);
 
 // Upload Image
 const uploadFile = (e) =>{  
@@ -653,12 +659,12 @@ const deleteProfile = ((id) => {
 
 
   // Upload Image
-  const formSubmitImage= (e) => {
+  const formSubmitPhoto= (e) => {
     e.preventDefault();
 
-    if(formData == null) setMessage("No File attached");
+    if(formData == null) setMessage("No Photo attached");
 
-      axios.post(`http://localhost:3002/image/${imageId}/images/photo`,
+      axios.post(`http://localhost:3002/image/${imageId}/images/photos`,
       formData,
             {
               onUploadProgress : (progressEvent) => {
@@ -698,11 +704,11 @@ const deleteProfile = ((id) => {
               pauseOnHover
               theme='light'
               />
-              <h1 style={{color:'gold', margin:'100px'}}>Welcome Admin</h1>
+              <h1 style={{color:'gold', margin:'100px'}}>Welcome {adminName}</h1>
 
               <div>                         
               <div class="register" >
-              <h2 class="header1">Set Admin</h2>
+              <h2 class="header2">Set Admin</h2>
               <div class="messages">
               <Link to="/Register"  style={{ textDecoration: 'none', fontSize:'20px'}}>
              <button>Become the Admin Here</button> 
@@ -712,8 +718,8 @@ const deleteProfile = ((id) => {
               </div>
 
               <div>                         
-              <div class="listOfCustomers" >
-              <h2 class="header1">Received Messages</h2>
+              <div class="adminMessages" >
+              <h2 class="header2">Received Messages</h2>
               <div class="messages">
               <Messages/>
               </div>      
@@ -723,7 +729,7 @@ const deleteProfile = ((id) => {
 
                {/* Phone Section     */}
               <div class="containerAdmin">               
-              <h2 class="header1">Phone Section</h2>
+              <h2 class="header2">Phone Section</h2>
               <hr/>
 
               <h5 style={{color:'Black'}}>Avialable phone numbers</h5>
@@ -758,7 +764,7 @@ const deleteProfile = ((id) => {
 
                 {/* Skill Section            */}
               <div class="containerAdmin">
-              <h2 class="header1">Skill Section</h2>
+              <h2 class="header2">Skill Section</h2>
               <hr/>
               <h5 style={{color:'Black'}}>Avialable Skills</h5>
               <div class="adminSection">
@@ -793,7 +799,7 @@ const deleteProfile = ((id) => {
 
              {/* Hobby Section            */}
              <div class="containerAdmin">
-              <h2 class="header1">Hobby Section</h2>
+              <h2 class="header2">Hobby Section</h2>
               <hr/>
               <h5 style={{color:'Black'}}>Avialable Hobbies</h5>
               <div class="adminSection">
@@ -828,7 +834,7 @@ const deleteProfile = ((id) => {
 
     {/* Public Message Section */}
     <div class="containerAdmin">
-                  <h2 class="header1">Public Message Section</h2>
+                  <h2 class="header2">Public Message Section</h2>
                   <hr/>
                   <h5 style={{color:'Black'}}>Avialable Messages</h5>
                   <div class="adminSection">
@@ -864,7 +870,7 @@ const deleteProfile = ((id) => {
 
                  {/* Profile Section            */}
              <div class="containerAdmin">
-              <h2 class="header1">Profile Section</h2>
+              <h2 class="header2">Profile Section</h2>
               <hr/>
               <h5  style={{color:'Black'}}>Avialable Profile</h5>
               <div class="adminSection">
@@ -915,7 +921,7 @@ const deleteProfile = ((id) => {
                           
              {/* Project Section */}
               <div class="containerAdmin">
-              <h2  class="header1">Projects Section</h2>
+              <h2  class="header2">Projects Section</h2>
               <hr/>
               <h5 style={{color:'Black'}}>Avialable Projects</h5>
               <div class="adminSection">
@@ -975,7 +981,7 @@ const deleteProfile = ((id) => {
                 {/* EDUCATION */}
                 {/* Schools */}
               <div class="containerAdmin">
-              <h2  class="header1">School Section</h2>
+              <h2  class="header2">School Section</h2>
               <hr/>
               <h5 style={{color:'Black'}}>Avialable Schools</h5>
               <div class="adminSection">
@@ -1044,7 +1050,7 @@ const deleteProfile = ((id) => {
 
                 {/* Trainings */}
                 <div class="containerAdmin">
-              <h2  class="header1">Training Section</h2>
+              <h2  class="header2">Training Section</h2>
               <hr/>
               <h5 style={{color:'Black'}}>Avialable Training</h5>
               <div class="adminSection">
@@ -1112,9 +1118,9 @@ const deleteProfile = ((id) => {
 
                 {/* Photo Section               */}
               <div class="containerAdmin">
-              <h2 class="header1">Add Your Photo</h2> 
+              <h2 class="header2">Add Your Photo</h2> 
               <hr/>
-                <form  post ="" onSubmit={formSubmitImage}>
+                <form  post ="" onSubmit={formSubmitPhoto}>
                 <div class="row addPro ">                 
                    <div class="col-12 addPro2">
                       <div class="drop">

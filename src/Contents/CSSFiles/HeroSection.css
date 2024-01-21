@@ -113,11 +113,12 @@
 }
 
 .header1{
-  background-color: pink;
+  background-color: white;
   color: midnightblue;
   border-radius: 29px;
   border: 2px solid black;
-  width: 80%;
-  margin: 0 10%;
+  width: 50%;
+  margin: 20px auto;
+ 
 }
 

@@ -1,5 +1,4 @@
 import '../../../Contents/CSSFiles/Login.css';
-import {Link, useNavigate} from "react-router-dom";
 import {useState, useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -51,20 +50,20 @@ const handleSubmit = (e) =>{
 
   data?.map((data)=>{
     bcrypt.compare(password,data.password).then((result)=>{setHash(result)})//Hashing password here
-
-    if(email != data.email && !hash){
+    if(email === data.email && hash){
+      toast.success("Logged in");
+      window.localStorage.setItem('login',JSON.stringify(true))
+      SetIsLoggingIn(false);
+      setTimeout(() => {
+     handleClose();
+     window.location.reload();
+  }, 2000);  
+        
+      }
+      else{ 
         toast.warning("Wrong Password!!")
         SetIsLoggingIn(false);
         return
-      }
-      else{ 
-        toast.success("Logged in");
-        window.localStorage.setItem('login',JSON.stringify(true))
-        SetIsLoggingIn(false);
-        setTimeout(() => {
-       handleClose();
-       window.location.reload();
-    }, 2000);  
     } })
 };
         return (

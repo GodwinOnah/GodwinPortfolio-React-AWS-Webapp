@@ -1,13 +1,32 @@
 import React from 'react';
 import {Link } from "react-router-dom";
 import '../../../../Contents/CSSFiles/Nav.css'; 
-import {Login} from '../../Home/Login.js'
+import {useState, useEffect} from 'react';
 import { ContactMe } from './../ContactMe.js';
 import {View} from './../View.js'
 import { CiSettings } from "react-icons/ci";
 
 
 export const Nav = () => {
+  const [data,SetData] = useState([]);
+
+  data?.map((data)=>{
+    window.localStorage.setItem('Admin',data.name)
+
+  })
+
+  useEffect(()=>{  
+    fetch('http://localhost:3002/register')
+    .then(res =>{
+        return res.json();
+     })
+     .then((data) =>{
+      SetData(data);
+      })
+     .catch(err=>{
+         console.log(err);
+    })
+   },[]);
 
   let resume ="ONAH_GODWIN_RESUME.pdf";
 
@@ -15,10 +34,12 @@ export const Nav = () => {
       <nav class="navbar navbar-expand-lg bg-body-tertiary  sticky-top">
       <div class="container-fluid navi">   
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <Link to="/" class="logo"style={{ textDecoration: 'none',color:'gold', 
-        fontFamily:'fantasy',fontSize:'50px',fontWeight:'bolder',padding:'20px' }}> 
-          <strong>ONAH GODWIN</strong>
+        <li class="nav-item">
+          <Link to="/" class="logo"> 
+          <strong>ONAH GODWIN😎</strong>
           </Link> 
+          </li>
+       
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">     
           <li class="nav-item ">
             <Link to="/" class="navItem1" style={{ textDecoration: 'none' }}
