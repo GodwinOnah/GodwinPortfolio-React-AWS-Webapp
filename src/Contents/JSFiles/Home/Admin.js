@@ -21,7 +21,6 @@ const [progress,setProgress] = useState({started:false, pc:0});
 const [message,setMessage] = useState("");
 const [pmessage,setPMessage] = useState("");
 const [pMessages,setPMessages] = useState(null);
-const formData = new FormData();
 const [myPhone,setMyPhone] = useState([]);
 const [skills,setSkills] = useState(null);
 const [hobbies,setHobbies] = useState(null);
@@ -51,6 +50,7 @@ const [noProfileFound, setNoProfileFound] =  useState("");
 const [profileAvailable, setProfileAvailable]=  useState(false);
 const [loginStatus,setLoginStatus] = useState(false);
 const [adminName,setAdminName] = useState('');
+const [photo,setPhoto] = useState(null);
 
 
 useEffect(()=>{
@@ -59,13 +59,13 @@ useEffect(()=>{
   },[adminName]);
 
 // Upload Image
-const uploadFile = (e) =>{  
-    if(e.target.files.length>0){ 
-      setImage(e.target.value);     
-      const file = e.target.files[0];
-      setImageId(file); 
-      formData.append('file',file);
-}}
+// const uploadFile = (e) =>{  
+//     if(e.target.files.length>0){ 
+//       setImage(e.target.value);     
+//       const file = e.target.files[0];
+//       setImageId(file); 
+//       formData.append('file',file);
+// }}
 
 // Get Login
 useEffect(()=>{
@@ -662,9 +662,12 @@ const deleteProfile = ((id) => {
   const formSubmitPhoto= (e) => {
     e.preventDefault();
 
+    const formData = new FormData();
+    formData.append('photo',photo)
+
     if(formData == null) setMessage("No Photo attached");
 
-      axios.post(`http://localhost:3002/image/${imageId}/images/photos`,
+      axios.post(`http://localhost:3002/photos`,
       formData,
             {
               onUploadProgress : (progressEvent) => {
@@ -1124,9 +1127,9 @@ const deleteProfile = ((id) => {
                 <div class="row addPro ">                 
                    <div class="col-12 addPro2">
                       <div class="drop">
-                      <input type='file' name="image"
+                      <input type='file' name="photo"
                        value={image}
-                       onChange = {uploadFile}
+                       onChange = {(e)=>setPhoto(e.target.files[0])}
                        placeholder="Upload Picture"/>
                        <div>
                         {progress.started && <progress max="100" value = {progress.pc}></progress>}
