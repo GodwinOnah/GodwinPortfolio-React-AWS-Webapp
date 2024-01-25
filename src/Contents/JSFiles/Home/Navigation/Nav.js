@@ -71,7 +71,7 @@ export const Nav = () => {
             </li> 
             <li class="nav-item navItem1" >
             {cvs?.map((cv)=>(
-            <View item={'http://localhost:3002/CV_images/'+cv.cv} what="Resume"/>
+            <View item={`${process.env.REACT_APP_URL}/CV_images/`+cv.cv} what="Resume"/>
             ))}
             </li>   
             <Link to="/Admin" class="navItem1" style={{ textDecoration: 'none' }}

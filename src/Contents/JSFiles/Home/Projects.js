@@ -1,5 +1,3 @@
-import axios from 'axios';
-import Carousel from 'carousel';
 import {useState, useEffect} from 'react';
 import '../../../Contents/CSSFiles/Projects.css';
 import {Project} from './Project.js';

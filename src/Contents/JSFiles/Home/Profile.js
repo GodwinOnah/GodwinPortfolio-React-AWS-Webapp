@@ -3,8 +3,6 @@ import '../../../Contents/CSSFiles/Skills.css';
 import {useState, useEffect} from 'react';
 
 export const Profile = () => {
-
-      let url ="https://www.google.com/search?q="
          
         const [noProfileFound, setNoProfileFound] =  useState("");
         const [profiles,setProfiles] = useState([]);

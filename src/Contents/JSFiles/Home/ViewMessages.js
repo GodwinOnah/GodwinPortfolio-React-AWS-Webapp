@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 
 export const ViewMessage = ({name,email,phone,companyname,subject,message}) =>{
 

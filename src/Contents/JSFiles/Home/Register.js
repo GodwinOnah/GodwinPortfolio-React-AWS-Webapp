@@ -15,7 +15,6 @@ export const Register = () =>{
   const [confirmPassword,SetConfirmPassword] = useState('');
   const [isRegistering,setIsRegistering] = useState(false);
   const [isRegistered,setIsRegistered] = useState(false);
-  const [data,setData] = useState(false);
   const [loginStatus,setLoginStatus] = useState(false);
  
   
@@ -37,7 +36,6 @@ const logout =()=>{
         return res.json();
      })
      .then((data) =>{
-      if(data) setData(true);
        if(data.length>0) setIsRegistered(true);
       })
      .catch(err=>{

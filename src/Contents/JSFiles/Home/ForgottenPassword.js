@@ -1,13 +1,11 @@
 import '../../../Contents/CSSFiles/Login.css';
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useState, useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import React, { useRef } from 'react';
-import {Login} from './Login'
+import React from 'react';
 import { toast,ToastContainer } from "react-toastify";
 import bcrypt from 'bcryptjs-react';
-import axios from 'axios'
 
 
 export const ForgottenPassword = () =>{
@@ -20,11 +18,6 @@ export const ForgottenPassword = () =>{
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true); 
     const [isChecking,SetIsChecking] = useState(false);
-    const [data,setData] = useState('');
-    const [counter,setCounter] = useState(0);
-    const [templateParams,setTemplateParams] = useState({});
-
-  const navigate = useNavigate()
 
   useEffect(()=>{
     fetch(`${process.env.URL}/register`)
@@ -32,7 +25,6 @@ export const ForgottenPassword = () =>{
         return res.json();
      })
      .then((data) =>{
-       setData(data);
       })
      .catch(err=>{
           console.log(err);

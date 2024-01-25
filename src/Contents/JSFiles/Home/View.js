@@ -15,7 +15,7 @@ export const View= ({item,what}) =>{
     return (
         <div style={{cursor:"pointer"}}>
          
-          <a href="#" onClick={handleShow}>
+          <a  onClick={handleShow}>
             {what}
           </a>  
           <Modal show={show} onHide={handleClose} size="xl">
@@ -40,7 +40,7 @@ export const View= ({item,what}) =>{
             <div class="modal1">
               {string2=="pdf"||"docx" ?  
                 (<div>
-                    <iframe src={item} alt="" style={{width:'100%',height:'500px'}}></iframe>
+                    <iframe src={item} alt="" style={{width:'100%',height:'500px'}} title="frame1"></iframe>
                 </div>) :
                 (<div>
                     <img src={item} alt="" style={{width:'100%',height:'500px'}}/>

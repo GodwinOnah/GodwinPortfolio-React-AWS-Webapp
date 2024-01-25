@@ -1,9 +1,7 @@
  import {useState, useEffect} from 'react';
 import React from 'react';
 import '../../../Contents/CSSFiles/messages.css';
-import { toast,ToastContainer } from "react-toastify";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import { toast} from "react-toastify";
 import { ViewMessage } from '../Home/ViewMessages';
 
 

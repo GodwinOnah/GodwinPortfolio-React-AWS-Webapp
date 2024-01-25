@@ -63,22 +63,6 @@ useEffect(()=>{
   if(data != null)  setAdminName(data)
   },[adminName]);
 
- 
-// Get Login
-useEffect(()=>{
-  const data =  window.localStorage.getItem('login')
-  if(data !=null) setLoginStatus(JSON.parse(data));
-  fetch(`${process.env.URL}/login`)
-  .then(res =>{
-      return res.json();
-   })
-   .then((data) =>{
-    })
-   .catch(err=>{
-    toast.warning(err);
-  })
- },[]);
-
 //  PHONE
 // Submit Phone
 const formSubmitPhone= (e) => {
@@ -205,7 +189,7 @@ const formSubmitSkill= (e) => {
               toast.success(res);
               window.location.reload();
           })
-          .catch(error=>{
+          .catch(error=>{ 
               toast.warning("Skill not deleted");
               toast.warning(error);
            });
@@ -592,9 +576,8 @@ const formData = new FormData();
 formData.append('tCourse',tCourse);
 formData.append('tCompany',tCompany);
 formData.append('tCompanyWebsite',tCompanyWebsite);
-formData.append('file',certificateFile                                                                                                                                                                       );
+// formData.append('file',certificateFile);                                                                                                                                                                       );
 formData.append('tYear',tYear);
-
 
 if(formData == null) setMessage("No Photo attached");
 axios.post(`${process.env.REACT_APP_URL}/trainings`,

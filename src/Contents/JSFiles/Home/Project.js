@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import '../../../Contents/CSSFiles/project.css';
 
 export const Project = ({project}) =>{
@@ -12,15 +12,15 @@ export const Project = ({project}) =>{
    let gitHubAvailable = true
    let vdeoAvailable = true
 
-   if(projectWebsite==""||projectWebsite==null){
+   if(projectWebsite===""||projectWebsite==null){
     websiteAvailable=false
    }
 
-   if(gitHubName==""||gitHubName==null){
+   if(gitHubName===""||gitHubName==null){
     gitHubAvailable=false
    }
 
-   if(videoLink==""||videoLink==null){
+   if(videoLink===""||videoLink==null){
     vdeoAvailable=false
    }
 
