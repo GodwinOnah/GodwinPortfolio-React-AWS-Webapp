@@ -41,9 +41,8 @@ export const ForgottenPassword = () =>{
 
 const handleSubmit = (e) =>{
   e.preventDefault();
-  const id = data.length
   const hash=bcrypt.hashSync(password);//Hashing password here
-  const datax = {id,email,maidenName,hash};
+  const datax = {email,maidenName,hash};
   if(!email||!maidenName||!confirmPassword||!password) 
   return toast.warning("Enter all field");
 
