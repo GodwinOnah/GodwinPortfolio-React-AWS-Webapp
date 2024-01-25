@@ -576,7 +576,7 @@ const formData = new FormData();
 formData.append('tCourse',tCourse);
 formData.append('tCompany',tCompany);
 formData.append('tCompanyWebsite',tCompanyWebsite);
-// formData.append('file',certificateFile);                                                                                                                                                                       );
+formData.append('file',certificateFile);                                                                                                                                                                
 formData.append('tYear',tYear);
 
 if(formData == null) setMessage("No Photo attached");
