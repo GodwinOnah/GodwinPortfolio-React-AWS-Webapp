@@ -1,23 +1,28 @@
 import React, { useContext } from 'react';
 import '../../../Contents/CSSFiles/project.css';
 
-
 export const Project = ({project}) =>{
    const projectWebsite = project["projectlink"]
    const gitHubName = project["githubname"]
+   const videoLink = project["videolink"]
    const stringx = "Visit website"
    const stringy = "GitHub"
+   const stringz = "Video"
    let websiteAvailable = true
    let gitHubAvailable = true
+   let vdeoAvailable = true
 
-   if(projectWebsite==""){
+   if(projectWebsite==""||projectWebsite==null){
     websiteAvailable=false
    }
 
-   if(gitHubName==""){
+   if(gitHubName==""||gitHubName==null){
     gitHubAvailable=false
    }
 
+   if(videoLink==""||videoLink==null){
+    vdeoAvailable=false
+   }
 
     return(     
         <div class="d-flex containerL">  
@@ -30,6 +35,11 @@ export const Project = ({project}) =>{
         </div>
         <div class="d-flex justify-content-center">
         <div class="website">
+        <a target="blank" href={videoLink} class="link">
+          <strong>{vdeoAvailable && stringz}</strong>
+          </a>
+        </div>
+        <div class="website">
         <a target="blank" href={gitHubName} class="link">
           <strong>{gitHubAvailable && stringy}</strong>
           </a>
@@ -41,8 +51,7 @@ export const Project = ({project}) =>{
         </div>
         </div>
        </div> 
-
-           </div>
+</div>
        
     )
 }

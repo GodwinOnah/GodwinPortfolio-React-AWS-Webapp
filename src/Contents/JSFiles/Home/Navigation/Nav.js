@@ -9,6 +9,7 @@ import { CiSettings } from "react-icons/ci";
 
 export const Nav = () => {
   const [data,SetData] = useState([]);
+  const [cvs,setCvs] = useState([]);
 
   data?.map((data)=>{
     window.localStorage.setItem('Admin',data.name)
@@ -16,7 +17,7 @@ export const Nav = () => {
   })
 
   useEffect(()=>{  
-    fetch('http://localhost:3002/register')
+    fetch(`${process.env.REACT_APP_URL}/register`)
     .then(res =>{
         return res.json();
      })
@@ -28,7 +29,19 @@ export const Nav = () => {
     })
    },[]);
 
-  let resume ="ONAH_GODWIN_RESUME.pdf";
+   useEffect(()=>{  
+    fetch(`${process.env.REACT_APP_URL}/cvs`)
+    .then(res =>{
+        return res.json();
+     })
+     .then((data) =>{
+      setCvs(data);
+      })
+     .catch(err=>{
+         console.log(err);
+    })
+   },[]);
+  
 
     return (
       <nav class="navbar navbar-expand-lg bg-body-tertiary  sticky-top">
@@ -57,11 +70,13 @@ export const Nav = () => {
             <ContactMe/>
             </li> 
             <li class="nav-item navItem1" >
-            <View image={resume} what="Resume"/>
+            {cvs?.map((cv)=>(
+            <View item={'http://localhost:3002/CV_images/'+cv.cv} what="Resume"/>
+            ))}
             </li>   
             <Link to="/Admin" class="navItem1" style={{ textDecoration: 'none' }}
              title='Visit admin today'>
-            <CiSettings />
+            <CiSettings />Settings
               </Link>
           </ul>
          

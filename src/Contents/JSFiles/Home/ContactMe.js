@@ -26,7 +26,7 @@ export const ContactMe = () =>{
     const myPhoneNumber = "(+447751776483)";
 
     useEffect(()=>{
-      fetch('http://localhost:3002/phone')
+      fetch(`${process.env.REACT_APP_URL}/phone`)
       .then((res)=>{
         return res.json();
      })
@@ -75,7 +75,7 @@ export const ContactMe = () =>{
      });
      
        //  Send message to database
-      fetch('http://localhost:3002/messages',
+      fetch(`${process.env.REACT_APP_URL}/messages`,
      {
       method:'POST',
       headers:{

@@ -11,10 +11,10 @@ export const Admin=()=>{
 
 const [skill,setSkill] = useState("");
 const [projectTitle,setProjectTitle] = useState("");
+const [videoLink,setVideoLink] = useState("");
 const [gitHubLink,setGitHubLink] = useState("");
 const [projectLink,setProjectLink] = useState("");
 const [projectDescription,setProjectDescription] = useState("");
-const [image,setImage] = useState(null);
 const [phone,setPhone] = useState("");
 const [imageId,setImageId] = useState("");
 const [progress,setProgress] = useState({started:false, pc:0});
@@ -41,7 +41,7 @@ const [trainings,setTrainings] = useState([]);
 const [tCourse,setTCourse] = useState("");
 const [tCompany,setTCompany] = useState("");
 const [tCompanyWebsite,setTCompanyWebsite] = useState("");
-const [certificate,setCertificate] = useState("");
+const [certificateFile,setCertificateFile] = useState(null);
 const [tYear,setTYear] = useState("");
 const [noTrainingFound, setNoTrainingFound] =  useState("");
 const [profiles,setProfiles] = useState(null);
@@ -50,7 +50,11 @@ const [noProfileFound, setNoProfileFound] =  useState("");
 const [profileAvailable, setProfileAvailable]=  useState(false);
 const [loginStatus,setLoginStatus] = useState(false);
 const [adminName,setAdminName] = useState('');
+const [cv,setCv] = useState(null);
+const [cvs,setCvs] = useState([]);
 const [photo,setPhoto] = useState(null);
+const [photos,setPhotos] = useState([]);
+const [isCvPresent,setIsCvPresent] = useState(false);
 
 
 useEffect(()=>{
@@ -58,20 +62,12 @@ useEffect(()=>{
   if(data != null)  setAdminName(data)
   },[adminName]);
 
-// Upload Image
-// const uploadFile = (e) =>{  
-//     if(e.target.files.length>0){ 
-//       setImage(e.target.value);     
-//       const file = e.target.files[0];
-//       setImageId(file); 
-//       formData.append('file',file);
-// }}
-
+ 
 // Get Login
 useEffect(()=>{
   const data =  window.localStorage.getItem('login')
   if(data !=null) setLoginStatus(JSON.parse(data));
-  fetch('http://localhost:3002/login')
+  fetch(`${process.env.URL}/login`)
   .then(res =>{
       return res.json();
    })
@@ -90,7 +86,7 @@ const formSubmitPhone= (e) => {
   { toast.warning("Enter a phone number");
   return
 }
-  fetch('http://localhost:3002/phone',
+  fetch(`${process.env.REACT_APP_URL}/phone`,
   {  
     method:'POST', 
     headers:{
@@ -114,7 +110,7 @@ const formSubmitPhone= (e) => {
 
  // Get Phone
  useEffect(()=>{
-  fetch('http://localhost:3002/phone')
+  fetch(`${process.env.REACT_APP_URL}/phone`)
   .then((res)=>{
     return res.json();
  })
@@ -130,7 +126,7 @@ const formSubmitPhone= (e) => {
 //  Delete Phone
 const deletePhone = ((id) => {
   if(window.confirm("Do you want to delete this item?")){
-    fetch("http://localhost:3002/phone/"+id,
+    fetch(`${process.env.REACT_APP_URL}/phone/`+id,
     {  
       method:'DELETE', 
     }
@@ -156,7 +152,7 @@ const formSubmitSkill= (e) => {
       toast.warning("Enter a skill");
       return
     }
-    fetch('http://localhost:3002/skills',
+    fetch(`${process.env.REACT_APP_URL}/skills`,
     {  
       method:'POST', 
       headers:{
@@ -180,7 +176,7 @@ const formSubmitSkill= (e) => {
 
    // Get Skill
    useEffect(()=>{
-    fetch('http://localhost:3002/skills')
+    fetch(`${process.env.REACT_APP_URL}/skills`)
     .then((res)=>{
        return res.json();
     })
@@ -197,7 +193,7 @@ const formSubmitSkill= (e) => {
   // Delete Skill
   const deleteSkill = ((id) => {
     if(window.confirm("Do you want to delete this item?")){
-      fetch("http://localhost:3002/skills/"+id,
+      fetch(`${process.env.REACT_APP_URL}/skills/`+id,
       {  
         method:'DELETE', 
       }
@@ -219,12 +215,11 @@ const formSubmitSkill= (e) => {
 // Submit Public Message
 const formSubmitPMessage= (e) => {
   e.preventDefault();
-  console.log(pmessage)
   if(pmessage== "") {
     toast.warning("Enter a message");
     return
   }
-  fetch('http://localhost:3002/pmessages',
+  fetch(`${process.env.REACT_APP_URL}/pmessages`,
   {  
     method:'POST', 
     headers:{
@@ -248,7 +243,7 @@ const formSubmitPMessage= (e) => {
 
  // Get Public Message
  useEffect(()=>{
-  fetch('http://localhost:3002/pmessages')
+  fetch(`${process.env.REACT_APP_URL}/pmessages`)
   .then((res)=>{
      return res.json();
   })
@@ -265,7 +260,7 @@ const formSubmitPMessage= (e) => {
 // Delete public message
 const deletePMessage = ((id) => {
   if(window.confirm("Do you want to delete this item?")){
-    fetch("http://localhost:3002/pmessages/"+id,
+    fetch(`${process.env.REACT_APP_URL}/pmessages/`+id,
     {  
       method:'DELETE', 
     }
@@ -291,7 +286,7 @@ const formSubmitHobby= (e) => {
     toast.warning("Enter a hobby");
     return
   }
-  fetch('http://localhost:3002/hobbies',
+  fetch(`${process.env.REACT_APP_URL}/hobbies`,
   {  
     method:'POST', 
     headers:{
@@ -315,7 +310,7 @@ const formSubmitHobby= (e) => {
 
  // Get Hobby
  useEffect(()=>{
-  fetch('http://localhost:3002/hobbies')
+  fetch(`${process.env.REACT_APP_URL}/hobbies`)
   .then((res)=>{
      return res.json();
   })
@@ -332,7 +327,7 @@ const formSubmitHobby= (e) => {
 // Delete hobby
 const deleteHobby = ((id) => {
   if(window.confirm("Do you want to delete this item?")){
-    fetch("http://localhost:3002/hobbies/"+id,
+    fetch(`${process.env.REACT_APP_URL}/hobbies/`+id,
     {  
       method:'DELETE', 
     }
@@ -358,7 +353,7 @@ const formSubmitProfile= (e) => {
     toast.warning("Enter a profile summary");
     return
   }
-  fetch('http://localhost:3002/profiles',
+  fetch(`${process.env.REACT_APP_URL}/profiles`,
   {  
     method:'POST', 
     headers:{
@@ -382,7 +377,7 @@ const formSubmitProfile= (e) => {
 
  // Get Profile Summary
  useEffect(()=>{
-  fetch('http://localhost:3002/profiles')
+  fetch(`${process.env.REACT_APP_URL}/profiles`)
   .then((res)=>{
      return res.json();
   })
@@ -399,8 +394,7 @@ const formSubmitProfile= (e) => {
 // Update Profile
 const updateProfile = () => {
   if(window.confirm("Do you want to update your profile?")){
-    fetch(
-      "http://localhost:3002/profiles",
+    fetch(`${process.env.REACT_APP_URL}/profiles`,
         {
           method: 'PUT',
           headers:{
@@ -413,7 +407,6 @@ const updateProfile = () => {
       .then(res =>{return res.json()})
       .then(data =>{         
                 toast.success("Profile summary updated");
-                // window.location.reload();
               return true;   
            })
            .catch(err=>{
@@ -426,7 +419,7 @@ const updateProfile = () => {
 // Delete Profile
 const deleteProfile = ((id) => {
   if(window.confirm("Do you want to delete this item?")){
-    fetch("http://localhost:3002/profiles/"+id,
+    fetch(`${process.env.REACT_APP_URL}/profiles/`+id,
     {  
       method:'DELETE', 
     }
@@ -448,12 +441,12 @@ const deleteProfile = ((id) => {
   // Submit Project
   const formSubmitProject= (e) => {
     e.preventDefault();
-    const datax = {projectTitle,projectDescription,gitHubLink,projectLink};
+    const datax = {projectTitle,projectDescription,videoLink,gitHubLink,projectLink};
     if(!projectTitle||!projectDescription){
       toast.warning('Enter a Project Title and description are compulsary fields');
       return;
 }
-    fetch('http://localhost:3002/projects',
+    fetch(`${process.env.REACT_APP_URL}/projects`,
     {  
       method:'POST', 
       headers:{
@@ -481,7 +474,7 @@ const deleteProfile = ((id) => {
    // Delete Project
    const deleteProject = ((id) => {
     if(window.confirm("Do you want to delete this item?")){
-      fetch("http://localhost:3002/projects/"+id,
+      fetch(`${process.env.REACT_APP_URL}/projects/`+id,
       {  
         method:'DELETE', 
       }
@@ -500,7 +493,7 @@ const deleteProfile = ((id) => {
   )
     // Get Projects
   useEffect(()=>{
-    fetch('http://localhost:3002/projects').then(res =>{
+    fetch(`${process.env.REACT_APP_URL}/projects`).then(res =>{
         return res.json();
      })
      .then((data) =>{
@@ -524,7 +517,7 @@ const deleteProfile = ((id) => {
       return;
 }
 
-    fetch('http://localhost:3002/schools',
+    fetch(`${process.env.REACT_APP_URL}/schools`,
     {  
       method:'POST', 
       headers:{
@@ -553,7 +546,7 @@ const deleteProfile = ((id) => {
    //  Delete School
    const deleteSchool = ((id) => {
     if(window.confirm("Do you want to delete this item?")){
-      fetch("http://localhost:3002/schools/"+id,
+      fetch(`${process.env.REACT_APP_URL}/schools/`+id,
       {  
         method:'DELETE', 
       }
@@ -573,7 +566,7 @@ const deleteProfile = ((id) => {
 
    // Get Schools
     useEffect(()=>{
-        fetch('http://localhost:3002/schools').then(res =>{
+        fetch(`${process.env.REACT_APP_URL}/schools`).then(res =>{
         return res.json();
         })
         .then((data) =>{
@@ -588,43 +581,53 @@ const deleteProfile = ((id) => {
   //Submit Trainings
   const formSubmitTraining = (e) => {
     e.preventDefault();
-    const datax = {tCourse,tCompany,tCompanyWebsite,certificate,tYear};
-    console.log(datax)
-    if(!tCourse||!tCompany||!certificate||!tYear){
+    const datax = {tCourse,tCompany,tCompanyWebsite,tYear};
+    if(!tCourse||!tCompany||!tYear){
       toast.warning('Enter compulsary fields');
       return;
 }
 
-    fetch('http://localhost:3002/trainings',
-    {  
-      method:'POST', 
-      headers:{
-      "Access-Control-Allow-Origin":"*",
-      "Content-Type": "application/json"
-             },
-      body: JSON.stringify(datax)
-    },
-      ).then(res =>{
-            return res.text();      
-        })
-        .then(res=>{
-            setTCourse("");
-            setTCompany("");
-            setTCompanyWebsite("");
-            setCertificate("");
-            setTYear("");
-            toast.success(res);
-            // window.location.reload();
-        })
-        .catch(error=>{
-            toast.warning("Training not added");
-         });
+const formData = new FormData();
+formData.append('tCourse',tCourse);
+formData.append('tCompany',tCompany);
+formData.append('tCompanyWebsite',tCompanyWebsite);
+formData.append('file',certificateFile                                                                                                                                                                       );
+formData.append('tYear',tYear);
+
+
+if(formData == null) setMessage("No Photo attached");
+axios.post(`${process.env.REACT_APP_URL}/trainings`,
+formData,
+      {
+        onUploadProgress : (progressEvent) => {
+          setProgress(prevState=>{
+            return {...prevState, pc: progressEvent.progress*100}
+          })
+            },
+        method: 'POST',
+        headers:{              
+        "Access-Control-Allow-Origin":"*",
+        "Content-Type": "multipart/form-data"
+      }
+    })
+    .then(res=>{
+      setTCourse("");
+      setTCompany("");
+      setTCompanyWebsite("");
+      setCertificateFile(null);
+      setTYear("");
+      toast.success("Trainig Added");
+    })
+    .catch(error=>{
+      toast.success("Training not Added");
+      toast.warning(error);
+    }); 
   }
 
-   //  Delete Traing
+   //  Delete Trainingg
    const deleteTraining = ((id) => {
     if(window.confirm("Do you want to delete this item?")){
-      fetch("http://localhost:3002/trainings/"+id,
+      fetch(`${process.env.REACT_APP_URL}/trainings/`+id,
       {  
         method:'DELETE', 
       }
@@ -644,7 +647,7 @@ const deleteProfile = ((id) => {
 
   // Get Training
     useEffect(()=>{
-      fetch('http://localhost:3002/trainings')
+      fetch(`${process.env.REACT_APP_URL}/trainings`)
        .then(res =>{
           return res.json();
       })
@@ -657,8 +660,92 @@ const deleteProfile = ((id) => {
       })}
 )
 
+ //Get CV
+ useEffect(()=>{  
+  fetch(`${process.env.REACT_APP_URL}/cvs`)
+  .then(res =>{
+      return res.json();
+   })
+   .then((data) =>{
+    setCvs(data);
+    if(data.length>0) setIsCvPresent(true);
+    })
+   .catch(err=>{
+       console.log(err);
+  })
+ },[]);
 
-  // Upload Image
+ //  Delete CV
+const deleteCv = ((id) => {
+if(window.confirm("Do you want to delete this item?")){
+  fetch(`${process.env.REACT_APP_URL}/cvs/`+id,
+  {  
+    method:'DELETE', 
+  }
+    ).then(res =>{
+          return res.text();      
+      })
+      .then(res=>{
+          toast.success("CV deleted");
+          window.location.reload();
+      })
+      .catch(error=>{
+          toast.warning("CV not deleted");
+          console.log(error)
+       });
+}}
+)
+
+// Upload CV
+const formSubmitCV= (e) => {
+  e.preventDefault();
+
+  const formData = new FormData();
+  formData.append('cv',cv)
+
+  if(formData == null) setMessage("No CV attached");
+
+    axios.post(`${process.env.REACT_APP_URL}/cvs`,
+    formData,
+          {
+            onUploadProgress : (progressEvent) => {
+              setProgress(prevState=>{
+                return {...prevState, pc: progressEvent.progress*100}
+              })
+                },
+            method: 'POST',
+            headers:{              
+            "Access-Control-Allow-Origin":"*",
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        .then(res=>{
+          toast.success("CV Uplaoded");
+          setTimeout(() => {
+            window.location.reload();
+         }, 2000);
+        })
+        .catch(error=>{
+          toast.success("CV not Uplaoded");
+          toast.warning(error);
+        }); 
+      }
+
+  //Get Photo
+  useEffect(()=>{
+    fetch(`${process.env.REACT_APP_URL}/photos`)
+    .then(res =>{
+      return res.json();
+   })
+   .then((data) =>{
+    setPhotos(data);
+    })
+   .catch(err=>{
+       console.log(err);
+  })
+   },[]);
+
+  // Add Photo
   const formSubmitPhoto= (e) => {
     e.preventDefault();
 
@@ -667,7 +754,7 @@ const deleteProfile = ((id) => {
 
     if(formData == null) setMessage("No Photo attached");
 
-      axios.post(`http://localhost:3002/photos`,
+      axios.post(`${process.env.REACT_APP_URL}/photos`,
       formData,
             {
               onUploadProgress : (progressEvent) => {
@@ -682,15 +769,37 @@ const deleteProfile = ((id) => {
             }
           })
           .then(res=>{
-            setMessage("Image file Uplaoded");
-            toast.success(res);
-            window.location.reload();
+            toast.success("Photo file Uplaoded");
+            setTimeout(() => {
+              window.location.reload();
+           }, 2000);
           })
           .catch(error=>{
-            setMessage("File upload failed");
+            toast.success("Photo not Uplaoded");
             toast.warning(error);
           }); 
         }
+
+       //  Delete Photo
+const deletePhoto = ((id) => {
+  if(window.confirm("Do you want to delete this item?")){
+    fetch(`${process.env.REACT_APP_URL}/photos/`+id,
+    {  
+      method:'DELETE', 
+    }
+      ).then(res =>{
+            return res.text();      
+        })
+        .then(res=>{
+            toast.success("Photo deleted");
+            window.location.reload();
+        })
+        .catch(error=>{
+            toast.warning("Photo not deleted");
+            console.log(error)
+         });
+  }}
+  ) 
      
           return(
             <>
@@ -714,7 +823,7 @@ const deleteProfile = ((id) => {
               <h2 class="header2">Set Admin</h2>
               <div class="messages">
               <Link to="/Register"  style={{ textDecoration: 'none', fontSize:'20px'}}>
-             <button>Become the Admin Here</button> 
+             <button class="btn btn-primary">Become the Admin Here</button> 
               </Link>
               </div>      
               </div>
@@ -960,6 +1069,13 @@ const deleteProfile = ((id) => {
                       placeholder="Description" />
                    </div> 
                    <div class="col-12 addPro2">
+                      <input type='text' name="videoLink" 
+                       size="70"
+                      value={videoLink}
+                      onChange = {(e)=>setVideoLink(e.target.value)}
+                      placeholder="Video Link" />
+                   </div>
+                   <div class="col-12 addPro2">
                       <input type='text' name="gitHubLink" 
                        size="70"
                       value={gitHubLink}
@@ -1097,12 +1213,9 @@ const deleteProfile = ((id) => {
                       placeholder="Company website" />
                    </div> 
                    <div class="col-12 addPro2">
-                      <input type='text' name="certificate" 
-                       size="50"
-                       required
-                      value={certificate}
-                      onChange = {(e)=>setCertificate(e.target.value)}
-                      placeholder="Certificate"/>
+                   <strong>Upload Certificate: </strong><input type='file' name="certificateImage"
+                       onChange = {(e)=>setCertificateFile(e.target.files[0])}
+                       placeholder="Upload certificate"/>
                    </div>
                    <div class="col-12 addPro2">
                       <input type='text' name="tYear" 
@@ -1119,16 +1232,72 @@ const deleteProfile = ((id) => {
                       </form>
                 </div>  
 
+
+                {/* CV Section               */}
+                <div class="containerAdmin">
+              <h2 class="header2">Add a CV</h2> 
+              <hr/>
+              <h5 style={{color:'Black'}}>Avialable CV</h5>
+              <div class="adminSection">
+              {cvs?.map((cv)=>(
+                <div>                  
+                  {cv.cv}
+                  {loginStatus && < button class="btn btn-primary"  onClick={()=>deleteCv(cv.id)}>
+                  DELETE
+                 </button>  } 
+                 {!loginStatus && < button class="btn btn-primary" disabled>
+                  DELETE
+                 </button>  }                  
+                  </div>
+            ))} 
+            </div>
+                <form  post ="" onSubmit={formSubmitCV}>
+                <div class="row addPro ">                 
+                   <div class="col-12 addPro2">
+                      <div class="drop">
+                      <input type='file' name="cv"
+                       onChange = {(e)=>setCv(e.target.files[0])}
+                       placeholder="Upload CV"/>
+                       <div>
+                        {progress.started && <progress max="100" value = {progress.pc}></progress>}
+                        </div>
+                    <div>
+                      {message && <span>{message}</span>}
+                    </div>
+                      </div> 
+                    </div>
+               
+                    <div class="col-12 addPro2">                      
+                    {!isCvPresent && loginStatus && <button class="btn btn-primary" type='submit'>Upload</button>}
+                     {isCvPresent && !loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
+                    </div>
+                      </div>
+                      </form>
+                </div> 
+
                 {/* Photo Section               */}
               <div class="containerAdmin">
               <h2 class="header2">Add Your Photo</h2> 
               <hr/>
+              <h5 style={{color:'Black'}}>Avialable Photo(s)</h5>
+              <div class="adminSection">
+              {photos?.map((photo)=>(
+                <div>                  
+                  {photo.photo}
+                  {loginStatus && < button class="btn btn-primary"  onClick={()=>deletePhoto(photo.id)}>
+                  DELETE
+                 </button>  } 
+                 {!loginStatus && < button class="btn btn-primary" disabled>
+                  DELETE
+                 </button>  }                  
+                  </div>
+            ))} 
+              </div>
                 <form  post ="" onSubmit={formSubmitPhoto}>
                 <div class="row addPro ">                 
                    <div class="col-12 addPro2">
                       <div class="drop">
                       <input type='file' name="photo"
-                       value={image}
                        onChange = {(e)=>setPhoto(e.target.files[0])}
                        placeholder="Upload Picture"/>
                        <div>

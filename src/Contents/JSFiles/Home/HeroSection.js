@@ -12,18 +12,18 @@ import { MdMarkEmailUnread } from "react-icons/md";
 export const HeroSection = () => {
 
     const [pMessages,setPMessages] = useState(null);
+    const [cvs,setCvs] = useState([]);
     
-    let message1 = ""
+    let message1 = "🛳  "
+    let message2 = "  🚐"
 
     {pMessages?.map((message)=>{
-    
-            message1+=message.pmessage+".........."
-       
+            message1+=message.pmessage+".........."    
     })} 
 
     // Get Public Message
  useEffect(()=>{
-    fetch('http://localhost:3002/pmessages')
+    fetch(`${process.env.REACT_APP_URL}/pmessages`)
     .then((res)=>{
        return res.json();
     })
@@ -35,13 +35,27 @@ export const HeroSection = () => {
     })
    },[]);
 
+   useEffect(()=>{  
+    fetch(`${process.env.REACT_APP_URL}/cvs`)
+    .then(res =>{
+        return res.json();
+     })
+     .then((data) =>{
+      setCvs(data);
+      })
+     .catch(err=>{
+         console.log(err);
+    })
+   },[]);
+  
+
     let url = "https://www.google.com/search?q="
     let fullstackdeveloper = "Full-Stack Developer"
     return (
         <div style={{marginTop:'85px'}}>                     
             <marquee scrollamount="3">                      
-              <strong style={{color:'blue', fontSize:'20px', fontWeight:'bolder'}}>
-                {message1}
+              <strong style={{color:'yellow', fontSize:'25px'}}>
+                {message1}{message2}
                 </strong>                     
             </marquee>         
                <div> 
@@ -78,7 +92,8 @@ export const HeroSection = () => {
                             </a>                        
                         </div>
                         <h2 style={{ fontSize: "40px", cursor: "pointer" }}>
-                            <a style={{ textDecoration: "none" ,color:'gold',fontSize:'30px'}} href={url + fullstackdeveloper} target="blank">
+                            <a style={{ textDecoration: "none" ,color:'gold',fontSize:'50px'}} 
+                            href={url + fullstackdeveloper} target="blank">
                                 {fullstackdeveloper}
                             </a>
                         </h2>
@@ -87,9 +102,11 @@ export const HeroSection = () => {
                         </p>               
                         <div>
                             <button class="hireMe"><ContactMe/></button>
-                            <button class="Resume"><a href="ONAH_GODWIN_RESUME.pdf" download="ONAH_GOWIN_CV_REACT.pdf" 
-                            title='Download resume'>Get Resume</a>
+                            {cvs?.map((cv)=>(
+                            <button class="Resume"><a href={`${process.env.REACT_APP_URL}/CV_images`+cv.cv} 
+                            title='Download resume' download>Get Resume</a>
                             </button>
+                               ))}
                         </div>
                     </div>
                     <div class="col-6">                        

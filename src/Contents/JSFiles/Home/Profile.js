@@ -11,7 +11,7 @@ export const Profile = () => {
 
         // Get Profile Summary
      useEffect(()=>{
-        fetch('http://localhost:3002/profiles')
+        fetch(`${process.env.REACT_APP_URL}/profiles`)
         .then((res)=>{
            return res.json();
         })
@@ -29,7 +29,7 @@ export const Profile = () => {
             <div class="">         
               { noProfileFound || profiles?.map((profile)=>
                (
-                <div  style={{margin:"10px"}}>
+                <div  style={{margin:"10px",fontSize:'20px'}}>
                    <strong>                    
                         {profile.profile}
                     </strong>           

@@ -5,7 +5,7 @@
    
 }
 
-@media screen and (max-width:1144px){
+@media screen and (max-width:1231px){
 .navItem1{
         margin-left: 0.5em;
        font-size: 15px;
@@ -47,14 +47,14 @@
 }
 
 .navi {
-background:black;
+background:midnightblue;
 margin-bottom: -10px;
 padding: 20px;
 }
 
 .logo{
     text-decoration: none;
-    color: blue;
+    color:white;
     font-family: fantasy;
     font-size:50px ;
     font-weight: bolder;

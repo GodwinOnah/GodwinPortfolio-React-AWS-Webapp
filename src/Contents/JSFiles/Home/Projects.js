@@ -33,11 +33,13 @@ export const Projects = () => {
 // ]
 
 useEffect(()=>{
-    fetch('http://localhost:3002/projects').then(res =>{
+    fetch(`${process.env.REACT_APP_URL}/projects`).then(res =>{
         return res.json();
      })
      .then((data) =>{
-        if(data)setProjects(data);
+        if(data){setProjects(data)}
+        else{setNoProjectFound('No project data found. Check of database exist')}
+
         return
       })
      .catch(err=>{setNoProjectFound('No project data found. Check of database exist');
@@ -51,9 +53,7 @@ useEffect(()=>{
        (   
             <div>
             <Project project={project}/>
-            </div>
-       
-       
+            </div>      
        )
     )
        }

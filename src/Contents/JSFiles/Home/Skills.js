@@ -10,7 +10,7 @@ export const Skills = () => {
         const [noSkillFound, setNoSkillFound] =  useState("");
 
         useEffect(()=>{
-            fetch('http://localhost:3002/skills')
+            fetch(`${process.env.REACT_APP_URL}/skills`)
             .then((res)=>{
                return res.json();
             })
@@ -30,7 +30,7 @@ export const Skills = () => {
                 <div key={index} style={{margin:"10px",cursor:"pointer"}}>
                     {index+1+". "}
                     <strong>
-                     <a class="skills-a" href={url+skill} style={{fontSize:'15px'}} target="blank">
+                     <a class="skills-a" href={url+skill} style={{fontSize:'25px'}} target="blank">
                         {skill.skill}
                     </a> 
                     </strong>           

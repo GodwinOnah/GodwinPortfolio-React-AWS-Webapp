@@ -1,9 +1,9 @@
 import { toast,ToastContainer } from "react-toastify";
 
 
-export const  Poster = ({title,data,url,setter}) =>{
+export const  Poster = ({title,data,setter}) =>{
 
-    fetch("\'"+url+"/"+title+"\'",
+    fetch(`${process.env.REACT_APP_URL}/`+title+"\'",
     {  
       method:'POST', 
       headers:{

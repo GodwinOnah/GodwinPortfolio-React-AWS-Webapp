@@ -4,8 +4,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { toast,ToastContainer } from "react-toastify";
 import bcrypt from 'bcryptjs-react';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () =>{
+
+  const navigate = useNavigate();
   
   const [email,SetEmail] = useState('');
   const [password,SetPassword] = useState('');
@@ -14,10 +17,9 @@ export const Login = () =>{
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true); 
   const [data,SetData] = useState('');
-  const [hash, setHash] = useState(false);
 
   useEffect(()=>{
-    fetch('http://localhost:3002/register')
+    fetch(`${process.env.REACT_APP_URL}/register`)
     .then(res =>{
         return res.json();
      })
@@ -30,7 +32,7 @@ export const Login = () =>{
    },[]);
 
    useEffect(()=>{
-    fetch('http://localhost:3002/login')
+    fetch(`${process.env.REACT_APP_URL}/login`)
     .then(res =>{
         return res.json();
      })
@@ -49,23 +51,24 @@ const handleSubmit = (e) =>{
   return toast.warning("Enter all fields");
 
   data?.map((data)=>{
-    bcrypt.compare(password,data.password).then((result)=>{setHash(result)})//Hashing password here
-    if(email === data.email && hash){
-      toast.success("Logged in");
-      window.localStorage.setItem('login',JSON.stringify(true))
-      SetIsLoggingIn(false);
-      setTimeout(() => {
-     handleClose();
-     window.location.reload();
-  }, 2000);  
-        
-      }
-      else{ 
-        toast.warning("Wrong Password!!")
+    bcrypt.compare(password,data.password).then((result)=>{
+      if(email === data.email && result){
+        toast.success("Logged in");
+        window.localStorage.setItem('login',JSON.stringify(true))
         SetIsLoggingIn(false);
-        return
-    } })
-};
+        setTimeout(() => {
+       handleClose();
+       window.location.reload();
+    }, 2000);
+    return (navigate("/Admin"))  
+   }
+        else{ 
+          toast.warning("Wrong Password!!")
+          SetIsLoggingIn(false);
+          return
+      } })
+    } 
+)};
         return (
           <div style={{cursor:"pointer"}}>          
             <button class="btn btn-primary" type='submit' onClick={handleShow}>

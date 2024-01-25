@@ -12,12 +12,10 @@ export const AboutMe = ()=>{
   const [hobbies,setHobbies] = useState([]);
   const [noTrainingFound, setNoTrainingFound] =  useState("");
   const [noHobbyFound, setNoHobbyFound] =  useState("");
-
-  // const hobbies = ["Solving coding challenge","Reading books", "Love soccer","love basketball"]
           
    // Get Schools
    useEffect(()=>{
-    fetch('http://localhost:3002/schools').then(res =>{
+    fetch(`${process.env.REACT_APP_URL}/schools`).then(res =>{
         return res.json();
      })
      .then((data) =>{
@@ -32,7 +30,7 @@ export const AboutMe = ()=>{
 
    // Get Trainings
    useEffect(()=>{
-    fetch('http://localhost:3002/trainings').then(res =>{
+    fetch(`${process.env.REACT_APP_URL}/trainings`).then(res =>{
         return res.json();
      })
      .then((data) =>{
@@ -46,7 +44,7 @@ export const AboutMe = ()=>{
 
    // Get Hobbies
    useEffect(()=>{
-    fetch('http://localhost:3002/hobbies')
+    fetch(`${process.env.REACT_APP_URL}/hobbies`)
      .then(res =>{
         return res.json();
      })
@@ -128,7 +126,7 @@ return(
                       {training.companywebsite}
                       </div>
                       </td>
-                     <td> <View image={training.certificate} what="View"/></td>
+                     <td> <View item={`${process.env.REACT_APP_URL}/certificates/`+training.certificate} what="View"/></td>
                      <td> {training.year}</td>                                                  
                      </tr>                   
                   ))} 

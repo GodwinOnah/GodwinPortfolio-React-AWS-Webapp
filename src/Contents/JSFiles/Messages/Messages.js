@@ -16,7 +16,7 @@ export const Messages=()=>{
     useEffect(()=>{
       const data =  window.localStorage.getItem('login')
       if(data !=null) setLoginStatus(JSON.parse(data));
-        fetch('http://localhost:3002/messages')
+        fetch(`${process.env.REACT_APP_URL}/messages`)
         .then((res)=>{
           return res.json();
         })
@@ -32,7 +32,7 @@ export const Messages=()=>{
       // Delete a Message
    const deleteMessage = ((id) => {
     if(window.confirm("Do you want to delete this item?")){
-      fetch("http://localhost:3002/messages/"+id,
+      fetch(`${process.env.REACT_APP_URL}/messages/`+id,
       {  
         method:'DELETE', 
       }
@@ -68,7 +68,7 @@ export const Messages=()=>{
                 </tr>
               </thead>
               
-              {<strong style={{color:'White'}}>
+              {!loginStatus && <strong style={{color:'White'}}>
                 Sorry for the inconvinience!! Only Admin can view messages
                 </strong> 
                 }

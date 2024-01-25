@@ -27,7 +27,7 @@ export const ForgottenPassword = () =>{
   const navigate = useNavigate()
 
   useEffect(()=>{
-    fetch('http://localhost:3002/register')
+    fetch(`${process.env.URL}/register`)
     .then(res =>{
         return res.json();
      })
@@ -53,12 +53,7 @@ const handleSubmit = (e) =>{
   }
  
   SetIsChecking(true);
-
-  if(data){
-  data?.map((data)=>{
-    if(email === data.email && maidenName === data.maidenname){
-     fetch(
-        "http://localhost:3002/register",
+     fetch(`${process.env.REACT_APP_URL}/register`,
           {
             method: 'PUT',
             headers:{
@@ -70,7 +65,7 @@ const handleSubmit = (e) =>{
         .then(res =>{return res.json()})
         .then(data =>{ 
           if(data){ 
-                  toast.success("Password changed");     
+                  toast.success(data);     
                   SetIsChecking(false)   
                   setEmail("");
                   setMaidenName("");
@@ -85,68 +80,13 @@ const handleSubmit = (e) =>{
                   SetIsChecking(false)
                 } 
              })
-             .catch(err=>{                
+             .catch(err=>{  
+              SetIsChecking(false)              
                   console.log(err);
           })
-        }
-      else{ 
-       setCounter(counter+1);
-       SetIsChecking(false); 
-
-      if(counter==5 ){        
-          var emailData = {
-            service_id: 'service_6ickoxa',
-            template_id: 'template_2u26p8t',
-            user_id: '4GGWAs8YmyTJJ--jF',
-            template_params: {
-              email:data.email,maidenName:data.maidenname
-            }
-        };
-
-          if(window.confirm("Login details to be sent to your email?")){ 
-          axios.post(
-            "https://api.emailjs.com/api/v1.0/email/send", emailData
-          )
-            .then(res =>{return res.json()})
-            .then(data =>{ 
-              if(data){     
-                toast.success("Details sent to your registerd email. Thanks"); 
-                setCounter(0);               
-                setEmail("");
-                setMaidenName("");
-                setPassword("");            
-                setTimeout(() => {
-                  handleClose();
-                }, 2000); 
-                window.location.reload();  
-                 navigate(<Login/>) 
-                    } 
-                    else{
-                      setCounter(0);   
-                      toast.warning("Password not sent to email");
-                      SetIsChecking(false)
-                    } 
-                 })
-                 .catch(err=>{ 
-                  setCounter(0);                  
-                      console.log(err);
-              })  
-            };
+    
           }
 
-            else{            
-              toast.warning("You are not the admin. Password will be sent to your email after "
-              +(5-counter)
-              +" attempts"); 
-            }
-             
-    }
-  })
-}else{
-  toast.warning("No Admin Register. Database is empty"); 
-}
-    };
-  
         return (
           <div style={{cursor:"pointer", marginRight:"20px"}}>
            
@@ -196,7 +136,7 @@ const handleSubmit = (e) =>{
                 placeholder="Confirm New Password" />
              </div>
               <div class="col-12 login">
-                {isChecking && <strong>Checking you...</strong>}
+                {isChecking && <strong style={{color:'white'}}>Checking your details...</strong>}
               </div>
                 </div>
           </div>
@@ -211,7 +151,7 @@ const handleSubmit = (e) =>{
                 </Button>
                 <ToastContainer
                   position='top-right'
-                  autoClose={2000}
+                  autoClose={4000}
                   hideProgressBar={false}
                   newestOnTop={false}
                   closeOnClick

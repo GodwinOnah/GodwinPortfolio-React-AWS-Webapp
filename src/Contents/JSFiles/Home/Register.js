@@ -32,7 +32,7 @@ const logout =()=>{
 
   useEffect(()=>{
    
-    fetch('http://localhost:3002/register')
+    fetch(`${process.env.REACT_APP_URL}/register`)
     .then(res =>{
         return res.json();
      })
@@ -63,8 +63,7 @@ const handleSubmit = (e) =>{
 
   setIsRegistering(true);
  
-  fetch(
-  "http://localhost:3002/register",
+  fetch(`${process.env.URL}/register`,
     {
       method: 'POST',
       headers:{
