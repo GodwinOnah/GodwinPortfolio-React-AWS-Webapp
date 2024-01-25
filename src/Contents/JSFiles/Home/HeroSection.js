@@ -13,13 +13,45 @@ export const HeroSection = () => {
 
     const [pMessages,setPMessages] = useState(null);
     const [cvs,setCvs] = useState([]);
+    const [greater,setGreater] = useState(false);
     
-    let message1 = "🛳  "
-    let message2 = "  🚐"
+    let message1 = "";
+   
 
     {pMessages?.map((message)=>{
-            message1+=message.pmessage+".........."    
+       message1+= '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+        '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
+       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+message.pmessage
+        
     })} 
+
+    
 
     // Get Public Message
  useEffect(()=>{
@@ -28,6 +60,7 @@ export const HeroSection = () => {
        return res.json();
     })
     .then((data) =>{
+        if(data.length>1) setGreater(true)
        if(data)setPMessages(data);
        return
      })
@@ -35,7 +68,7 @@ export const HeroSection = () => {
     })
    },[]);
 
-   useEffect(()=>{  
+   useEffect(()=>{ 
     fetch(`${process.env.REACT_APP_URL}/cvs`)
     .then(res =>{
         return res.json();
@@ -52,14 +85,14 @@ export const HeroSection = () => {
     let url = "https://www.google.com/search?q="
     let fullstackdeveloper = "Full-Stack Developer"
     return (
-        <div style={{marginTop:'85px'}}>                     
-            <marquee scrollamount="3">                      
-              <strong style={{color:'yellow', fontSize:'25px'}}>
-                {message1}{message2}
+        <div style={{marginTop:'5%'}}>                     
+            <marquee scrollamount="4">                      
+              <strong style={{color:'gold', fontSize:'15px'}}>
+             {message1}
                 </strong>                     
             </marquee>         
                <div> 
-                <div class="row" style={{ margin: "50px" }}>
+                <div class="row" style={{ marginTop: "5%" }}>
                     <div class="col-6 full-stack">
                     <Typical
                     steps={[
@@ -92,7 +125,7 @@ export const HeroSection = () => {
                             </a>                        
                         </div>
                         <h2 style={{ fontSize: "40px", cursor: "pointer" }}>
-                            <a style={{ textDecoration: "none" ,color:'gold',fontSize:'50px'}} 
+                            <a style={{ textDecoration: "none" ,color:'white',fontSize:'50px'}} 
                             href={url + fullstackdeveloper} target="blank">
                                 {fullstackdeveloper}
                             </a>
@@ -111,9 +144,6 @@ export const HeroSection = () => {
                     </div>
                     <div class="col-6">                        
                         <div class="Image">                           
-                        </div>
-                        <div>
-                            <strong>Hard work pays</strong>
                         </div>
                     </div>
                 </div>

@@ -23,7 +23,7 @@ export const AboutMe = ()=>{
         return
       })
      .catch(err=>{setNoSchoolFound('No school data found. Check of database exist');
-                      console.log(err);
+                     
     })
    },[]);
 
@@ -37,8 +37,8 @@ export const AboutMe = ()=>{
         if(data)setTrainings(data);
         return
       })
-     .catch(err=>{setNoTrainingFound('No school data found. Check of database exist');
-                      console.log(err);
+     .catch(err=>{setNoTrainingFound('No training data found. Check of database exist');
+                      
     })
    },[]);
 
@@ -53,7 +53,7 @@ export const AboutMe = ()=>{
         return
       })
      .catch(err=>{setNoHobbyFound('No hobby data found. Check of database exist');
-                      console.log(err);
+                      
     })
    },[]);
    
@@ -95,7 +95,7 @@ return(
     </div>
     </div>
 
-     {/* Trainig */}
+     {/* Trainninig */}
      <div class="tab">
      <h1>Training</h1> 
     <div class="table">

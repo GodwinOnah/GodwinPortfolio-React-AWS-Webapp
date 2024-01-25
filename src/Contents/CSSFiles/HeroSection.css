@@ -43,9 +43,11 @@
  border-radius: 50%;
  height: 600px;
  width: auto;
- background-image: url("../Images/Obande2.jpeg");
- justify-content: center;
- align-content: center;
+ background-image: url("../Images/obandeedit.jpeg") ;
+ background-repeat: no-repeat;
+ background-size: contain;
+
+ 
  
 }
 
@@ -68,6 +70,7 @@
 .div1{
     margin-top: 120px;
     border-radius: 30px;
+  padding: 10px;
 }
 .div2{
     margin-bottom: 500px;

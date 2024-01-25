@@ -16,7 +16,6 @@ const [gitHubLink,setGitHubLink] = useState("");
 const [projectLink,setProjectLink] = useState("");
 const [projectDescription,setProjectDescription] = useState("");
 const [phone,setPhone] = useState("");
-const [imageId,setImageId] = useState("");
 const [progress,setProgress] = useState({started:false, pc:0});
 const [message,setMessage] = useState("");
 const [pmessage,setPMessage] = useState("");
@@ -54,6 +53,8 @@ const [cv,setCv] = useState(null);
 const [cvs,setCvs] = useState([]);
 const [photo,setPhoto] = useState(null);
 const [photos,setPhotos] = useState([]);
+const [photoUpload,setPhotoUpload] = useState(false);
+const [cvUpload,setCvUpload] = useState(false);
 const [isCvPresent,setIsCvPresent] = useState(false);
 
 
@@ -74,7 +75,7 @@ useEffect(()=>{
    .then((data) =>{
     })
    .catch(err=>{
-       console.log(err);
+    toast.warning(err);
   })
  },[]);
 
@@ -119,7 +120,7 @@ const formSubmitPhone= (e) => {
     return
   })
   .catch(err=>{
-            console.log(err);
+    toast.warning(err);
  })
 },[]);
 
@@ -139,7 +140,7 @@ const deletePhone = ((id) => {
         })
         .catch(error=>{
             toast.warning("Phone not deleted");
-            console.log(error)
+            toast.warning(error);
          });
   }}
 )
@@ -185,7 +186,7 @@ const formSubmitSkill= (e) => {
        return
      })
      .catch(err=>{setNoSkillFound("No Skill found. Admin check if database exist");
-                   console.log(err);
+     toast.warning(err);
     })
    },[]);
 
@@ -206,7 +207,7 @@ const formSubmitSkill= (e) => {
           })
           .catch(error=>{
               toast.warning("Skill not deleted");
-              console.log(error)
+              toast.warning(error);
            });
     }}
   )
@@ -234,7 +235,7 @@ const formSubmitPMessage= (e) => {
     .then(data=>{
           setPMessage("");
           toast.success(data);
-          // window.location.reload();
+          window.location.reload();
     })
     .catch(error=>{
           toast.warning("Message not added");
@@ -252,7 +253,7 @@ const formSubmitPMessage= (e) => {
      return
    })
    .catch(err=>{setNoPMessageFound("No Skill found. Admin check if database exist");
-                 console.log(err);
+   toast.warning(err);
   })
  },[]);
 
@@ -273,7 +274,7 @@ const deletePMessage = ((id) => {
         })
         .catch(error=>{
             toast.warning("Message not deleted");
-            console.log(error)
+            toast.warning(error);
          });
   }}
 )
@@ -319,7 +320,7 @@ const formSubmitHobby= (e) => {
      return
    })
    .catch(err=>{setNoHobbyFound("No hobby found. Admin check if database exist");
-                 console.log(err);
+   toast.warning(err);
   })
  },[]);
 
@@ -340,7 +341,7 @@ const deleteHobby = ((id) => {
         })
         .catch(error=>{
             toast.warning("Hobby not deleted");
-            console.log(error)
+            toast.warning(error);
          });
   }}
 )
@@ -386,7 +387,7 @@ const formSubmitProfile= (e) => {
      setProfiles(data);
    })
    .catch(err=>{setNoProfileFound("No profile summary added. Admin check if database exist");
-                 console.log(err);
+   toast.warning(err);
   })
  },[]);
 
@@ -411,7 +412,7 @@ const updateProfile = () => {
            })
            .catch(err=>{
               toast.warning("Profile not updated");
-                     console.log(err);
+              toast.warning(err);
       }) 
 }}
 
@@ -432,7 +433,7 @@ const deleteProfile = ((id) => {
         })
         .catch(error=>{
             toast.warning("Profile not deleted");
-            console.log(error)
+            toast.warning(error);
          });
   }}
 )
@@ -487,7 +488,7 @@ const deleteProfile = ((id) => {
           })
           .catch(error=>{
               toast.warning("Project not deleted");
-              console.log(error)
+              toast.warning(error);
            });
     }}
   )
@@ -501,7 +502,7 @@ const deleteProfile = ((id) => {
         return
       })
      .catch(err=>{setNoProjectFound('No project data found. Check of database exist');
-                      console.log(err);
+     toast.warning(err);
     })
    },[]);
 
@@ -559,7 +560,7 @@ const deleteProfile = ((id) => {
           })
           .catch(error=>{
               toast.warning("School not deleted");
-              console.log(error)
+              toast.warning(error);
            });
     }}         
   )
@@ -574,7 +575,7 @@ const deleteProfile = ((id) => {
         return
         })
         .catch(err=>{setNoSchoolFound('No school data found. Check of database exist');
-                      console.log(err);
+        toast.warning(err);
         })}
 )
 
@@ -640,7 +641,7 @@ formData,
           })
           .catch(error=>{
               toast.warning("Training not deleted");
-              console.log(error)
+              toast.warning(error);
            });
     }}         
   )   
@@ -656,7 +657,7 @@ formData,
           return
         })
       .catch(err=>{setNoTrainingFound('No training data found. Check of database exist');
-                        console.log(err);
+                       
       })}
 )
 
@@ -668,10 +669,10 @@ formData,
    })
    .then((data) =>{
     setCvs(data);
-    if(data.length>0) setIsCvPresent(true);
+    if(data.length>0) setCvs(true);
     })
    .catch(err=>{
-       console.log(err);
+    toast.warning(err);
   })
  },[]);
 
@@ -691,7 +692,7 @@ if(window.confirm("Do you want to delete this item?")){
       })
       .catch(error=>{
           toast.warning("CV not deleted");
-          console.log(error)
+          toast.warning(error);
        });
 }}
 )
@@ -699,12 +700,12 @@ if(window.confirm("Do you want to delete this item?")){
 // Upload CV
 const formSubmitCV= (e) => {
   e.preventDefault();
-
+  
   const formData = new FormData();
   formData.append('cv',cv)
 
-  if(formData == null) setMessage("No CV attached");
-
+  // if(!formData.has('cv'))  return toast.warning("Attach a CV");
+  setCvUpload(true);
     axios.post(`${process.env.REACT_APP_URL}/cvs`,
     formData,
           {
@@ -721,12 +722,14 @@ const formSubmitCV= (e) => {
         })
         .then(res=>{
           toast.success("CV Uplaoded");
+          setCvUpload(false);
           setTimeout(() => {
             window.location.reload();
          }, 2000);
         })
         .catch(error=>{
           toast.success("CV not Uplaoded");
+          setCvUpload(false);
           toast.warning(error);
         }); 
       }
@@ -741,19 +744,19 @@ const formSubmitCV= (e) => {
     setPhotos(data);
     })
    .catch(err=>{
-       console.log(err);
+    toast.warning(err);
   })
    },[]);
 
   // Add Photo
   const formSubmitPhoto= (e) => {
     e.preventDefault();
-
+   
     const formData = new FormData();
     formData.append('photo',photo)
 
     if(formData == null) setMessage("No Photo attached");
-
+    setPhotoUpload(true);
       axios.post(`${process.env.REACT_APP_URL}/photos`,
       formData,
             {
@@ -769,13 +772,15 @@ const formSubmitCV= (e) => {
             }
           })
           .then(res=>{
-            toast.success("Photo file Uplaoded");
+            toast.success("Photo file Uplaoded successively");
+            setPhotoUpload(false);
             setTimeout(() => {
               window.location.reload();
            }, 2000);
           })
           .catch(error=>{
             toast.success("Photo not Uplaoded");
+            setPhotoUpload(false);
             toast.warning(error);
           }); 
         }
@@ -796,7 +801,7 @@ const deletePhoto = ((id) => {
         })
         .catch(error=>{
             toast.warning("Photo not deleted");
-            console.log(error)
+            
          });
   }}
   ) 
@@ -1040,7 +1045,7 @@ const deletePhoto = ((id) => {
               { projects?.map((project)=>(
                 <div>                  
                   {project["projecttitle"]} 
-                  {loginStatus && < button class="btn btn-primary" onClick={()=>deleteProject(project.id)}>
+                  {loginStatus && <button class="btn btn-primary" onClick={()=>deleteProject(project.id)}>
                   DELETE
                  </button>  } 
                  {!loginStatus && < button class="btn btn-primary" disabled>
@@ -1258,6 +1263,7 @@ const deletePhoto = ((id) => {
                       <input type='file' name="cv"
                        onChange = {(e)=>setCv(e.target.files[0])}
                        placeholder="Upload CV"/>
+                       {cvUpload && <span>Uploading CV...</span>}
                        <div>
                         {progress.started && <progress max="100" value = {progress.pc}></progress>}
                         </div>
@@ -1304,7 +1310,7 @@ const deletePhoto = ((id) => {
                         {progress.started && <progress max="100" value = {progress.pc}></progress>}
                         </div>
                     <div>
-                      {message && <span>{message}</span>}
+                      {photoUpload && <span>Uploading Photo...</span>}
                     </div>
                       </div> 
                     </div>
