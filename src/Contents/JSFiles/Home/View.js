@@ -15,9 +15,9 @@ export const View= ({item,what}) =>{
     return (
         <div style={{cursor:"pointer"}}>
          
-          <a href='' onClick={handleShow}>
+          <button onClick={handleShow}>
             {what}
-          </a>  
+          </button>  
           <Modal show={show} onHide={handleClose} size="xl">
             <Modal.Header>
               <Modal.Title><strong style={{fontSize:'20px',color:'blue',fontFamily:'-moz-initial'}}>
