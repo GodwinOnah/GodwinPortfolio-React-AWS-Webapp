@@ -20,9 +20,10 @@ export const  Poster = ({title,data,setter}) =>{
             varx("");
         })
             toast.success(data);
+            window.location.reload();
       })
       .catch(error=>{
             toast.warning({title}+" not added");
-            console.log(error);
+            toast.warning(error);
         });
   }

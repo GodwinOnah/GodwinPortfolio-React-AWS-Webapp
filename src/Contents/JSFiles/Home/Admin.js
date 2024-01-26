@@ -5,6 +5,7 @@ import { toast,ToastContainer } from "react-toastify";
 import { Messages } from './../Messages/Messages.js';
 import {useState, useEffect} from 'react';
 import {Link } from "react-router-dom";
+import {Poster} from "./Poster";
 
 
 export const Admin=()=>{
@@ -59,10 +60,13 @@ const [isCvPresent,setIsCvPresent] = useState(false);
 
 
 useEffect(()=>{
-  const data = window.localStorage.getItem('Admin')
-  if(data != null)  setAdminName(data)
-  },[adminName]);
+  const admindata = window.localStorage.getItem('Admin')
+  if(admindata != null)  setAdminName(admindata);
+  const logindata = window.localStorage.getItem('login')
+  if(logindata != null)  setLoginStatus(JSON.parse(logindata));
+  },[adminName,loginStatus]);
 
+ 
 //  PHONE
 // Submit Phone
 const formSubmitPhone= (e) => {
@@ -482,10 +486,11 @@ const deleteProfile = ((id) => {
         return res.json();
      })
      .then((data) =>{
+      if(data.length<1)setNoProjectFound('No project data found. Check of database exist');
         if(data)setProjects(data);
         return
       })
-     .catch(err=>{setNoProjectFound('No project data found. Check of database exist');
+     .catch(err=>{
      toast.warning(err);
     })
    },[]);
@@ -870,7 +875,7 @@ const deletePhoto = ((id) => {
               <div class="adminSection">
               { skills?.map((skill)=>(
                 <div>                  
-                  {skill.skill} 
+                  {noSkillFound|| skill.skill} 
                   {loginStatus && < button class="btn btn-primary" onClick={()=>deleteSkill(skill.id)}>
                   DELETE
                  </button>  } 
@@ -905,7 +910,7 @@ const deletePhoto = ((id) => {
               <div class="adminSection">
               { hobbies?.map((hobby)=>(
                 <div>                  
-                  {hobby.hobby} 
+                  {noHobbyFound|| hobby.hobby} 
                   {loginStatus && < button class="btn btn-primary" onClick={()=>deleteHobby(hobby.id)}>
                   DELETE
                  </button>  } 
@@ -940,7 +945,7 @@ const deletePhoto = ((id) => {
                   <div class="adminSection">
                   { pMessages?.map((pMessage)=>(
                     <div>                  
-                      {pMessage.pmessage} 
+                      {noPMessageFound || pMessage.pmessage} 
                       {loginStatus && < button class="btn btn-primary" onClick={()=>deletePMessage(pMessage.id)}>
                       DELETE
                     </button>  } 
@@ -976,7 +981,7 @@ const deletePhoto = ((id) => {
               <div class="adminSection">
               { profiles?.map((profile)=>(
                 <div>                  
-                  {profile.profile} 
+                  {noProfileFound || profile.profile} 
                   {loginStatus && < button class="btn btn-primary" onClick={()=>deleteProfile(profile.id)}>
                   DELETE
                  </button>  } 
@@ -1027,7 +1032,7 @@ const deletePhoto = ((id) => {
               <div class="adminSection">
               { projects?.map((project)=>(
                 <div>                  
-                  {project["projecttitle"]} 
+                  {noProjectFound || project["projecttitle"]} 
                   {loginStatus && <button class="btn btn-primary" onClick={()=>deleteProject(project.id)}>
                   DELETE
                  </button>  } 
@@ -1095,7 +1100,7 @@ const deletePhoto = ((id) => {
 
               { schools?.map((school)=>(
                 <div>                  
-                  {school.school}
+                  {noSchoolFound || school.school}
                   {loginStatus && < button class="btn btn-primary"  onClick={()=>deleteSchool(school.id)}>
                   DELETE
                  </button>  } 
@@ -1163,7 +1168,7 @@ const deletePhoto = ((id) => {
               <div class="adminSection">
               {trainings?.map((training)=>(
                 <div>                  
-                  {training.course}
+                  {noTrainingFound || training.course}
                   {loginStatus && < button class="btn btn-primary"  onClick={()=>deleteTraining(training.id)}>
                   DELETE
                  </button>  } 
@@ -1229,7 +1234,7 @@ const deletePhoto = ((id) => {
               <div class="adminSection">
               {cvs?.map((cv)=>(
                 <div>                  
-                  {cv.cv}
+                  { cv.cv}
                   {loginStatus && < button class="btn btn-primary"  onClick={()=>deleteCv(cv.id)}>
                   DELETE
                  </button>  } 

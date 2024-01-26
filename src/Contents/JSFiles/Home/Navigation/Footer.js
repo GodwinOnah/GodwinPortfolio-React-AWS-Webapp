@@ -1,6 +1,6 @@
 
 import '../../../../Contents/CSSFiles/Footer.css'; 
-import image1 from '../../../Images/Obande1.jpeg'
+import image1 from '../../../Images/obandeedit.jpeg'
 import { FaFacebook, FaWhatsapp, FaInstagram, FaGithub, FaLinkedin } from 'react-icons/fa';
 import { MdMarkEmailUnread } from "react-icons/md";
 

@@ -24,11 +24,10 @@ export const Login = () =>{
         return res.json();
      })
      .then((data) =>{
-      console.log(data)
       SetData(data);
       })
      .catch(err=>{
-         console.log(err);
+      toast.warning(err);
     })
    },[]);
 
@@ -41,7 +40,6 @@ const handleSubmit = (e) =>{
 
   data?.map((data)=>{
     bcrypt.compare(password,data.password).then((result)=>{
-      console.log(result)
       if(email === data.email && result){
         toast.success("Logged in");
         window.localStorage.setItem('login',JSON.stringify(true))

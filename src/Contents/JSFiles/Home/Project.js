@@ -13,15 +13,15 @@ export const Project = ({project}) =>{
    let vdeoAvailable = true
 
    if(projectWebsite===""||projectWebsite==null){
-    websiteAvailable=false
+    websiteAvailable=false;
    }
 
    if(gitHubName===""||gitHubName==null){
-    gitHubAvailable=false
+    gitHubAvailable=false;
    }
 
    if(videoLink===""||videoLink==null){
-    vdeoAvailable=false
+    vdeoAvailable=false;
    }
 
     return(     
