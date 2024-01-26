@@ -17,7 +17,7 @@ export const Pictures = () => {
      .then((data) =>{
       setPictures(data);
       })
-    .catch(err=>{setNoPhotoFound('No photo added by this time. Check of database exist');
+    .catch(err=>{setNoPhotoFound('No photo added. Check of database exist');
                       console.log(err);
     })
      },[]);
