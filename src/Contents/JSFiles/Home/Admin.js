@@ -236,7 +236,7 @@ const formSubmitPMessage= (e) => {
      if(data)setPMessages(data);
      return
    })
-   .catch(err=>{setNoPMessageFound("No Skill found. Admin check if database exist");
+   .catch(err=>{setNoPMessageFound("No Skill found by this time. Admin check if database exist");
    toast.warning(err);
   })
  },[]);
