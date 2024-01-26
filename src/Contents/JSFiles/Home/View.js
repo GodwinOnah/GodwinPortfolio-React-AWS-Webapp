@@ -15,7 +15,7 @@ export const View= ({item,what}) =>{
     return (
         <div style={{cursor:"pointer"}}>
          
-          <a  onClick={handleShow}>
+          <a href='' onClick={handleShow}>
             {what}
           </a>  
           <Modal show={show} onHide={handleClose} size="xl">
