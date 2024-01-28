@@ -51,7 +51,8 @@ table tr th, table tr td{
 .messages{
    overflow: scroll;
    max-height: 400px;
-   margin-top: 40px;  
+   margin: 40px; 
+
 }
 
 .adminSection{
@@ -75,9 +76,24 @@ table tr th, table tr td{
     width: 80%;
     margin: 0 10%;
   }
+
   .adminMessages{
-   
-    padding: 20px;
+    padding: 5%;
     background-color: black;
+    margin: 0 5px;
+    text-align: center;
    
 }
+
+@media screen and (max-width:576px){
+    .cv{
+        font-size: 10px;
+    }
+    } 
+   
+   
+ @media screen and (max-width:442px){
+        .cv{
+            font-size: 7px;
+        }
+        } 

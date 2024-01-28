@@ -12,6 +12,8 @@ export const AboutMe = ()=>{
   const [hobbies,setHobbies] = useState([]);
   const [noTrainingFound, setNoTrainingFound] =  useState("");
   const [noHobbyFound, setNoHobbyFound] =  useState("");
+
+  let url ="https://www.google.com/search?q="
           
    // Get Schools
    useEffect(()=>{
@@ -22,7 +24,8 @@ export const AboutMe = ()=>{
         if(data)setSchools(data);
         return
       })
-     .catch(err=>{setNoSchoolFound('No school data found. Check of database exist');
+     .catch(err=>{
+      setNoSchoolFound('No school data found. Check of database exist or call the admin on: +447751776483');
                      
     })
    },[]);
@@ -37,7 +40,8 @@ export const AboutMe = ()=>{
         if(data)setTrainings(data);
         return
       })
-     .catch(err=>{setNoTrainingFound('No training data found. Check of database exist');
+     .catch(err=>{
+      setNoTrainingFound('No training data found. Check of database exist or call the admin on: +447751776483');
                       
     })
    },[]);
@@ -52,7 +56,8 @@ export const AboutMe = ()=>{
         if(data)setHobbies(data);
         return
       })
-     .catch(err=>{setNoHobbyFound('No hobby data found. Check of database exist');
+     .catch(err=>{
+      setNoHobbyFound('No hobby data found. Check of database exist or call the admin on: +447751776483');
                       
     })
    },[]);
@@ -75,7 +80,7 @@ return(
          <th>Graduation</th>
          </tr>
        </thead>
-       <tbody style={{fontSize:'13px'}}> 
+       <tbody class="tbody"> 
        {noSchoolFound ||
                   schools?.map((school,index)=>(               
                      <tr key = {index}>              
@@ -109,7 +114,7 @@ return(
          <th>Year of completion</th>
          </tr>
        </thead>
-       <tbody> 
+       <tbody class="tbody"> 
 
        {noTrainingFound ||
                   trainings?.map((training,index)=>(               
@@ -121,12 +126,9 @@ return(
                      </a>
                      </td>
                      <td>
-                      <div>
-                      <h6>{training.company}</h6>
-                      {training.companywebsite}
-                      </div>
+                      <a href={url+training.company}>{training.company}</a>
                       </td>
-                     <td> <View item={`${process.env.REACT_APP_URL}/certificates/`+training.certificate} what="View"/></td>
+                     <td> <a href='#'><View item={`${process.env.REACT_APP_URL}/certificates/`+training.certificate} what="View"/></a></td>
                      <td> {training.year}</td>                                                  
                      </tr>                   
                   ))} 

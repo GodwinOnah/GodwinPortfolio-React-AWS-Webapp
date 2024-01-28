@@ -9,6 +9,16 @@
     margin: 30px;
     padding: 5px;  
 }
+
+@media screen and (max-width:600px){
+    .cardL{
+        width: 340px;
+        margin: 10px;
+        padding: 5px;  
+    }
+    
+}
+
 .card-body{
     height: 80px;
     overflow: scroll;

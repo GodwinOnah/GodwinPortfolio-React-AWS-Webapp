@@ -5,7 +5,7 @@ import { toast,ToastContainer } from "react-toastify";
 import { Messages } from './../Messages/Messages.js';
 import {useState, useEffect} from 'react';
 import {Link } from "react-router-dom";
-import {Poster} from "./Poster";
+import { CiSettings } from "react-icons/ci";
 
 
 export const Admin=()=>{
@@ -46,6 +46,7 @@ const [tYear,setTYear] = useState("");
 const [noTrainingFound, setNoTrainingFound] =  useState("");
 const [profiles,setProfiles] = useState(null);
 const [profile,setProfile] = useState("");
+const [profileTitle,setProfileTitle] = useState("");
 const [noProfileFound, setNoProfileFound] =  useState("");
 const [profileAvailable, setProfileAvailable]=  useState(false);
 const [loginStatus,setLoginStatus] = useState(false);
@@ -60,7 +61,7 @@ const [isCvPresent,setIsCvPresent] = useState(false);
 
 
 useEffect(()=>{
-  const admindata = window.localStorage.getItem('Admin')
+  const admindata = window.localStorage.getItem('Admin');
   if(admindata != null)  setAdminName(admindata);
   const logindata = window.localStorage.getItem('login')
   if(logindata != null)  setLoginStatus(JSON.parse(logindata));
@@ -93,7 +94,7 @@ const formSubmitPhone= (e) => {
           window.location.reload();
       })
       .catch(error=>{
-            toast.warning("Phone number not added");
+            toast.warning("Phone number not added or call the admin on: +447751776483");
       });
 }
 
@@ -127,8 +128,7 @@ const deletePhone = ((id) => {
             window.location.reload();
         })
         .catch(error=>{
-            toast.warning("Phone not deleted");
-            toast.warning(error);
+            toast.warning("Phone not deleted? Call the admin on: +447751776483");
          });
   }}
 )
@@ -159,7 +159,7 @@ const formSubmitSkill= (e) => {
             window.location.reload();
       })
       .catch(error=>{
-            toast.warning("Skill not added");
+            toast.warning("Skill not added? Call the admin on: +447751776483");
         });
   }
 
@@ -173,8 +173,7 @@ const formSubmitSkill= (e) => {
        if(data)setSkills(data);
        return
      })
-     .catch(err=>{setNoSkillFound("No Skill found. Admin check if database exist");
-     toast.warning(err);
+     .catch(err=>{setNoSkillFound("No Skill found. Admin check if database exist or call the admin on: +447751776483");
     })
    },[]);
 
@@ -194,8 +193,7 @@ const formSubmitSkill= (e) => {
               window.location.reload();
           })
           .catch(error=>{ 
-              toast.warning("Skill not deleted");
-              toast.warning(error);
+              toast.warning("Skill not deleted? Call the admin on: +447751776483");
            });
     }}
   )
@@ -226,7 +224,7 @@ const formSubmitPMessage= (e) => {
           window.location.reload();
     })
     .catch(error=>{
-          toast.warning("Message not added");
+          toast.warning("Message not added? Call the admin on: +447751776483");
       });
 }
 
@@ -240,7 +238,7 @@ const formSubmitPMessage= (e) => {
      if(data)setPMessages(data);
      return
    })
-   .catch(err=>{setNoPMessageFound("No Skill found by this time. Admin check if database exist");
+   .catch(err=>{setNoPMessageFound("No Skill found by this time. Admin check if database exist or call the admin on: +447751776483");
    toast.warning(err);
   })
  },[]);
@@ -261,8 +259,7 @@ const deletePMessage = ((id) => {
             window.location.reload();
         })
         .catch(error=>{
-            toast.warning("Message not deleted");
-            toast.warning(error);
+            toast.warning("Message not deleted? Call the admin on: +447751776483");
          });
   }}
 )
@@ -293,7 +290,7 @@ const formSubmitHobby= (e) => {
           window.location.reload();
     })
     .catch(error=>{
-          toast.warning("Hobby not added");
+          toast.warning("Hobby not added? Call the admin on: +447751776483");
       });
 }
 
@@ -307,7 +304,7 @@ const formSubmitHobby= (e) => {
      if(data)setHobbies(data);
      return
    })
-   .catch(err=>{setNoHobbyFound("No hobby found. Admin check if database exist");
+   .catch(err=>{setNoHobbyFound("No hobby found. Admin check if database exist or call the admin on: +447751776483");
    toast.warning(err);
   })
  },[]);
@@ -338,6 +335,7 @@ const deleteHobby = ((id) => {
 // Submit Profile
 const formSubmitProfile= (e) => {
   e.preventDefault();
+  const datax = {profileTitle,profile};
   if(profile== "") {
     toast.warning("Enter a profile summary");
     return
@@ -349,7 +347,7 @@ const formSubmitProfile= (e) => {
     "Access-Control-Allow-Origin":"*",
     "Content-Type": "application/json"
            },
-    body: JSON.stringify({profile})
+    body: JSON.stringify(datax)
   }
     ).then(res =>{
           return res.json();      
@@ -360,7 +358,7 @@ const formSubmitProfile= (e) => {
           window.location.reload();
     })
     .catch(error=>{
-          toast.warning("Profile not added");
+          toast.warning("Profile not added? Call the admin on: +447751776483");
       });
 }
 
@@ -374,7 +372,7 @@ const formSubmitProfile= (e) => {
     if(data.length>0) setProfileAvailable(true);
      setProfiles(data);
    })
-   .catch(err=>{setNoProfileFound("No profile summary added. Admin check if database exist");
+   .catch(err=>{setNoProfileFound("No profile summary added. Admin check if database exist or call the admin on: +447751776483");
    toast.warning(err);
   })
  },[]);
@@ -382,6 +380,7 @@ const formSubmitProfile= (e) => {
 
 // Update Profile
 const updateProfile = () => {
+  const datax = {profileTitle,profile};
   if(window.confirm("Do you want to update your profile?")){
     fetch(`${process.env.REACT_APP_URL}/profiles`,
         {
@@ -390,7 +389,7 @@ const updateProfile = () => {
             "Access-Control-Allow-Origin":"*",
               "Content-Type": "application/Json"
            },
-          body: JSON.stringify({profile})
+          body: JSON.stringify(datax)
           }
       )
       .then(res =>{return res.json()})
@@ -399,7 +398,7 @@ const updateProfile = () => {
               return true;   
            })
            .catch(err=>{
-              toast.warning("Profile not updated");
+              toast.warning("Profile not updated? Call the admin on: +447751776483");
               toast.warning(err);
       }) 
 }}
@@ -420,7 +419,7 @@ const deleteProfile = ((id) => {
             window.location.reload();
         })
         .catch(error=>{
-            toast.warning("Profile not deleted");
+            toast.warning("Profile not deleted? Call the admin on: +447751776483");
             toast.warning(error);
          });
   }}
@@ -456,7 +455,7 @@ const deleteProfile = ((id) => {
             window.location.reload();
         })
         .catch(error=>{
-            toast.warning("Project not added");
+            toast.warning("Project not added? Call the admin on: +447751776483");
          });
   }
 
@@ -475,7 +474,7 @@ const deleteProfile = ((id) => {
               window.location.reload();
           })
           .catch(error=>{
-              toast.warning("Project not deleted");
+              toast.warning("Project not deleted? Call the admin on: +447751776483");
               toast.warning(error);
            });
     }}
@@ -486,7 +485,7 @@ const deleteProfile = ((id) => {
         return res.json();
      })
      .then((data) =>{
-      if(data.length<1)setNoProjectFound('No project data found. Check of database exist');
+      if(data.length<1)setNoProjectFound('No project data found. Check of database exist or call the admin on: +447751776483');
         if(data)setProjects(data);
         return
       })
@@ -529,7 +528,7 @@ const deleteProfile = ((id) => {
             window.location.reload();
         })
         .catch(error=>{
-            toast.warning("School not added");
+            toast.warning("School not added? Call the admin on: +447751776483");
          });
   }
 
@@ -548,7 +547,7 @@ const deleteProfile = ((id) => {
               window.location.reload();
           })
           .catch(error=>{
-              toast.warning("School not deleted");
+              toast.warning("School not deleted? Call the admin on: +447751776483");
               toast.warning(error);
            });
     }}         
@@ -563,7 +562,7 @@ const deleteProfile = ((id) => {
         if(data)setSchools(data);
         return
         })
-        .catch(err=>{setNoSchoolFound('No school data found. Check of database exist');
+        .catch(err=>{setNoSchoolFound('No school data found. Check of database exist or call the admin on: +447751776483');
         toast.warning(err);
         })}
 )
@@ -644,7 +643,7 @@ formData,
           if(data)setTrainings(data);
           return
         })
-      .catch(err=>{setNoTrainingFound('No training data found. Check of database exist');
+      .catch(err=>{setNoTrainingFound('No training data found. Check of database exist or call the admin on: +447751776483');
                        
       })}
 )
@@ -655,9 +654,9 @@ formData,
   .then(res =>{
       return res.json();
    })
-   .then((data) =>{
+   .then((data) =>{  
     setCvs(data);
-    if(data.length>0) setCvs(true);
+    if(data.length>0) setIsCvPresent(true);
     })
    .catch(err=>{
     toast.warning(err);
@@ -679,7 +678,7 @@ if(window.confirm("Do you want to delete this item?")){
           window.location.reload();
       })
       .catch(error=>{
-          toast.warning("CV not deleted");
+          toast.warning("CV not deleted? Call the admin on: +447751776483");
           toast.warning(error);
        });
 }}
@@ -716,7 +715,7 @@ const formSubmitCV= (e) => {
          }, 2000);
         })
         .catch(error=>{
-          toast.success("CV not Uplaoded");
+          toast.success("CV not Uplaoded? Call the admin on: +447751776483");
           setCvUpload(false);
           toast.warning(error);
         }); 
@@ -788,7 +787,7 @@ const deletePhoto = ((id) => {
             window.location.reload();
         })
         .catch(error=>{
-            toast.warning("Photo not deleted");
+            toast.warning("Photo not deleted? or Call the admin on: +447751776483");
             
          });
   }}
@@ -813,7 +812,7 @@ const deletePhoto = ((id) => {
 
               <div>                         
               <div class="register" >
-              <h2 class="header2">Set Admin</h2>
+              <h2 class="header2"> <CiSettings />Admin</h2>
               <div class="messages">
               <Link to="/Register"  style={{ textDecoration: 'none', fontSize:'20px'}}>
              <button class="btn btn-primary">Become the Admin Here</button> 
@@ -822,13 +821,11 @@ const deletePhoto = ((id) => {
               </div>
               </div>
 
-              <div>                         
-              <div class="adminMessages" >
+              <div class="adminMessages" >                         
               <h2 class="header2">Received Messages</h2>
               <div class="messages">
               <Messages/>
               </div>      
-              </div>
               </div>
 
 
@@ -839,7 +836,8 @@ const deletePhoto = ((id) => {
 
               <h5 style={{color:'Black'}}>Avialable phone numbers</h5>
               <div class="adminSection">
-              { myPhone?.map((phone)=>(
+              { 
+              myPhone?.map((phone)=>(
                 <div>                  
                   {phone.phone}                
                   {loginStatus && < button class="btn btn-primary" onClick={()=>deletePhone(phone.id)}>
@@ -849,7 +847,8 @@ const deletePhoto = ((id) => {
                   DELETE
                  </button>  }              
                   </div>
-            ))}               
+            ))
+            }               
               </div>
                 <form  post ="" onSubmit={formSubmitPhone}>
                 <div class="row addPro ">
@@ -980,7 +979,8 @@ const deletePhoto = ((id) => {
               <h5  style={{color:'Black'}}>Avialable Profile</h5>
               <div class="adminSection">
               { profiles?.map((profile)=>(
-                <div>                  
+                <div> 
+                  <h3>{profile.profiletitle}</h3>                 
                   {noProfileFound || profile.profile} 
                   {loginStatus && < button class="btn btn-primary" onClick={()=>deleteProfile(profile.id)}>
                   DELETE
@@ -994,6 +994,13 @@ const deletePhoto = ((id) => {
 
                 <form>
                 <div class="row addPro ">
+                <div  class="col-12 addPro2">
+                      <input type='text' name="profileTitle" 
+                      required
+                     value={profileTitle}
+                     onChange = {(e)=>setProfileTitle(e.target.value)}
+                     placeholder="Profile Title" />
+                  </div>
                   <div  class="col-12 addPro2">
                       <textarea type='text' name="profile" 
                      value={profile}
@@ -1047,7 +1054,6 @@ const deletePhoto = ((id) => {
                 <div class="row addPro ">
                   <div  class="col-12 addPro2">
                       <input type='text' name="projectTittle" 
-                      size="70"
                       required
                      value={projectTitle}
                      onChange = {(e)=>setProjectTitle(e.target.value)}
@@ -1063,21 +1069,18 @@ const deletePhoto = ((id) => {
                    </div> 
                    <div class="col-12 addPro2">
                       <input type='text' name="videoLink" 
-                       size="70"
                       value={videoLink}
                       onChange = {(e)=>setVideoLink(e.target.value)}
                       placeholder="Video Link" />
                    </div>
                    <div class="col-12 addPro2">
                       <input type='text' name="gitHubLink" 
-                       size="70"
                       value={gitHubLink}
                       onChange = {(e)=>setGitHubLink(e.target.value)}
                       placeholder="GitHub Link" />
                    </div>
                    <div class="col-12 addPro2">
                       <input type='text' name="projectLink" 
-                      size="70"
                       value={projectLink}
                       onChange = {(e)=>setProjectLink(e.target.value)}
                       placeholder="Website Link" />
@@ -1115,7 +1118,6 @@ const deletePhoto = ((id) => {
                 <div class="row addPro ">
                   <div  class="col-12 addPro2">
                       <input type='text' name="honor" 
-                      size="50"
                       required
                      value={honor}
                      onChange = {(e)=>setHonor(e.target.value)}
@@ -1125,13 +1127,11 @@ const deletePhoto = ((id) => {
                       <input type='text' name="school" 
                       required
                       value={school}
-                      size="50"
                       onChange = {(e)=>setSchool(e.target.value)}
                       placeholder="School Attended" />
                    </div> 
                    <div class="col-12 addPro2">
                       <input type='text' name="course" 
-                       size="50"
                        required
                       value={course}
                       onChange = {(e)=>setCourse(e.target.value)}
@@ -1139,14 +1139,12 @@ const deletePhoto = ((id) => {
                    </div>
                    <div class="col-12 addPro2">
                       <input type='text' name="courseLink" 
-                       size="50"
                       value={courseLink}
                       onChange = {(e)=>setCourseLink(e.target.value)}
                       placeholder="Curriculum Link" />
                    </div>
                    <div class="col-12 addPro2">
                       <input type='text' name="graduationYear" 
-                      size="50"
                       required
                       value={graduationYear}
                       onChange = {(e)=>setGraduationYear(e.target.value)}
@@ -1183,7 +1181,6 @@ const deletePhoto = ((id) => {
                 <div class="row addPro ">
                   <div  class="col-12 addPro2">
                       <input type='text' name="tCourse" 
-                      size="50"
                       required
                      value={tCourse}
                      onChange = {(e)=>setTCourse(e.target.value)}
@@ -1193,7 +1190,6 @@ const deletePhoto = ((id) => {
                       <input type='text' name="tCompany" 
                       required
                       value={tCompany}
-                      size="50"
                       onChange = {(e)=>setTCompany(e.target.value)}
                       placeholder="Company" />
                    </div> 
@@ -1201,7 +1197,6 @@ const deletePhoto = ((id) => {
                       <input type='text' name="tCompanyWebsite" 
                       required
                       value={tCompanyWebsite}
-                      size="50"
                       onChange = {(e)=>setTCompanyWebsite(e.target.value)}
                       placeholder="Company website" />
                    </div> 
@@ -1212,7 +1207,6 @@ const deletePhoto = ((id) => {
                    </div>
                    <div class="col-12 addPro2">
                       <input type='text' name="tYear" 
-                       size="50"
                       value={tYear}
                       onChange = {(e)=>setTYear(e.target.value)}
                       placeholder="Graduation" />
@@ -1232,9 +1226,9 @@ const deletePhoto = ((id) => {
               <hr/>
               <h5 style={{color:'Black'}}>Avialable CV</h5>
               <div class="adminSection">
-              {cvs?.map((cv)=>(
+              {cvs.map((cv)=>(
                 <div>                  
-                  { cv.cv}
+                  <strong class="cv">{cv.cv}</strong>
                   {loginStatus && < button class="btn btn-primary"  onClick={()=>deleteCv(cv.id)}>
                   DELETE
                  </button>  } 
@@ -1263,7 +1257,8 @@ const deletePhoto = ((id) => {
                
                     <div class="col-12 addPro2">                      
                     {!isCvPresent && loginStatus && <button class="btn btn-primary" type='submit'>Upload</button>}
-                     {isCvPresent && !loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
+                    {isCvPresent && loginStatus && <button disabled class="btn btn-primary" type='submit'>Uploaded</button>}
+                     {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                       </div>
                       </form>
@@ -1277,7 +1272,7 @@ const deletePhoto = ((id) => {
               <div class="adminSection">
               {photos?.map((photo)=>(
                 <div>                  
-                  {photo.photo}
+                   <strong class="cv">{photo.photo}</strong>
                   {loginStatus && < button class="btn btn-primary"  onClick={()=>deletePhoto(photo.id)}>
                   DELETE
                  </button>  } 

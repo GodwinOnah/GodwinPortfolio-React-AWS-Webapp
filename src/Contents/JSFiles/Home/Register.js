@@ -39,7 +39,7 @@ const logout =()=>{
        if(data.length>0) setIsRegistered(true);
       })
      .catch(err=>{
-                      console.log(err);
+      toast.warning("Couldn't fetch data: make sure there is network or call the admin on: +447751776483")
     })
    },[]);
 

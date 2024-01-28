@@ -8,38 +8,55 @@
 @media screen and (max-width:1231px){
 .navItem1{
         margin-left: 0.5em;
-       font-size: 15px;
-       margin-left: 30px; 
+       font-size: 30px;
+       margin-left: 20px; 
 }
-.logo{
-    text-decoration: none;
-    color: blue;
-    font-family: fantasy;
-    font-size:30px ;
-    font-weight: bold;
-    padding: 10px;
-} 
+
+.logo2{
+    font-size:40px ;
+}
+}
+
+@media screen and (max-width:1069px){
+    .navItem1{
+        margin-left: 0.5em;
+        font-size: 25px;
+        margin-left: 20px; 
+        display:inline;
+    }
+    
+    .logo2{
+        font-size:35px ;
+    }
 }
 
 @media screen and (max-width:991px){
+        .navItem1{
+            margin-left: 0.5em;
+            font-size: 20px;
+            margin-left: 20px; 
+              
+        }
+        
+        .logo2{
+            font-size:30px ;
+        }
+    }
+
+@media screen and (max-width:861px){
     .navItem1{
         margin-left: 0.5em;
         font-size: 15px;
-        margin-left: 30px; 
+        margin-left: 25px; 
 }
 
-.logo{
-    text-decoration: none;
-    color: blue;
-    font-family: fantasy;
+ .navbar-collapse {
+    display: flex;
+  }
+
+.logo2{
     font-size:20px ;
-    font-weight: bold;
-    padding: 5px;
-} 
-}   
-
-         
-
+}}   
 
 .navItem1 a {
     text-decoration: none;
@@ -47,18 +64,22 @@
 }
 
 .navi {
-background:midnightblue;
+background:black;
 margin-bottom: -10px;
 padding: 20px;
 }
 
-.logo{
+.logo1{
     text-decoration: none;
-    color:white;
+   
     font-family: fantasy;
-    font-size:50px ;
     font-weight: bolder;
     padding: 20px;
 }
+
+.logo2{
+    font-size:50px ;
+}
+
 
 

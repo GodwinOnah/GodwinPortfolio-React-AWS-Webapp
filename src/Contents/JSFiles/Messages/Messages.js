@@ -4,9 +4,7 @@ import '../../../Contents/CSSFiles/messages.css';
 import { toast} from "react-toastify";
 import { ViewMessage } from '../Home/ViewMessages';
 
-
 export const Messages=()=>{
-
     const [messages,setMessages] = useState([]);
     const [noMessageFound, setNoMessageFound] =  useState("");
     const [loginStatus,setLoginStatus] = useState(false);
@@ -22,8 +20,7 @@ export const Messages=()=>{
               if(data)setMessages(data);
               // return
         })
-        .catch(err=>{setNoMessageFound("No message received at the moment. Admin check if database exist");
-                      console.log(err);
+        .catch(err=>{setNoMessageFound("No message received at the moment. Admin check if database exist");       
       })
       },[]);
 
@@ -43,14 +40,9 @@ export const Messages=()=>{
           })
           .catch(error=>{
               toast.warning("Message not deleted");
-              console.log(error)
            });
     }}
    )
-   
-    
-
-
         return (
           <div class="listOfCustomers" >
           <table class="table table-hover">
@@ -64,35 +56,28 @@ export const Messages=()=>{
                 <th>MESSAGE</th>
                 <th></th>
                 </tr>
-              </thead>
-              
-              {!loginStatus && <strong style={{color:'White'}}>
-                Sorry for the inconvinience!! Only Admin can view messages
-                </strong> 
-                }
-             
-             
-            {loginStatus && <tbody style={{fontSize:'20px'}}> 
+              </thead>                     
+          <tbody class="messageTBody"> 
                {noMessageFound ||
-                  messages?.map((message,index)=>(
-                   
+                  messages?.map((message,index)=>(                  
                      <tr key = {index}>              
                      <th>{index+1}</th>
                      <td>{message.name}</td>
-                     <td>{message.email}</td>
-                     <td>{message.phone}</td> 
+                     {loginStatus && <td>{message.email}</td>}
+                     {!loginStatus &&  <td><strong style={{color:'red'}}>Hidden</strong></td> }
+                     {loginStatus &&  <td>{message.phone}</td> }
+                     {!loginStatus &&  <td><strong style={{color:'red'}}>Hidden</strong></td> }
                      <td>{message.companyname}</td> 
                      <td>
-                      <div style={{fontSize:'10px', display:'flex',border:'2px solid green'}}>
-                      <div style={{margin:'10px'}}>
-                        <h6 style={{fontSize:'12px'}}>Subject</h6>
-                      {message.subject}
+                      <div class="mess1">
+                      <div class="mess2">
+                      {message.message}
                       </div>                    
                       </div>
                       </td> 
                       <td>
                         <div class="d-flex">                       
-                        <strong style={{fontSize:'30px',marginRight:'10px'}}>
+                        <strong  class="viewMessageBtn" >
                         <ViewMessage 
                         name={message.name}
                         email={message.email}
@@ -101,19 +86,25 @@ export const Messages=()=>{
                         subject={message.subject}
                         message={message.message}
                         />
-                          </strong>
-                        <button onClick={()=>deleteMessage(message.id)}>
-                          <strong style={{color:'red',fontSize:'20px'}}>
+                        </strong>
+                        {loginStatus &&  <button onClick={()=>deleteMessage(message.id)}>
+                          <strong class="deleteMessageBtn">
                             DELETE
                             </strong>
                             </button>
+                           }
+                           {!loginStatus &&  <button disabled onClick={()=>deleteMessage(message.id)}>
+                          <strong class="deleteMessageBtn">
+                            DELETE
+                            </strong>
+                            </button>
+                           }
                             </div>
                             </td>            
-                     </tr> 
-                  
+                     </tr>                
                   ))
                   }           
-                  </tbody>}
+                  </tbody>
                  </table>  
                  </div>
         )}

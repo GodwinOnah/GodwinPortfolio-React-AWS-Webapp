@@ -11,15 +11,18 @@
         }
     } 
 
-    .icons{
+.icons{
         justify-content: center;
+        width: fit-content;
+        margin: 50px;
+        border: 2px solid pink;
+        border-radius: 20px;
+}
 
-    }
-
-    .icons-icons{
-        font-size: 40px;
-        margin: 20px;
-        color: white;
+.icons-icons{
+    font-size: 40px;
+    margin: 20px;
+    color: white;
     }
 .image-background{
     height:"50px";
@@ -38,19 +41,21 @@
     margin: 20px;
 }
 
-.Image{
- border-radius: 50%;
- height: 600px;
- width: auto;
- background-image: url("../Images/obandeedit.jpeg") ;
- background-repeat: no-repeat;
- background-size: contain;
-
- 
- 
+hr{
+    font-size: 40px;
+    width: 40px;
+    }
+    
+.slideshow{
+    width: 100%;
+}
+.slideshow img{
+    width: 600px;
+    height: 600px;
+    margin: 30px;
 }
 
-.full-stack{
+.profileSummarySection{
     width: 45%;
 }
 
@@ -70,17 +75,233 @@
     margin-top: 120px;
     border-radius: 30px;
   padding: 10px;
+  border: 30px solid white;
+  background-color:black;
+  margin: 70px 20px;
 }
 .div2{
-    margin-bottom: 500px;
+    margin-bottom: 50px;
    
 }
+
+.profileAndImageSection{
+    display: flex;
+}
+
+.profileImage img{
+width: 600px;
+height: 600px;
+margin: 30px;
+}
+
+.dIcons{
+    font-size: 40px;
+}
+
+@media screen and (max-width:1131px){
+    .dIcons{
+        font-size: 30px;
+    }
+} 
+
+@media screen and (max-width:1142px){
+    .profile-Image{
+        display: flex;
+    }
+    
+    .profileImage img{
+    width: 550px;
+    height: 550px;
+    }
+}
+
+@media screen and (max-width:994px){
+    .profile-Image{
+        display: flex;
+    }
+    
+    .profileImage img{
+    width: 450px;
+    height: 450px;
+    }
+
+    .dIcons{
+        font-size: 25px;
+    }
+
+    .icons-icons{
+        font-size: 40px;
+        margin: 10px;
+        color: white;
+        }
+
+    .icons{
+        justify-content: center;
+        width: fit-content;
+        margin: 40px;
+        border: 1px solid pink;
+        border-radius: 20px;
+    }
+}
+
+@media screen and (max-width:884px){
+    .profile-Image{
+        display: flex;
+    }
+    
+    .profileImage img{
+    width: 400px;
+    height: 400px;
+    }
+
+    .dIcons{
+        font-size: 25px;
+    }
+
+    .icons-icons{
+        font-size: 40px;
+        margin: 10px;
+        color: white;
+        }
+
+    .icons{
+        justify-content: center;
+        width: fit-content;
+        margin: 40px;
+        border: 1px solid pink;
+        border-radius: 20px;
+    }
+}
+
+
+
+ @media screen and (max-width:770px){
+            .dIcons{
+                font-size: 25px;
+            }
+
+            .profile-Image{
+                display: flex;
+            }
+            
+            .profileImage img{
+            width: 350px;
+            height: 350px;
+            }
+    
+            .icons-icons{
+                font-size: 40px;
+                margin: 10px;
+                color: white;
+                }
+    
+                .icons{
+                    justify-content: center;
+                    width: fit-content;
+                    margin: 20px;
+                    border: 1px solid pink;
+                    border-radius: 20px;
+            }
+            } 
+
+@media screen and (max-width:692px){
+                .dIcons{
+                    font-size: 80px;
+                }
+    
+                .profileSummarySection{
+                    width: 95%;
+                }
+
+                .profileAndImageSection{
+                    display: inline;
+                }
+                
+                .profileImage img{
+                width: 450px;
+                height: 450px;
+                border-radius: 20px;
+                }
+
+                .slideshow img{
+                    width: 350px;
+                    height: 350px;
+                    margin: 10px;
+                }
+        
+                .icons-icons{
+                    font-size: 30px;
+                    margin: 10px;
+                    color: white;
+                    }
+        
+                    .icons{
+                        justify-content: center;
+                        width: fit-content;
+                        margin: 20px;
+                        border: 1px solid pink;
+                        border-radius: 20px;
+}}
+
+@media screen and (max-width:582px){
+                    .dIcons{
+                        font-size: 60px;
+                    }
+        
+                    .profileSummarySection{
+                        width: 95%;
+                    }
+    
+                    .profileAndImageSection{
+                        display: inline;
+                    }
+                    
+                    .profileImage img{
+                    width: 450px;
+                    height: 450px;
+                    }
+            
+                    .icons-icons{
+                        font-size: 30px;
+                        margin: 10px;
+                        color: white;
+                        }
+            
+                        .icons{
+                            justify-content: center;
+                            width: fit-content;
+                            margin: 20px;
+                            border: 1px solid pink;
+                            border-radius: 20px;
+                    }
+
+    .profile{
+                    border: solid 2px black;
+                   margin-left: 5%;
+                   margin-right:5%;
+                    text-align: center;
+                    justify-content: center;
+                    height: auto;
+                    align-items: center;
+                    text-justify: newspaper;
+                }
+
+                .icons{
+                    justify-content: center;
+                    width: fit-content;
+                    margin-bottom: 90px;
+                    border: 2px solid pink;
+                    border-radius: 20px;
+            }
+                
+    } 
+    
 
 .hireMe{
     margin: 15px;
     background-color: purple;
     border: 2px solid black;
-    color: white;
+    color: black;
     border-radius: 29px;
     height: 50px;
     font-size: large;
@@ -92,7 +313,7 @@
     margin: 15px;
     background-color: magenta;
     border: 2px solid blue;
-    color: white;
+    color: black;
     border-radius: 29px;
     height: 50px;
     font-size: large;
@@ -122,4 +343,9 @@
   width: 50%;
   margin: 20px auto;
  
+}
+
+.welcomeLogo{
+    width: 500px;
+    height: 80px;
 }

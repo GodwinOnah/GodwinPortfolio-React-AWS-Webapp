@@ -19,18 +19,6 @@ export const ForgottenPassword = () =>{
     const handleShow = () => setShow(true); 
     const [isChecking,SetIsChecking] = useState(false);
 
-  useEffect(()=>{
-    fetch(`${process.env.URL}/register`)
-    .then(res =>{
-        return res.json();
-     })
-     .then((data) =>{
-      })
-     .catch(err=>{
-          console.log(err);
-    })
-   },[]);
-
 const handleSubmit = (e) =>{
   e.preventDefault();
   const hash=bcrypt.hashSync(password);//Hashing password here
@@ -73,7 +61,7 @@ const handleSubmit = (e) =>{
              })
              .catch(err=>{  
               SetIsChecking(false)              
-                  console.log(err);
+              toast.warning("No network or database connectivity? Call the admin on: +447751776483");
           })
     
           }

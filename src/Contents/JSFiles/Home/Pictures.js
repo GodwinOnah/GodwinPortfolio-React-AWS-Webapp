@@ -18,7 +18,7 @@ export const Pictures = () => {
       setPictures(data);
       })
     .catch(err=>{setNoPhotoFound('No photo added. Check of database exist');
-                      console.log(err);
+                     
     })
      },[]);
 
@@ -27,8 +27,8 @@ export const Pictures = () => {
         <Fade>
           {      
                   noPhotoFound || pictures?.map((picture) => (
-                    <div> {                        
-                   <img  src={`${process.env.REACT_APP_URL}/photo_images/`+picture.photo} height="600px" width="auto" alt="..." />                  
+                    <div class="slideshow"> {                        
+                   <img  src={`${process.env.REACT_APP_URL}/photo_images/`+picture.photo}  alt="This is not an image" onerror="this.onerror=null; this.src='/Resources/images/default_img.png'" />                  
                   }</div>
                       ) )} 
         </Fade>

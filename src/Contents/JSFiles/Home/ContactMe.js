@@ -93,7 +93,7 @@ export const ContactMe = () =>{
       return (
         <div style={{cursor:"pointer"}}>
           <a onClick={handleShow}>
-          Contact Me
+          Contact 
           </a>
     
           <Modal show={show} onHide={handleClose} size="lg">
@@ -163,12 +163,13 @@ export const ContactMe = () =>{
                  </div>
                 <div  class="col-12 login ">
                   Message
-                <div style={{border:'1px solid blue', width:'fit-content',margin:'0 auto',padding:'10px'}}>
+                <div style={{border:'1px solid blue', width:'fit-content',
+                margin:'0 auto',padding:'10px'}}>
                 <div>
                 <input 
-                    size="60"
                     value={subject}
                     name="subject"
+                    size="40"
                     onChange = {e=>SetSubject(e.target.value)}
                     type='text' placeholder="Subject" />
                   </div>

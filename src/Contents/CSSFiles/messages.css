@@ -1,10 +1,90 @@
 .listOfCustomers{
-   
     padding: 20px;
-    background-color: blueviolet;
+    background-color: blue;
+    width: fit-content;
    
 }
 table{
     margin: 0;
     border: 1px solid blue;
+    width: 100%;
+}
+.messageTBody{
+   font-size: 20px; 
+}
+
+@media screen and (max-width:1200px){
+    .messageTBody{
+        font-size: 15px; 
+     }
+     .deleteMessageBtn{
+        color:red;
+        font-size:25px;
+    }
+    .viewMessageBtn{
+        font-size:25px;
+        margin-right:10px;
+    }
+    } 
+
+@media screen and (max-width:1062px){
+        .messageTBody{
+            font-size: 12px; 
+         }
+         .deleteMessageBtn{
+            color:red;
+            font-size:20px;
+        }
+        .viewMessageBtn{
+            font-size:20px;
+            margin-right:10px;
+        }
+        } 
+
+@media screen and (max-width:868px){
+            .messageTBody{
+                font-size: 10px; 
+             }
+             .deleteMessageBtn{
+                color:red;
+                font-size:15px;
+            }
+            .viewMessageBtn{
+                font-size:15px;
+                margin-right:10px;
+            }
+            .mess1{
+                font-size:8px; 
+                display:flex;
+                border:1px solid green
+            }
+            
+            .mess2{
+                margin:4px;
+                overflow:hidden;
+                height:15px;
+                width:50px
+            }
+            } 
+.deleteMessageBtn{
+    color:red;
+    font-size:30px;
+}
+.viewMessageBtn{
+    color:blue;
+    font-size:30px;
+    margin-right:10px;
+}
+
+.mess1{
+    font-size:11px; 
+    display:flex;
+    border:1px solid green
+}
+
+.mess2{
+    margin:10px;
+    overflow:hidden;
+    height:25px;
+    width:80px
 }

@@ -38,16 +38,17 @@ const handleSubmit = (e) =>{
   if(!email||!password) 
   return toast.warning("Enter all fields");
 
+  if(data){
   data?.map((data)=>{
     bcrypt.compare(password,data.password).then((result)=>{
       if(email === data.email && result){
-        toast.success("Logged in");
         window.localStorage.setItem('login',JSON.stringify(true))
         SetIsLoggingIn(false);
         setTimeout(() => {
-       handleClose();
-       window.location.reload();
+        handleClose();
+        window.location.reload();
     }, 2000);
+    toast.success("Logged in");
     return (navigate("/Admin"))  
    }
         else{ 
@@ -56,7 +57,13 @@ const handleSubmit = (e) =>{
           return
       } })
     } 
-)};
+)
+}
+else{
+  toast.warning("No network or databese connectivity. You can try page refresh or call the admin on: +447751776483")
+}
+
+};
         return (
           <div style={{cursor:"pointer"}}>          
             <button class="btn btn-primary" type='submit' onClick={handleShow}>

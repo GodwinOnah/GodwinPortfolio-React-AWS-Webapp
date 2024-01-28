@@ -19,7 +19,7 @@ export const Footer = () => {
                     </div>
 
                     <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                    <div class="d-flex icons">
+                    <div class="d-flex">
                                             <a class="icons-icons" href="https://www.facebook.com/obande2" target="blank" title='Facebook'>
                                             <FaFacebook />
                                             </a>
