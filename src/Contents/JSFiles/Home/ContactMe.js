@@ -169,7 +169,7 @@ export const ContactMe = () =>{
                 <input 
                     value={subject}
                     name="subject"
-                    size="40"
+                    size="30"
                     onChange = {e=>SetSubject(e.target.value)}
                     type='text' placeholder="Subject" />
                   </div>
