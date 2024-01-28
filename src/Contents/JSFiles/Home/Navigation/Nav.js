@@ -40,7 +40,6 @@ export const Nav = () => {
     })
    },[]);
   
-
     return (
       <div >
       <div>
@@ -49,14 +48,11 @@ export const Nav = () => {
       </Link>    
       <img class="welcomeLogo" src={image2} alt="This is a logo"/>       
       </div> 
+      <div>
       <nav class="navbar navbar-expand bg-body-tertiary  sticky-top">
-      <div class="container-fluid navi">  
-     
+      <div class="container-fluid navi">      
         <div id="navbarSupportedContent">       
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0"> 
-          <li class="nav-item">
-         
-          </li>    
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">    
           <li class="nav-item ">
             <Link to="/" class="navItem1" style={{ textDecoration: 'none' }}
              title='Back to homepage'>
@@ -87,6 +83,6 @@ export const Nav = () => {
       </div>
     </nav>
     </div>
-
+    </div>
     );
 }
