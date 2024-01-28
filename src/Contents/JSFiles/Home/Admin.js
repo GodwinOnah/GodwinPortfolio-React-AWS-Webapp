@@ -500,7 +500,6 @@ const deleteProfile = ((id) => {
   const formSubmitSchool = (e) => {
     e.preventDefault();
     const datax = {honor,school,course,courseLink,graduationYear};
-    console.log(datax)
     if(!honor||!school||!course||!graduationYear){
       toast.warning('Enter compulsary fields');
       return;

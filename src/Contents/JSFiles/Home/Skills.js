@@ -30,7 +30,7 @@ export const Skills = () => {
                 <div key={index} style={{margin:"10px",cursor:"pointer"}}>
                     {index+1+". "}
                     <strong>
-                     <a class="skills-a" href={url+skill.skill} style={{fontSize:'25px'}} target="blank">
+                     <a class="skills-a" href={url+skill.skill} target="blank">
                         {skill.skill}
                     </a> 
                     </strong>           

@@ -6,18 +6,15 @@ import { ContactMe } from './../ContactMe.js';
 import {View} from './../View.js'
 import { CiSettings } from "react-icons/ci";
 import { toast,ToastContainer } from "react-toastify";
+import image2 from '../../../Images/HoUw.gif';
 
 
 export const Nav = () => {
   const [data,SetData] = useState([]);
   const [cvs,setCvs] = useState([]);
+ 
 
-  data?.map((data)=>{
-    window.localStorage.setItem('Admin',data.name)
-
-  })
-
-  useEffect(()=>{  
+  useEffect(()=>{ 
     fetch(`${process.env.REACT_APP_URL}/register`)
     .then(res =>{
         return res.json();
@@ -45,14 +42,20 @@ export const Nav = () => {
   
 
     return (
-      <nav class="navbar navbar-expand-sm bg-body-tertiary  sticky-top">
-      <div class="container-fluid navi">   
+      <div >
+      <div>
+      <Link to="/" class="logo1"> 
+          <strong class="logo2">ONAH GODWIN😎</strong>
+      </Link>    
+      <img class="welcomeLogo" src={image2} alt="This is a logo"/>       
+      </div> 
+      <nav class="navbar navbar-expand bg-body-tertiary  sticky-top">
+      <div class="container-fluid navi">  
+     
         <div id="navbarSupportedContent">       
           <ul class="navbar-nav me-auto mb-2 mb-lg-0"> 
           <li class="nav-item">
-          <Link to="/" class="logo1"> 
-          <strong class="logo2">ONAH GODWIN😎</strong>
-          </Link> 
+         
           </li>    
           <li class="nav-item ">
             <Link to="/" class="navItem1" style={{ textDecoration: 'none' }}
@@ -83,7 +86,7 @@ export const Nav = () => {
         </div>
       </div>
     </nav>
-
+    </div>
 
     );
 }

@@ -10,7 +10,7 @@ import { toast,ToastContainer } from "react-toastify";
 import { FaFacebook, FaWhatsapp, FaInstagram, FaGithub, FaLinkedin } from 'react-icons/fa';
 import { MdMarkEmailUnread } from "react-icons/md";
 import image from '../../Images/godwin2.jpeg';
-import image2 from '../../Images/HoUw.gif';
+
 
 export const HeroSection = () => {
 
@@ -99,9 +99,7 @@ export const HeroSection = () => {
    
     return (
         <div style={{marginTop:'5%'}}>  
-        <div>
-            <img class="welcomeLogo" src={image2} alt="This is a logo"/>
-            </div>                   
+                       
             <marquee scrollamount="1">                      
               <strong style={{color:'gold', fontSize:'15px'}}>
              {message1}
@@ -143,14 +141,7 @@ export const HeroSection = () => {
                         <p>
                             <Profile/>
                         </p>               
-                        <div>
-                            <button class="hireMe"><ContactMe/></button>
-                            {cvs?.map((cv)=>(
-                            <button class="Resume"><a href={`${process.env.REACT_APP_URL}/CV_images/`+cv.cv} 
-                            title='Download resume' download>Get Resume</a>
-                            </button>
-                               ))}
-                        </div>
+                    
                     </div>
                     <div class="">                        
                         <div class="profileImage">
