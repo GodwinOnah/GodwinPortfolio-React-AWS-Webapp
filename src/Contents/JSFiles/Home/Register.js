@@ -59,7 +59,7 @@ const handleSubmit = (e) =>{
 
   setIsRegistering(true);
  
-  fetch(`${process.env.URL}/register`,
+  fetch(`${process.env.REACT_APP_URL}/register`,
     {
       method: 'POST',
       headers:{
