@@ -6,6 +6,7 @@ import { Messages } from './../Messages/Messages.js';
 import {useState, useEffect} from 'react';
 import {Link } from "react-router-dom";
 import { CiSettings } from "react-icons/ci";
+import Switch from "react-switch";
 
 
 export const Admin=()=>{
@@ -58,6 +59,8 @@ const [photos,setPhotos] = useState([]);
 const [photoUpload,setPhotoUpload] = useState(false);
 const [cvUpload,setCvUpload] = useState(false);
 const [isCvPresent,setIsCvPresent] = useState(false);
+const [underConstruction,setUnderConstruction] = useState(true);
+
 
 
 useEffect(()=>{
@@ -68,6 +71,11 @@ useEffect(()=>{
   },[adminName,loginStatus]);
 
  
+  // Set under construction swith ON/OFF
+  const underConstructionFunction = () =>{
+    setUnderConstruction(!underConstruction);
+  }
+  
 //  PHONE
 // Submit Phone
 const formSubmitPhone= (e) => {
@@ -133,6 +141,27 @@ const deletePhone = ((id) => {
   }}
 )
 
+//  Delete Phone
+const deleteAllPhone = ((id) => {
+  if(window.confirm("Do you want to delete all this item?")){
+    fetch(`${process.env.REACT_APP_URL}/phone`,
+    {  
+      method:'DELETE', 
+    }
+      ).then(res =>{
+            return res.text();      
+        })
+        .then(res=>{
+            toast.success(res);
+            window.location.reload();
+        })
+        .catch(error=>{
+            toast.warning("Phone not deleted? Call the admin on: +447751776483");
+         });
+  }}
+)
+
+
 // SKILLS
 // Submit Skills
 const formSubmitSkill= (e) => {
@@ -194,6 +223,26 @@ const formSubmitSkill= (e) => {
           })
           .catch(error=>{ 
               toast.warning("Skill not deleted? Call the admin on: +447751776483");
+           });
+    }}
+  )
+
+  // Delete Skill
+  const deleteAllSkill = ((id) => {
+    if(window.confirm("Do you want to delete this item?")){
+      fetch(`${process.env.REACT_APP_URL}/skills`,
+      {  
+        method:'DELETE', 
+      }
+        ).then(res =>{
+              return res.text();      
+          })
+          .then(res=>{
+              toast.success(res);
+              window.location.reload();
+          })
+          .catch(error=>{ 
+              toast.warning("All Skill not deleted? Call the admin on: +447751776483");
            });
     }}
   )
@@ -264,6 +313,26 @@ const deletePMessage = ((id) => {
   }}
 )
 
+// Delete public message
+const deleteAllPMessage = ((id) => {
+  if(window.confirm("Do you want to delete this item?")){
+    fetch(`${process.env.REACT_APP_URL}/pmessages`,
+    {  
+      method:'DELETE', 
+    }
+      ).then(res =>{
+            return res.text();      
+        })
+        .then(res=>{
+            toast.success(res);
+            window.location.reload();
+        })
+        .catch(error=>{
+            toast.warning("All Messages not deleted? Call the admin on: +447751776483");
+         });
+  }}
+)
+
   // HOBBIES
 // Submit Hobbies
 const formSubmitHobby= (e) => {
@@ -326,6 +395,26 @@ const deleteHobby = ((id) => {
         })
         .catch(error=>{
             toast.warning("Hobby not deleted");
+            toast.warning(error);
+         });
+  }}
+)
+// Delete All hobby
+const deleteAllHobby = ((id) => {
+  if(window.confirm("Do you want to delete this item?")){
+    fetch(`${process.env.REACT_APP_URL}/hobbies`,
+    {  
+      method:'DELETE', 
+    }
+      ).then(res =>{
+            return res.text();      
+        })
+        .then(res=>{
+            toast.success(res);
+            window.location.reload();
+        })
+        .catch(error=>{
+            toast.warning("All Hobby not deleted");
             toast.warning(error);
          });
   }}
@@ -479,6 +568,27 @@ const deleteProfile = ((id) => {
            });
     }}
   )
+
+  // Delete All Projects
+  const deleteAllProject = ((id) => {
+    if(window.confirm("Do you want to delete this item?")){
+      fetch(`${process.env.REACT_APP_URL}/projects`,
+      {  
+        method:'DELETE', 
+      }
+        ).then(res =>{
+              return res.text();      
+          })
+          .then(res=>{
+              toast.success(res);
+              window.location.reload();
+          })
+          .catch(error=>{
+              toast.warning("All Projects not deleted? Call the admin on: +447751776483");
+              toast.warning(error);
+           });
+    }}
+  )
     // Get Projects
   useEffect(()=>{
     fetch(`${process.env.REACT_APP_URL}/projects`).then(res =>{
@@ -547,6 +657,27 @@ const deleteProfile = ((id) => {
           })
           .catch(error=>{
               toast.warning("School not deleted? Call the admin on: +447751776483");
+              toast.warning(error);
+           });
+    }}         
+  )
+
+  //  Delete All School
+  const deleteAllSchool = ((id) => {
+    if(window.confirm("Do you want to delete all these items?")){
+      fetch(`${process.env.REACT_APP_URL}/schools`,
+      {  
+        method:'DELETE', 
+      }
+        ).then(res =>{
+              return res.text();      
+          })
+          .then(res=>{
+              toast.success(res);
+              window.location.reload();
+          })
+          .catch(error=>{
+              toast.warning("All Schools not deleted? Call the admin on: +447751776483");
               toast.warning(error);
            });
     }}         
@@ -630,7 +761,28 @@ formData,
               toast.warning(error);
            });
     }}         
-  )   
+  )  
+  
+  //  Delete All Trainingg
+  const deleteAllTraining = ((id) => {
+    if(window.confirm("Do you want to delete all these item?")){
+      fetch(`${process.env.REACT_APP_URL}/trainings`,
+      {  
+        method:'DELETE', 
+      }
+        ).then(res =>{
+              return res.text();      
+          })
+          .then(res=>{
+              toast.success(res);
+              window.location.reload();
+          })
+          .catch(error=>{
+              toast.warning("All training not deleted");
+              toast.warning(error);
+           });
+    }}         
+  )  
 
   // Get Training
     useEffect(()=>{
@@ -769,7 +921,8 @@ const formSubmitCV= (e) => {
             setPhotoUpload(false);
             toast.warning(error);
           }); 
-        }
+}
+
 
        //  Delete Photo
 const deletePhoto = ((id) => {
@@ -791,6 +944,56 @@ const deletePhoto = ((id) => {
          });
   }}
   ) 
+
+   //  Delete All Photo
+const deleteAllPhoto = ((id) => {
+  if(window.confirm("Do you want to delete this item?")){
+    fetch(`${process.env.REACT_APP_URL}/photos`,
+    {  
+      method:'DELETE', 
+    }
+      ).then(res =>{
+            return res.text();      
+        })
+        .then(res=>{
+            toast.success("All Photos deleted");
+            window.location.reload();
+        })
+        .catch(error=>{
+            toast.warning("All Photos not deleted? or Call the admin on: +447751776483");
+            
+         });
+  }}
+  ) 
+
+
+
+  //Confirm going for page construction
+ const confirmIsUnderConstruction = ()=>{
+
+  if(window.confirm("Do you want to go for page maintenance?")){
+
+    fetch(`${process.env.REACT_APP_URL}/underconstruction`,
+        {
+          method: 'PUT',
+          headers:{
+            "Access-Control-Allow-Origin":"*",
+              "Content-Type": "application/Json"
+           },
+          body: JSON.stringify({underConstruction})
+          }
+      )
+      .then(res =>{return res.json()})
+      .then(data =>{         
+                toast.success("Page under construction set");
+              return true;   
+           })
+           .catch(err=>{
+              toast.warning("Page not set for under construction");
+              toast.warning(err);
+      }) 
+  }
+ }
      
           return(
             <>
@@ -812,6 +1015,21 @@ const deletePhoto = ((id) => {
               <div>                         
               <div class="register" >
               <h2 class="header2"> <CiSettings />Admin</h2>
+              <div style={{ display:'flex', justifyContent:'center',margin:'30px'}}>
+              <div style={{border:'2px solid white', width:'fit-content',}}>
+                <h4>Setting default page to 'Under Construction'?</h4>
+              <strong style={{color:'gold', margin:'10px'}}>NO</strong>
+              <label class="switch">
+              <input class="check" type="checkbox"  onChange={underConstructionFunction}/>          
+              <span class="slider"></span>
+              </label>
+              <strong style={{color:'gold', margin:'10px'}}>YES</strong> 
+              <div style={{padding:'15px'}}>
+              {loginStatus && < button class="btn btn-primary" onClick={()=>confirmIsUnderConstruction}>Confirm</button>}
+              </div>
+              
+              </div>
+              </div>
               <div class="messages">
               <Link to="/Register"  style={{ textDecoration: 'none', fontSize:'20px'}}>
              <button class="btn btn-primary">Become the Admin Here</button> 
@@ -860,6 +1078,7 @@ const deletePhoto = ((id) => {
                   </div>
                     <div class="col-12 addPro2">                      
                      {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
+                     {loginStatus && <button class="btn btn-danger" style={{marginLeft:'10px'}} onclick={deleteAllPhone}>Clear</button>}
                      {!loginStatus && <button disabled class="btn btn-primary">Only Admin can edit this</button>}
                     </div>
                       </div>
@@ -895,6 +1114,7 @@ const deletePhoto = ((id) => {
                   </div>
                     <div class="col-12 addPro2">                      
                     {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
+                    {loginStatus && <button class="btn btn-danger" style={{marginLeft:'10px'}} onclick={deleteAllSkill}>Clear</button>}
                      {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                       </div>
@@ -930,6 +1150,7 @@ const deletePhoto = ((id) => {
                   </div>
                     <div class="col-12 addPro2">                      
                     {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
+                    {loginStatus && <button class="btn btn-danger" style={{marginLeft:'10px'}} onclick={deleteAllHobby}>Clear</button>}
                      {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                       </div>
@@ -966,6 +1187,7 @@ const deletePhoto = ((id) => {
                       </div>
                         <div class="col-12 addPro2">                      
                         {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
+                        {loginStatus && <button class="btn btn-danger" style={{marginLeft:'10px'}} onclick={deleteAllPMessage}>Clear</button>}
                         {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                         </div>
                           </div>
@@ -1087,6 +1309,7 @@ const deletePhoto = ((id) => {
                    </div>                
                     <div class="col-12 addPro2">                      
                     {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
+                    {loginStatus && <button class="btn btn-danger" style={{marginLeft:'10px'}} onclick={deleteAllProject}>Clear</button>}
                      {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                       </div>
@@ -1152,6 +1375,7 @@ const deletePhoto = ((id) => {
                    </div>                
                     <div class="col-12 addPro2">                      
                     {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
+                    {loginStatus && <button class="btn btn-danger" style={{marginLeft:'10px'}} onclick={deleteAllSchool}>Clear</button>}
                      {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                       </div>
@@ -1213,6 +1437,7 @@ const deletePhoto = ((id) => {
                    </div>             
                     <div class="col-12 addPro2">                      
                     {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
+                    {loginStatus && <button class="btn btn-danger" style={{marginLeft:'10px'}} onclick={deleteAllTraining}>Clear</button>}
                      {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                       </div>
@@ -1297,9 +1522,10 @@ const deletePhoto = ((id) => {
                     </div>
                       </div> 
                     </div>
-               
+                   
                     <div class="col-12 addPro2">                      
                     {loginStatus && <button class="btn btn-primary" type='submit'>Upload</button>}
+                    {loginStatus && <button class="btn btn-danger" style={{marginLeft:'10px'}}onclick={deleteAllPhoto}>Clear</button>}
                      {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                       </div>

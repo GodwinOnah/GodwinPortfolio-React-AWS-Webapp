@@ -28,7 +28,8 @@ export const Pictures = () => {
           {      
                   noPhotoFound || pictures?.map((picture) => (
                     <div class="slideshow"> {                        
-                   <img  src={`${process.env.REACT_APP_URL}/photo_images/`+picture.photo}  alt="This is not an image" onerror="this.onerror=null; this.src='/Resources/images/default_img.png'" />                  
+                   <img  src={`${process.env.REACT_APP_URL}/photo_images/`+picture.photo}  alt="This is not an image" 
+                   onerror="this.onerror=null; this.src='/Resources/images/default_img.png'" />                  
                   }</div>
                       ) )} 
         </Fade>

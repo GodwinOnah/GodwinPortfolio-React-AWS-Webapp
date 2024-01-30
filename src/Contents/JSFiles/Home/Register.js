@@ -16,12 +16,30 @@ export const Register = () =>{
   const [isRegistering,setIsRegistering] = useState(false);
   const [isRegistered,setIsRegistered] = useState(false);
   const [loginStatus,setLoginStatus] = useState(false);
+  const [isUnderConstruction, setIsUnderConstruction] = useState([]);
  
   useEffect(()=>{
   const data = window.localStorage.getItem('login')
   if(data != null)  setLoginStatus(JSON.parse(data))
   },[loginStatus]);
   
+
+  useEffect(()=>{
+    fetch(`${process.env.REACT_APP_URL}/underconstruction`)
+    .then(res =>{     
+        return res.json();
+     })
+     .then((data) =>{  
+      setIsUnderConstruction(data);
+    
+      })
+     .catch(err=>{
+      console.log(err);
+    })
+   },[]);
+
+
+
 const logout =()=>{
   window.localStorage.setItem('login',JSON.stringify(false));
   window.location.reload();
@@ -154,7 +172,7 @@ const handleSubmit = (e) =>{
           <div class="d-flex justify-content-center" style={{margin:'20px'}}>
             {!loginStatus && <ForgottenPassword/>}
             {!loginStatus && <Login/>}
-            {loginStatus &&  <button class="btn btn-primary" onClick={logout}>Logout</button>}             
+            {loginStatus && <button class="btn btn-primary" onClick={logout}>Logout</button>}             
             </div>
           </div>              
           </div>
