@@ -822,7 +822,8 @@ const deletePhoto = ((id) => {
 
               <div class="adminMessages" >                         
               <h2 class="header2">Received Messages</h2>
-              <div class="messages">
+              <div  style={{ overflow: loginStatus?'scroll':'hidden',
+              maxHeight: loginStatus?'400px':'300px',display:'flex',justifyContent:'center'}}>               
               <Messages/>
               </div>      
               </div>

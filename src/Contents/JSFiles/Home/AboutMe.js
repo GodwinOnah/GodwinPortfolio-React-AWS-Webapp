@@ -25,6 +25,7 @@ export const AboutMe = ()=>{
         return
       })
      .catch(err=>{
+ 
       setNoSchoolFound('No school data found. Check of database exist or call the admin on: +447751776483');
                      
     })
@@ -120,10 +121,8 @@ return(
                   trainings?.map((training,index)=>(               
                      <tr key = {index}>              
                      <th>{index+1}</th>
-                     <td>
-                     <a href={"\""+training.companywebsite.substring[0,training.companywebsite.length-2]+"/"+training.course+"\""} target="blank">
-                     {training.course}
-                     </a>
+                     <td> 
+                     {training.course}                   
                      </td>
                      <td>
                       <a href={url+training.company}>{training.company}</a>

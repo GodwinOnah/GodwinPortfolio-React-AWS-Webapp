@@ -46,9 +46,6 @@ export const HeroSection = () => {
        '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
        '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
        '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
-       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
-       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
-       '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+
        '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+message.pmessage     
     })} 
 
@@ -75,6 +72,7 @@ export const HeroSection = () => {
        return res.json();
     })
     .then((data) =>{
+        console.log(data)
         if(data.length>1) setGreater(true)
        if(data)setPMessages(data);
        return
@@ -100,7 +98,7 @@ export const HeroSection = () => {
     return (
         <div style={{marginTop:'5%'}}>  
                        
-            <marquee scrollamount="1">                      
+            <marquee scrollamount="5">                      
               <strong style={{color:'gold', fontSize:'15px'}}>
              {message1}
                 </strong>                     

@@ -17,8 +17,6 @@ export const Register = () =>{
   const [isRegistered,setIsRegistered] = useState(false);
   const [loginStatus,setLoginStatus] = useState(false);
  
-  
- 
   useEffect(()=>{
   const data = window.localStorage.getItem('login')
   if(data != null)  setLoginStatus(JSON.parse(data))
@@ -45,7 +43,7 @@ const logout =()=>{
 
 const handleSubmit = (e) =>{
   e.preventDefault();
-  const hash=bcrypt.hashSync(password);//Hashing password here
+  const hash = bcrypt.hashSync(password);//Hashing password here
   const datax = {name, email, maidenName, hash};
   if(!name||!email||!maidenName||!password||!confirmPassword) 
   return toast.warning("Enter all field");
@@ -55,8 +53,8 @@ const handleSubmit = (e) =>{
   }
 
   if(isRegistered){
-    toast.warning("Only Admin can register")
-    return
+   return toast.warning("Only Admin can register");
+    
   } 
 
   setIsRegistering(true);
@@ -85,7 +83,7 @@ const handleSubmit = (e) =>{
        .catch(err=>{
             toast.warning("Registeration failed");
             setIsRegistering(false);
-            console.log(err);
+          
     })
       };
  
@@ -158,11 +156,10 @@ const handleSubmit = (e) =>{
             {!loginStatus && <Login/>}
             {loginStatus &&  <button class="btn btn-primary" onClick={logout}>Logout</button>}             
             </div>
-          </div>
-               
+          </div>              
           </div>
         );
-      }
+}
       
      
   

@@ -88,24 +88,27 @@ export const Messages=()=>{
                         />
                         </strong>
                         {loginStatus &&  <button onClick={()=>deleteMessage(message.id)}>
-                          <strong class="deleteMessageBtn">
-                            DELETE
+                          <strong class="deleteMessageBtn" title='Delete'>
+                          X
                             </strong>
                             </button>
                            }
                            {!loginStatus &&  <button disabled onClick={()=>deleteMessage(message.id)}>
-                          <strong class="deleteMessageBtn">
-                            DELETE
+                          <strong class="deleteMessageBtn" title='Delete'>
+                           X
                             </strong>
                             </button>
                            }
                             </div>
                             </td>            
-                     </tr>                
+                     </tr> 
+                                    
                   ))
-                  }           
+                  } 
+                   {!loginStatus&&<p style={{color:'white',textAlign:'center'}}>Scrolling Disabled</p>}          
                   </tbody>
-                 </table>  
+                 </table> 
+                 
                  </div>
         )}
       
