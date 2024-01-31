@@ -31,7 +31,7 @@ export const ViewMessage = ({
         <div style={{
             cursor: "pointer"
         }}>
-            <button href="#" onClick={handleShow}>
+            <button class = "btn btn-info" href="#" onClick={handleShow}>
                 View
             </button>
             <Modal show={show} onHide={handleClose} size="xl">

@@ -18,7 +18,6 @@ function App() {
         setLoginStatus] = useState([]);
 
     useEffect(() => {
-
         const logindata = window
             .localStorage
             .getItem('login')
@@ -32,6 +31,9 @@ function App() {
         fetch(`${process.env.REACT_APP_URL}/underconstruction`).then(res => {
             return res.json();
         }).then((data) => {
+            console.log(555);
+            console.log(data);
+
             setIsUnderConstruction(data);
 
         }).catch(err => {
@@ -44,11 +46,11 @@ function App() {
         <div className="App">
 
             {isUnderConstruction.map((isUnderConstruction) => {
-                return isUnderConstruction.underconstruction || loginStatus
+                return !isUnderConstruction.underconstruction || loginStatus
                     ? < BrowserRouter > <Nav/> < Routes > <Route path='/' exact element={< HeroSection />}/>
                     : <Route path='/AboutMe' exact element={< AboutMe />}/> < Route path = '/Admin' exact element = { < Admin />
                     } /> <Route path='/Register' exact element={< Register />}/> </Routes> 
-      <Footer / > </ BrowserRouter >: <SiteUnderConstruction/>
+      <Footer/ > </ BrowserRouter >: <SiteUnderConstruction/>
 
             })
 }

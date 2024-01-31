@@ -45,6 +45,23 @@ export const Messages = () => {
             });
         }
     })
+
+    // Delete all Messages
+    const deleteAllMessages = () => {
+        if (window.confirm("Do you want to delete this item?")) {
+            fetch(`${process.env.REACT_APP_URL}/messages`, {method: 'DELETE'}).then(res => {
+                return res.text();
+            }).then(res => {
+                toast.success(res);
+                window
+                    .location
+                    .reload();
+            }).catch(error => {
+                toast.warning("All Messages not deleted");
+            });
+        }
+    }
+
     return (
         <div class="listOfCustomers">
             <table class="table table-hover">
@@ -98,14 +115,27 @@ export const Messages = () => {
                                                 subject={message.subject}
                                                 message={message.message}/>
                                         </strong>
-                                        {loginStatus && <button onClick={() => deleteMessage(message.id)}>
-                                            <strong class="deleteMessageBtn" title='Delete'>
+                                        {loginStatus && <button class="btn btn-danger" onClick={() => deleteMessage(message.id)}>
+                                            <strong
+                                                style={{
+                                                color: 'gold'
+                                            }}
+                                                class="deleteMessageBtn"
+                                                title='Delete'>
                                                 X
                                             </strong>
                                         </button>
 }
-                                        {!loginStatus && <button disabled onClick={() => deleteMessage(message.id)}>
-                                            <strong class="deleteMessageBtn" title='Delete'>
+                                        {!loginStatus && <button
+                                            class="btn btn-danger"
+                                            disabled
+                                            onClick={() => deleteMessage(message.id)}>
+                                            <strong
+                                                style={{
+                                                color: 'gold'
+                                            }}
+                                                class="deleteMessageBtn"
+                                                title='Delete'>
                                                 X
                                             </strong>
                                         </button>
@@ -117,8 +147,13 @@ export const Messages = () => {
                         ))
 }
                     {!loginStatus &&< p style = {{color:'white',textAlign:'center'}} > Scrolling Disabled </p>}
-               </tbody>
+                </tbody>
             </table>
+
+            {loginStatus && <button class="btn btn-danger" onClick={() => deleteAllMessages()}>
+                Clear Messages
+            </button>
+}
 
         </div>
     )

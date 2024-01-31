@@ -7,7 +7,6 @@ import {useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
 import {CiSettings} from "react-icons/ci";
 
-
 export const Admin = () => {
 
     const [skill,
@@ -24,8 +23,12 @@ export const Admin = () => {
         setProjectDescription] = useState("");
     const [phone,
         setPhone] = useState("");
-    const [progress,
-        setProgress] = useState({started: false, pc: 0});
+    const [progressTraining,
+        setProgressTraining] = useState(0);
+    const [progressCv,
+        setProgressCv] = useState(0);
+    const [progressPhoto,
+        setProgressPhoto] = useState(0);
     const [message,
         setMessage] = useState("");
     const [pmessage,
@@ -106,10 +109,17 @@ export const Admin = () => {
         setCvUpload] = useState(false);
     const [isCvPresent,
         setIsCvPresent] = useState(false);
-    const [underConstruction,
-        setUnderConstruction] = useState(true);
+    const [underconstruction,
+        setUnderConstruction] = useState(false);
+    const [deletingAllTrainings,
+        setDeletingAllTrainings] = useState(false);
+    const [deletingTraining,
+        setDeletingTraining] = useState(false);
 
     useEffect(() => {
+        window
+            .localStorage
+            .setItem('underconstruction', JSON.stringify(underconstruction))
         const admindata = window
             .localStorage
             .getItem('Admin');
@@ -125,7 +135,7 @@ export const Admin = () => {
 
     // Set under construction swith ON/OFF
     const underConstructionFunction = () => {
-        setUnderConstruction(!underConstruction);
+        setUnderConstruction(!underconstruction);
     }
 
     //  PHONE Submit Phone
@@ -709,18 +719,13 @@ export const Admin = () => {
         if (formData == null) 
             setMessage("No Photo attached");
         axios.post(`${process.env.REACT_APP_URL}/trainings`, formData, {
-            onUploadProgress: (progressEvent) => {
-                setProgress(prevState => {
-                    return {
-                        ...prevState,
-                        pc: progressEvent*100
-                    }
-                })
-            },
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "multipart/form-data"
+            },
+            onUploadProgress: (progressEvent) => {
+                setProgressTraining(Math.round(100 * progressEvent.loaded))
             }
         }).then(res => {
             setTCourse("");
@@ -729,6 +734,9 @@ export const Admin = () => {
             setCertificateFile(null);
             setTYear("");
             toast.success("Trainig Added");
+            window
+                .location
+                .reload();
         }).catch(error => {
             toast.success("Training not Added");
             toast.warning(error);
@@ -738,14 +746,17 @@ export const Admin = () => {
     //  Delete Trainingg
     const deleteTraining = ((id) => {
         if (window.confirm("Do you want to delete this item?")) {
+            setDeletingTraining(true);
             fetch(`${process.env.REACT_APP_URL}/trainings/` + id, {method: 'DELETE'}).then(res => {
                 return res.text();
             }).then(res => {
                 toast.success(res);
+                setDeletingTraining(false);
                 window
                     .location
                     .reload();
             }).catch(error => {
+                setDeletingTraining(false);
                 toast.warning("Training not deleted");
                 toast.warning(error);
             });
@@ -753,21 +764,24 @@ export const Admin = () => {
     })
 
     //  Delete All Trainingg
-    const deleteAllTraining = (() => {
+    const deleteAllTraining = () => {
         if (window.confirm("Do you want to delete all these item?")) {
+            setDeletingAllTrainings(true);
             fetch(`${process.env.REACT_APP_URL}/trainings`, {method: 'DELETE'}).then(res => {
                 return res.text();
             }).then(res => {
                 toast.success(res);
+                setDeletingAllTrainings(false);
                 window
                     .location
                     .reload();
             }).catch(error => {
+                setDeletingAllTrainings(false);
                 toast.warning("All training not deleted");
                 toast.warning(error);
             });
         }
-    })
+    }
 
     // Get Training
     useEffect(() => {
@@ -825,18 +839,13 @@ export const Admin = () => {
         // if(!formData.has('cv'))  return toast.warning("Attach a CV");
         setCvUpload(true);
         axios.post(`${process.env.REACT_APP_URL}/cvs`, formData, {
-            onUploadProgress: (progressEvent) => {
-                setProgress(prevState => {
-                    return {
-                        ...prevState,
-                        pc: progressEvent*100
-                    }
-                })
-            },
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "multipart/form-data"
+            },
+            onUploadProgress: (progressEvent) => {
+                setProgressCv(Math.round(100 * progressEvent.loaded))
             }
         }).then(res => {
             toast.success("CV Uplaoded");
@@ -875,18 +884,13 @@ export const Admin = () => {
             setMessage("No Photo attached");
         setPhotoUpload(true);
         axios.post(`${process.env.REACT_APP_URL}/photos`, formData, {
-            onUploadProgress: (progressEvent) => {
-                setProgress(prevState => {
-                    return {
-                        ...prevState,
-                        pc: progressEvent*100
-                    }
-                })
-            },
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "multipart/form-data"
+            },
+            onUploadProgress: (progressEvent) => {
+                setProgressPhoto(Math.round(100 * progressEvent.loaded))
             }
         }).then(res => {
             toast.success("Photo file Uplaoded successively");
@@ -948,7 +952,7 @@ export const Admin = () => {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/Json"
                 },
-                body: JSON.stringify({underConstruction})
+                body: JSON.stringify({underconstruction})
             }).then(res => {
                 return res.json()
             }).then(data => {
@@ -1013,8 +1017,9 @@ export const Admin = () => {
                             padding: '15px'
                         }}>
                             {loginStatus && < button class = "btn btn-primary" onClick = {
-                                () => confirmIsUnderConstruction
+                                () => confirmIsUnderConstruction()
                             } > Confirm </button>}
+                            {!loginStatus && < button disabled class = "btn btn-primary" > Confirm </button>}
                         </div>
 
                     </div>
@@ -1088,12 +1093,12 @@ export const Admin = () => {
                             style={{
                             marginLeft: '10px'
                         }}
-                            onclick={deleteAllPhone}>Clear</button>}
+                            onClick={() => deleteAllPhone()}>Clear</button>}
                         {!loginStatus && <button disabled class="btn btn-primary">Only Admin can edit this</button>}
                     </div>
                 </div>
             </form>
-    </div>
+        </div>
 
         {/* Skill Section            */}
         <div class="containerAdmin">
@@ -1135,7 +1140,7 @@ export const Admin = () => {
                             style={{
                             marginLeft: '10px'
                         }}
-                            onclick={deleteAllSkill}>Clear</button>}
+                            onClick={() => deleteAllSkill()}>Clear</button>}
                         {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                 </div>
@@ -1180,7 +1185,7 @@ export const Admin = () => {
                             style={{
                             marginLeft: '10px'
                         }}
-                            onclick={deleteAllHobby}>Clear</button>}
+                            onClick={() => deleteAllHobby()}>Clear</button>}
                         {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                 </div>
@@ -1230,7 +1235,7 @@ export const Admin = () => {
                             style={{
                             marginLeft: '10px'
                         }}
-                            onclick={deleteAllPMessage}>Clear</button>}
+                            onClick={() => deleteAllPMessage()}>Clear</button>}
                         {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                 </div>
@@ -1387,7 +1392,7 @@ export const Admin = () => {
                             style={{
                             marginLeft: '10px'
                         }}
-                            onclick={deleteAllProject}>Clear</button>}
+                            onClick={() => deleteAllProject()}>Clear</button>}
                         {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                 </div>
@@ -1474,7 +1479,7 @@ export const Admin = () => {
                             style={{
                             marginLeft: '10px'
                         }}
-                            onclick={deleteAllSchool}>Clear</button>}
+                            onClick={() => deleteAllSchool()}>Clear</button>}
                         {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                 </div>
@@ -1551,18 +1556,39 @@ export const Admin = () => {
                             {(e)=>setTYear(e.target.value)}
                             placeholder="Graduation"/>
                     </div>
+                    {progressTraining && <div
+                        class="progress"
+                        role="progressbar"
+                        aria-label="Example with label"
+                        aria-valuenow={progressTraining}
+                        aria-valuemin="0"
+                        aria-valuemax="100">
+                        <div
+                            class="progress-bar overflow-visible text-dark"
+                            style={{
+                            width: `${progressTraining}`
+                        }}>
+                            <span>Uploading files...</span>
+                        </div>
+                    </div>}
                     <div class="col-12 addPro2">
+                        {deletingAllTrainings && <div>
+                            <strong>Deleteing all trainings...</strong>
+                        </div>}
+                        {deletingTraining && <div>
+                            <strong>Deleteing training...</strong>
+                        </div>}
                         {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
+                        {loginStatus && <button
+                            class="btn btn-danger"
+                            style={{
+                            marginLeft: '10px'
+                        }}
+                            onClick={() => deleteAllTraining()}>Clear</button>}
                         {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                 </div>
             </form>
-            {loginStatus && <button
-                class="btn btn-danger"
-                style={{
-                marginLeft: '10px'
-            }}
-                onclick={() => deleteAllTraining}>Clear</button>}
 
         </div>
 
@@ -1593,16 +1619,28 @@ export const Admin = () => {
                                 name="cv"
                                 onChange=
                                 {(e)=>setCv(e.target.files[0])}
-                                placeholder="Upload CV"/> {cvUpload && <span>Uploading CV...</span>}
+                                placeholder="Upload CV"/>
                             <div>
-                                {progress.started && <progress max="100" value={progress.pc}></progress>}
+                                {progressCv && <div
+                                    class="progress"
+                                    role="progressbar"
+                                    aria-label="Example with label"
+                                    aria-valuenow={progressCv}
+                                    aria-valuemin="0"
+                                    aria-valuemax="100">
+                                    <div
+                                        class="progress-bar overflow-visible text-dark"
+                                        style={{
+                                        width: `${progressCv}`
+                                    }}>
+                                        <span>Uploading...</span>
+                                    </div>
+                                </div>}
                             </div>
-                            <div>
-                                {message && <span>{message}</span>}
-                            </div>
+
                         </div>
                     </div>
-
+                    {cvUpload && <span>Uploading CV...</span>}
                     <div class="col-12 addPro2">
                         {!isCvPresent && loginStatus && <button class="btn btn-primary" type='submit'>Upload</button>}
                         {isCvPresent && loginStatus && <button disabled class="btn btn-primary" type='submit'>Uploaded</button>}
@@ -1640,10 +1678,21 @@ export const Admin = () => {
                                 name="photo"
                                 onChange=
                                 {(e)=>setPhoto(e.target.files[0])}
-                                placeholder="Upload Picture"/>
-                            <div>
-                                {progress.started && <progress max="100" value={progress.pc}></progress>}
-                            </div>
+                                placeholder="Upload Picture"/> {progressPhoto && <div
+                                class="progress"
+                                role="progressbar"
+                                aria-label="Example with label"
+                                aria-valuenow={progressPhoto}
+                                aria-valuemin="0"
+                                aria-valuemax="100">
+                                <div
+                                    class="progress-bar overflow-visible text-dark"
+                                    style={{
+                                    width: `${progressPhoto}`
+                                }}>
+                                    <span>Uploading...</span>
+                                </div>
+                            </div>}
                             <div>
                                 {photoUpload && <span>Uploading Photo...</span>}
                             </div>

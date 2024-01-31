@@ -4,9 +4,8 @@ import {Skills} from './Skills.js';
 import {Projects} from './Projects.js';
 import {Profile} from './Profile.js';
 import '../../../Contents/CSSFiles/HeroSection.css';
-import {ContactMe} from './ContactMe.js';
 import Typical from 'react-typical';
-import {toast, ToastContainer} from "react-toastify";
+import {toast} from "react-toastify";
 import {FaFacebook, FaWhatsapp, FaInstagram, FaGithub, FaLinkedin} from 'react-icons/fa';
 import {MdMarkEmailUnread} from "react-icons/md";
 import image from '../../Images/godwin2.jpeg';
@@ -25,9 +24,6 @@ export const HeroSection = () => {
         pMessages
             ?.map((message) => {
                 message1 += '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0' +
-                        '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0' +
-                        '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0' +
-                        '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0' +
                         '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0' +
                         '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0' +
                         '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0' +

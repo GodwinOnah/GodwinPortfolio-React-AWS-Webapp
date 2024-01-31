@@ -73,7 +73,6 @@ export const Login = () => {
             toast.warning("No network or databese connectivity. You can try page refresh or call the admin " +
                     "on: +447751776483")
         }
-
     };
     return (
         <div style={{
@@ -109,7 +108,7 @@ export const Login = () => {
                                                 placeholder="Password"/>
                                         </div>
                                         <div class="col-12 login">
-                                            {isLoggingIn && <strong>Logging you in...</strong>}
+                                            {isLoggingIn && <strong style={{color:'white'}}>Logging you in...</strong>}
                                         </div>
                                     </div>
                                 </div>

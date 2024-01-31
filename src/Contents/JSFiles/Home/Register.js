@@ -196,7 +196,9 @@ export const Register = () => {
                 }}>
                     {!loginStatus && <ForgottenPassword/>}
                     {!loginStatus && <Login/>}
-                    {loginStatus && <button class="btn btn-primary" onClick={logout}>Logout</button>}
+                    {isUnderConstruction
+                        ?.map((isUnderConstruction) => (!isUnderConstruction.underconstruction && loginStatus && <button class="btn btn-primary" onClick={logout}>Logout</button>))}
+
                 </div>
             </div>
         </div>
