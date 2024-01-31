@@ -1,16 +1,16 @@
-.body{
+.body {
     color: Blue;
 }
-hr{
+hr {
     width: 90%;
     height: 30px;
     margin-left: 40px;
     margin-right: auto;
-   
+
     color: black;
 }
 
-.tab{
+.tab {
     margin-top: 100px;
     background-color: skyblue;
     padding: 20px;
@@ -21,49 +21,51 @@ li {
     list-style: none;
 }
 
-h1{color: blue; font-weight: bolder;}
+h1 {
+    color: blue;
+    font-weight: bolder;
+}
 
-table{
+table {
     border: 2px solid blue;
-    border-collapse: collapse; 
+    border-collapse: collapse;
     width: 100%;
     text-align: center;
     padding: 10px;
     margin: 10px;
 }
 
-table tr{
+table tr {
     border: 1px solid skyblue;
     border-collapse: collapse;
     color: white;
 }
 
-table tr th, table tr td{
+table tr td,
+table tr th {
     padding: 10px;
 }
-.tbody{
+.tbody {
     font-size: 13px;
 }
 
-.hobbies{
+.hobbies {
     color: Black;
 }
 
-
-.photos{
+.photos {
     height: auto;
     width: auto;
     border: 3px solid gold;
     padding: 5px;
     margin-top: 50px;
 }
-
-@media screen and (max-width:1231px){
-    .tbody{
+@media screen and (max-width:1231px) {
+    .tbody {
         font-size: 8px;
     }
-    .table{
-        font-size: 8px; 
+    .table {
+        font-size: 8px;
     }
-    
-    }
+
+}

@@ -1,69 +1,68 @@
 
-.images{  
+.images {
     border: 3px solid black;
-     margin: 10px;
- }
-
- @media screen and (max-width:1210px){
-    .image1{
-        height:"500px";
-         width:"500px"
-        }
-    } 
-
-.icons{
-        justify-content: center;
-        width: fit-content;
-        margin: 50px;
-        border: 2px solid pink;
-        border-radius: 20px;
+    margin: 10px;
+}
+@media screen and (max-width:1210px) {
+    .image1 {
+        height: "500px";
+        width: "500px";
+    }
 }
 
-.icons-icons{
+.icons {
+    justify-content: center;
+    width: fit-content;
+    margin: 50px;
+    border: 2px solid pink;
+    border-radius: 20px;
+}
+
+.icons-icons {
     font-size: 40px;
     margin: 20px;
     color: white;
-    }
-.image-background{
-    height:"50px";
-     width:"80px";
-    }
+}
+.image-background {
+    height: "50px";
+    width: "80px";
+}
 
-.projects{
+.projects {
     margin: 10px;
     padding: 5%;
     margin-left: auto;
     margin-right: auto;
-   padding: 5px;
-   border: 3px solid black;
+    padding: 5px;
+    border: 3px solid black;
 }
-.divC{
+.divC {
     margin: 20px;
 }
 
-hr{
+hr {
     font-size: 40px;
     width: 40px;
-    }
-    
-.slideshow{
+}
+
+.slideshow {
     width: 100%;
 }
-.slideshow img{
+.slideshow img {
     width: 600px;
     height: 600px;
     margin: 30px;
 }
 
-.profileSummarySection{
+.profileSummarySection {
     width: 45%;
 }
 
-.profile{
-   
+.profile {
+
     border: solid 2px black;
-   margin-left: 5%;
-   margin-right:5%;
+    margin-left: 5%;
+    margin-right: 5%;
     text-align: center;
     justify-content: center;
     height: auto;
@@ -71,71 +70,68 @@ hr{
     text-justify: newspaper;
 }
 
-.div1{
+.div1 {
     margin-top: 120px;
     border-radius: 30px;
-  padding: 10px;
-  border: 30px solid white;
-  background-color:black;
-  margin: 70px 20px;
+    padding: 10px;
+    border: 30px solid white;
+    background-color: black;
+    margin: 70px 20px;
 }
-.div2{
+.div2 {
     margin-bottom: 50px;
-   
+
 }
 
-.profileAndImageSection{
+.profileAndImageSection {
     display: flex;
 }
 
-.profileImage img{
-width: 600px;
-height: 600px;
-margin: 30px;
+.profileImage img {
+    width: 600px;
+    height: 600px;
+    margin: 30px;
 }
 
-.dIcons{
+.dIcons {
     font-size: 40px;
 }
-
-@media screen and (max-width:1131px){
-    .dIcons{
+@media screen and (max-width:1131px) {
+    .dIcons {
         font-size: 30px;
     }
-} 
-
-@media screen and (max-width:1142px){
-    .profile-Image{
+}
+@media screen and (max-width:1142px) {
+    .profile-Image {
         display: flex;
     }
-    
-    .profileImage img{
-    width: 550px;
-    height: 550px;
+
+    .profileImage img {
+        width: 550px;
+        height: 550px;
     }
 }
-
-@media screen and (max-width:994px){
-    .profile-Image{
+@media screen and (max-width:994px) {
+    .profile-Image {
         display: flex;
     }
-    
-    .profileImage img{
-    width: 450px;
-    height: 450px;
+
+    .profileImage img {
+        width: 450px;
+        height: 450px;
     }
 
-    .dIcons{
+    .dIcons {
         font-size: 25px;
     }
 
-    .icons-icons{
+    .icons-icons {
         font-size: 40px;
         margin: 10px;
         color: white;
-        }
+    }
 
-    .icons{
+    .icons {
         justify-content: center;
         width: fit-content;
         margin: 40px;
@@ -143,28 +139,27 @@ margin: 30px;
         border-radius: 20px;
     }
 }
-
-@media screen and (max-width:884px){
-    .profile-Image{
+@media screen and (max-width:884px) {
+    .profile-Image {
         display: flex;
     }
-    
-    .profileImage img{
-    width: 400px;
-    height: 400px;
+
+    .profileImage img {
+        width: 400px;
+        height: 400px;
     }
 
-    .dIcons{
+    .dIcons {
         font-size: 25px;
     }
 
-    .icons-icons{
+    .icons-icons {
         font-size: 40px;
         margin: 10px;
         color: white;
-        }
+    }
 
-    .icons{
+    .icons {
         justify-content: center;
         width: fit-content;
         margin: 40px;
@@ -172,132 +167,127 @@ margin: 30px;
         border-radius: 20px;
     }
 }
+@media screen and (max-width:770px) {
+    .dIcons {
+        font-size: 25px;
+    }
 
+    .profile-Image {
+        display: flex;
+    }
 
+    .profileImage img {
+        width: 350px;
+        height: 350px;
+    }
 
- @media screen and (max-width:770px){
-            .dIcons{
-                font-size: 25px;
-            }
+    .icons-icons {
+        font-size: 40px;
+        margin: 10px;
+        color: white;
+    }
 
-            .profile-Image{
-                display: flex;
-            }
-            
-            .profileImage img{
-            width: 350px;
-            height: 350px;
-            }
-    
-            .icons-icons{
-                font-size: 40px;
-                margin: 10px;
-                color: white;
-                }
-    
-                .icons{
-                    justify-content: center;
-                    width: fit-content;
-                    margin: 20px;
-                    border: 1px solid pink;
-                    border-radius: 20px;
-            }
-            } 
+    .icons {
+        justify-content: center;
+        width: fit-content;
+        margin: 20px;
+        border: 1px solid pink;
+        border-radius: 20px;
+    }
+}
+@media screen and (max-width:692px) {
+    .dIcons {
+        font-size: 80px;
+    }
 
-@media screen and (max-width:692px){
-                .dIcons{
-                    font-size: 80px;
-                }
-    
-                .profileSummarySection{
-                    width: 95%;
-                }
+    .profileSummarySection {
+        width: 95%;
+    }
 
-                .profileAndImageSection{
-                    display: inline;
-                }
-                
-                .profileImage img{
-                width: 450px;
-                height: 450px;
-                border-radius: 20px;
-                }
+    .profileAndImageSection {
+        display: inline;
+    }
 
-                .slideshow img{
-                    width: 350px;
-                    height: 350px;
-                    margin: 10px;
-                }
-        
-                .icons-icons{
-                    font-size: 30px;
-                    margin: 10px;
-                    color: white;
-                    }
-        
-                    .icons{
-                        justify-content: center;
-                        width: fit-content;
-                        margin: 20px;
-                        border: 1px solid pink;
-                        border-radius: 20px;
-}}
+    .profileImage img {
+        width: 450px;
+        height: 450px;
+        border-radius: 20px;
+    }
 
-@media screen and (max-width:582px){
-                    .dIcons{
-                        font-size: 60px;
-                    }
-        
-                    .profileSummarySection{
-                        width: 95%;
-                    }
-    
-                    .profileAndImageSection{
-                        display: inline;
-                    }
-                    
-                    .profileImage img{
-                    width: 450px;
-                    height: 450px;
-                    }
-            
-                    .icons-icons{
-                        font-size: 25px;
-                        margin: 7px;
-                        color: white;
-                        }
-            
-                        .icons{
-                            justify-content: center;
-                            width: fit-content;
-                            margin: 20px;
-                            border: 1px solid pink;
-                            border-radius: 20px;
-                    }
+    .slideshow img {
+        width: 350px;
+        height: 350px;
+        margin: 10px;
+    }
 
-    .profile{
-                    border: solid 2px black;
-                   margin-left: 5%;
-                   margin-right:5%;
-                    text-align: center;
-                    justify-content: center;
-                    height: auto;
-                    align-items: center;
-                    text-justify: newspaper;
-                }
+    .icons-icons {
+        font-size: 30px;
+        margin: 10px;
+        color: white;
+    }
 
-                .icons{
-                    justify-content: center;
-                    width: fit-content;
-                    margin-bottom: 90px;
-                    border: 2px solid pink;
-                    border-radius: 20px;
-            }
-                
-    } 
-    
+    .icons {
+        justify-content: center;
+        width: fit-content;
+        margin: 20px;
+        border: 1px solid pink;
+        border-radius: 20px;
+    }
+}
+@media screen and (max-width:582px) {
+    .dIcons {
+        font-size: 60px;
+    }
 
-.hireMe{
+    .profileSummarySection {
+        width: 95%;
+    }
+
+    .profileAndImageSection {
+        display: inline;
+    }
+
+    .profileImage img {
+        width: 450px;
+        height: 450px;
+    }
+
+    .icons-icons {
+        font-size: 25px;
+        margin: 7px;
+        color: white;
+    }
+
+    .icons {
+        justify-content: center;
+        width: fit-content;
+        margin: 20px;
+        border: 1px solid pink;
+        border-radius: 20px;
+    }
+
+    .profile {
+        border: solid 2px black;
+        margin-left: 5%;
+        margin-right: 5%;
+        text-align: center;
+        justify-content: center;
+        height: auto;
+        align-items: center;
+        text-justify: newspaper;
+    }
+
+    .icons {
+        justify-content: center;
+        width: fit-content;
+        margin-bottom: 90px;
+        border: 2px solid pink;
+        border-radius: 20px;
+    }
+
+}
+
+.hireMe {
     margin: 15px;
     background-color: purple;
     border: 2px solid black;
@@ -309,7 +299,7 @@ margin: 30px;
 
 }
 
-.Resume{
+.Resume {
     margin: 15px;
     background-color: magenta;
     border: 2px solid blue;
@@ -319,33 +309,29 @@ margin: 30px;
     font-size: large;
     font-weight: bolder;
 }
-
-
-.hireMe:hover{
+.hireMe:hover {
+    background-color: pink;
+}
+.Resume:hover {
     background-color: pink;
 }
 
-
-.Resume:hover{
-    background-color: pink;
-}
-
-.Resume a{
+.Resume a {
     text-decoration: none;
-    color:  white;;
+    color: white;
 }
 
-.header1{
-  background-color: white;
-  color: midnightblue;
-  border-radius: 29px;
-  border: 2px solid black;
-  width: 50%;
-  margin: 20px auto;
- 
+.header1 {
+    background-color: white;
+    color: midnightblue;
+    border-radius: 29px;
+    border: 2px solid black;
+    width: 50%;
+    margin: 20px auto;
+
 }
 
-.welcomeLogo{
+.welcomeLogo {
     width: 500px;
     height: 80px;
 }

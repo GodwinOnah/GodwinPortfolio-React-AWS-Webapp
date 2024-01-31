@@ -1,9 +1,12 @@
-.login{margin: 20px;}
-.modal1{
+.login {
+    margin: 20px;
+}
+.modal1 {
     background-color: midnightblue;
     text-align: center;
-    
+
 }
 
-.container{padding-top: 30px;}
-
+.container {
+    padding-top: 30px;
+}
