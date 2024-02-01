@@ -195,7 +195,7 @@ export const Admin = () => {
     })
 
     //  Delete all Phones
-    const deleteAllPhone = ((id) => {
+    const deleteAllPhone = (id) => {
         if (window.confirm("Do you want to delete all this item?")) {
             fetch(`${process.env.REACT_APP_URL}/phone`, {method: 'DELETE'}).then(res => {
                 return res.text();
@@ -208,7 +208,7 @@ export const Admin = () => {
                 toast.warning("Phone not deleted? Call the admin on: +447751776483");
             });
         }
-    })
+    }
 
     // SKILLS Submit Skills
     const formSubmitSkill = (e) => {

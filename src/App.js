@@ -31,9 +31,6 @@ function App() {
         fetch(`${process.env.REACT_APP_URL}/underconstruction`).then(res => {
             return res.json();
         }).then((data) => {
-            console.log(555);
-            console.log(data);
-
             setIsUnderConstruction(data);
 
         }).catch(err => {

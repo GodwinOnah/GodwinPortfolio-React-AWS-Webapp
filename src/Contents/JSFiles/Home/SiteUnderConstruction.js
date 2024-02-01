@@ -1,4 +1,4 @@
-import image1 from "../../Images/maintenance.jpeg"
+import image1 from "../../Images/screenshot-6.jpeg"
 import {Pictures} from "./Pictures"
 
 export const SiteUnderConstruction = () => {

@@ -15,7 +15,6 @@ export const Nav = () => {
         setCvs] = useState([]);
 
     useEffect(() => {
-
         fetch(`${process.env.REACT_APP_URL}/register`).then(res => {
             return res.json();
         }).then((data) => {

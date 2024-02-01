@@ -61,7 +61,6 @@ export const HeroSection = () => {
         fetch(`${process.env.REACT_APP_URL}/pmessages`).then((res) => {
             return res.json();
         }).then((data) => {
-            console.log(data)
             if (data.length > 1) 
                 setGreater(true)
             if (data) 

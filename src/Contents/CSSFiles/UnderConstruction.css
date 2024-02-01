@@ -1,36 +1,48 @@
+.underConstruction{
+    height: auto;
+    width: 800px;
+
+}
+
 @media screen and (max-width:1049px) {
-    .underConstruction img {
-        height: 3000px;
-        width: auto;
+    .underConstruction{
+        height: auto;
+        width: 600px;
+    
     }
 }
 @media screen and (max-width:1039px) {
-    .underConstruction img {
-        height: 300px;
-        width: 200px;
+    .underConstruction{
+        height: auto;
+        width: 500px;
+    
     }
 }
 @media screen and (max-width:991px) {
-    .underConstruction img {
+    .underConstruction{
         height: auto;
-        width: auto;
+        width: 400px;
+    
     }
 }
 @media screen and (max-width:861px) {
-    .underConstruction img {
+    .underConstruction{
         height: auto;
-        width: auto;
+        width: 300px;
+    
     }
 }
 @media screen and (max-width:635px) {
-    .underConstruction img {
+    .underConstruction{
         height: auto;
-        width: auto;
+        width: 200px;
+    
     }
 }
 @media screen and (max-width:551px) {
-    .underConstruction img {
+    .underConstruction{
         height: auto;
-        width: auto;
+        width: 100px;
+    
     }
 }
