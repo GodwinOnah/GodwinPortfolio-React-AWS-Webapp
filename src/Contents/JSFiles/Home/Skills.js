@@ -36,8 +36,9 @@ export const Skills = () => {
                     }}>
                         {index + 1 + ". "}
                         <strong>
-                            <a class="skills-a" href={url + skill.skill} target="blank">
+                            <a class="skills-a" href={url+skill.skill} target="blank">
                                 {skill.skill}
+                                <img src={`https://skillicons.dev/icons?i=${skill.skill.toLowerCase()}`}/>
                             </a>
                         </strong>
                     </div>

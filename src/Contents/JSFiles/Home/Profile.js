@@ -36,8 +36,8 @@ export const Profile = () => {
                                     target="blank"
                                     style={{
                                     textDecoration: 'none',
-                                    color: "midnightblue",
-                                    backgroundColor: 'gold',
+                                    color: "white",
+                                    backgroundColor: 'midnightblue',
                                     marginTop: '30px',
                                     borderRadius: '30px',
                                     padding: '10px'

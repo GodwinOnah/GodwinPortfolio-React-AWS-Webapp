@@ -1,7 +1,7 @@
 .App {
     text-align: center;
-    background-color: black;
-    color: white;
+    background-image: url('./Contents/Images/portfolio4.jpeg');
+    color: Blue;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

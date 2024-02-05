@@ -11,11 +11,11 @@
 }
 
 .icons {
-    justify-content: center;
-    width: fit-content;
+    width: 90%;
     margin: 50px;
     border: 2px solid pink;
     border-radius: 20px;
+    background-color:white;
 }
 
 .icons-icons {
@@ -59,8 +59,6 @@ hr {
 }
 
 .profile {
-
-    border: solid 2px black;
     margin-left: 5%;
     margin-right: 5%;
     text-align: center;
@@ -91,6 +89,7 @@ hr {
     width: 600px;
     height: 600px;
     margin: 30px;
+    border-radius: 20%;
 }
 
 .dIcons {
@@ -131,13 +130,6 @@ hr {
         color: white;
     }
 
-    .icons {
-        justify-content: center;
-        width: fit-content;
-        margin: 40px;
-        border: 1px solid pink;
-        border-radius: 20px;
-    }
 }
 @media screen and (max-width:884px) {
     .profile-Image {
@@ -159,13 +151,6 @@ hr {
         color: white;
     }
 
-    .icons {
-        justify-content: center;
-        width: fit-content;
-        margin: 40px;
-        border: 1px solid pink;
-        border-radius: 20px;
-    }
 }
 @media screen and (max-width:770px) {
     .dIcons {
@@ -185,14 +170,6 @@ hr {
         font-size: 40px;
         margin: 10px;
         color: white;
-    }
-
-    .icons {
-        justify-content: center;
-        width: fit-content;
-        margin: 20px;
-        border: 1px solid pink;
-        border-radius: 20px;
     }
 }
 @media screen and (max-width:692px) {
@@ -225,14 +202,6 @@ hr {
         margin: 10px;
         color: white;
     }
-
-    .icons {
-        justify-content: center;
-        width: fit-content;
-        margin: 20px;
-        border: 1px solid pink;
-        border-radius: 20px;
-    }
 }
 @media screen and (max-width:582px) {
     .dIcons {
@@ -258,31 +227,19 @@ hr {
         color: white;
     }
 
-    .icons {
-        justify-content: center;
-        width: fit-content;
-        margin: 20px;
-        border: 1px solid pink;
-        border-radius: 20px;
-    }
-
     .profile {
-        border: solid 2px black;
         margin-left: 5%;
         margin-right: 5%;
         text-align: center;
-        justify-content: center;
         height: auto;
         align-items: center;
         text-justify: newspaper;
     }
 
     .icons {
-        justify-content: center;
-        width: fit-content;
+
+        width: 90%;
         margin-bottom: 90px;
-        border: 2px solid pink;
-        border-radius: 20px;
     }
 
 }

@@ -23,13 +23,6 @@ export const Footer = () => {
 
                 <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
                     <div class="d-flex">
-                        <a
-                            class="icons-icons"
-                            href="https://www.facebook.com/obande2"
-                            target="blank"
-                            title='Facebook'>
-                            <FaFacebook/>
-                        </a>
                         <a class="icons-icons" href=" https://wa.me/+447751776483" title='Whatsapp'>
                             <FaWhatsapp/>
                         </a>

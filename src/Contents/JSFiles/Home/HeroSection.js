@@ -6,9 +6,9 @@ import {Profile} from './Profile.js';
 import '../../../Contents/CSSFiles/HeroSection.css';
 import Typical from 'react-typical';
 import {toast} from "react-toastify";
-import {FaFacebook, FaWhatsapp, FaInstagram, FaGithub, FaLinkedin} from 'react-icons/fa';
+import {FaWhatsapp, FaInstagram,FaLinkedin} from 'react-icons/fa';
 import {MdMarkEmailUnread} from "react-icons/md";
-import image from '../../Images/godwin2.jpeg';
+import image from '../../Images/link2.jpeg';
 
 export const HeroSection = () => {
 
@@ -89,7 +89,7 @@ export const HeroSection = () => {
             <marquee scrollamount="5">
                 <strong
                     style={{
-                    color: 'gold',
+                    color: 'yellow',
                     fontSize: '15px'
                 }}>
                     {message1}
@@ -102,31 +102,9 @@ export const HeroSection = () => {
                     marginTop: "5%"
                 }}>
                     <div class="profileSummarySection">
-                        <Typical
-                            steps={[
-                            "Hey!! I am GODWIN... 😎",
-                            1000,
-                            'A React Expert',
-                            2500,
-                            'A front-end Developer',
-                            4000,
-                            'A Back-end Developer',
-                            6000
-                        ]}
-                            loop={Infinity}
-                            wrapper="p"/>
-                        <div class="d-flex icons">
-                            <a
-                                class="icons-icons"
-                                href="https://www.facebook.com/obande2"
-                                target="blank"
-                                title='Facebook'>
-                                <strong
-                                    class="dIcons"
-                                    style={{
-                                    color: 'blue'
-                                }}><FaFacebook/></strong>
-                            </a>
+                        
+                        <div class="flex icons">
+                         
                             <a class="icons-icons" href=" https://wa.me/+447751776483" title='Whatsapp'>
                                 <strong
                                     class="dIcons"
@@ -144,17 +122,6 @@ export const HeroSection = () => {
                                     style={{
                                     color: 'orange'
                                 }}><FaInstagram/></strong>
-                            </a>
-                            <a
-                                class="icons-icons"
-                                href="https://github.com/GodwinOnah"
-                                target="blank"
-                                title='GitHub'>
-                                <strong
-                                    class="dIcons"
-                                    style={{
-                                    color: 'white'
-                                }}><FaGithub/></strong>
                             </a>
                             <a
                                 class="icons-icons"
@@ -178,6 +145,7 @@ export const HeroSection = () => {
                                     color: 'red'
                                 }}><MdMarkEmailUnread/></strong>
                             </a>
+                           
                         </div>
                         <p>
                             <Profile/>
@@ -188,6 +156,19 @@ export const HeroSection = () => {
                         <div class="profileImage">
                             <img src={image} alt="Not an image"/>
                         </div>
+                        <Typical
+                            steps={[
+                            "Hey!! I am GODWIN... 😎",
+                            1000,
+                            'A React Expert',
+                            2500,
+                            'A frontend Developer',
+                            4000,
+                            'A Backend Developer',
+                            6000
+                        ]}
+                            loop={Infinity}
+                            wrapper="p"/>
                     </div>
                 </div>
                 <hr/>
@@ -201,6 +182,7 @@ export const HeroSection = () => {
 
                     <div class="div1 div2">
                         <h2 class="header1">Projects</h2>
+                        
                         <div>
                             <Projects/>
                         </div>

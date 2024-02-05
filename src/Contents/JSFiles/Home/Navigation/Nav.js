@@ -5,7 +5,7 @@ import {useState, useEffect} from 'react';
 import {ContactMe} from './../ContactMe.js';
 import {View} from './../View.js'
 import {CiSettings} from "react-icons/ci";
-import {toast, ToastContainer} from "react-toastify";
+import {toast} from "react-toastify";
 import image2 from '../../../Images/HoUw.gif';
 
 export const Nav = () => {
@@ -37,14 +37,7 @@ export const Nav = () => {
     }, []);
 
     return (
-        <div >
-            <div>
-                <Link to="/" class="logo1">
-                    <strong class="logo2">ONAH GODWIN😎</strong>
-                </Link>
-                <img class="welcomeLogo" src={image2} alt="This is a logo"/>
-            </div>
-            <div>
+        <div >            
                 <nav class="navbar navbar-expand bg-body-tertiary  sticky-top">
                     <div class="container-fluid navi">
                         <div id="navbarSupportedContent">
@@ -93,7 +86,6 @@ export const Nav = () => {
                         </div>
                     </div>
                 </nav>
-            </div>
-        </div>
+                </div>
     );
 }

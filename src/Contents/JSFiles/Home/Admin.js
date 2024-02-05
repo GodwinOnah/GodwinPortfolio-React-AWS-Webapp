@@ -997,7 +997,7 @@ export const Admin = () => {
                         border: '2px solid white',
                         width: 'fit-content'
                     }}>
-                        <h4>Setting default page to 'Under Construction'?</h4>
+                        <h4><strong style={{color:'white'}}>Setting default page to 'Under Construction'?</strong></h4>
                         <strong
                             style={{
                             color: 'gold',

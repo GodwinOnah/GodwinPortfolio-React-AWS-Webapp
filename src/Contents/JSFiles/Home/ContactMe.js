@@ -17,8 +17,6 @@ export const ContactMe = () => {
         SetSubject] = useState("");
     const [message,
         SetMessage] = useState("");
-    const [phone,
-        SetPhone] = useState("");
     const [myPhone,
         setMyPhone] = useState([]);
     const [companyName,
@@ -52,7 +50,6 @@ export const ContactMe = () => {
         const datax = {
             name,
             email,
-            phone,
             companyName,
             subject,
             message
@@ -61,7 +58,7 @@ export const ContactMe = () => {
             toast.warning("Add a message");
             return;
         }
-        if (!name || !email || !phone || !companyName || !subject || !message) {
+        if (!name || !email || !companyName || !subject || !message) {
             toast.warning("Enter all fields");
             return;
         }
@@ -78,7 +75,6 @@ export const ContactMe = () => {
                 SetSending(false);
                 SetName("");
                 SetEmail("");
-                SetPhone("");
                 SetMessage("");
                 SetCompanyName("");
                 SetSubject("");
@@ -156,43 +152,61 @@ export const ContactMe = () => {
 
                             <div class="container">
                                 <div class="row  ">
+                                    <table>
+                                        <tr>
                                     <div class="col-12 login">
+                                        <td>
+                                        <label for="name">Name </label>
+                                        
+                                        </td>
+                                        <td>
                                         <input
                                             name="name"
                                             value={name}
                                             onChange=
                                             {e=>SetName(e.target.value)}
                                             type='text'
-                                            placeholder="Your name"/>
-                                    </div>
+                                            placeholder="Name"/>
+                                    
+                                        </td>
+                                        </div>
+                                    </tr>
 
+
+                                    <tr>
                                     <div class="col-12 login">
+                                        <td>
+                                    <label for="email">Email </label>
+                                    </td>
+                                        <td>
                                         <input
                                             name="senderEmail"
                                             value={email}
                                             onChange=
                                             {e=>SetEmail(e.target.value)}
                                             type='email'
-                                            placeholder="Your email"/>
-                                    </div>
+                                            placeholder="Email"/>
+                                    </td>
+                                        </div>
+                                    </tr>
+
+                                   <tr>
                                     <div class="col-12 login">
-                                        <input
-                                            name="phone"
-                                            value={phone}
-                                            onChange=
-                                            {e=>SetPhone(e.target.value)}
-                                            type='text'
-                                            placeholder="Phone"/>
-                                    </div>
-                                    <div class="col-12 login">
+                                        <td>
+                                    <label for="companyName">Company </label>
+                                    </td>
+                                        <td>
                                         <input
                                             name="companyName"
                                             value={companyName}
                                             onChange=
                                             {e=>SetCompanyName(e.target.value)}
                                             type='text'
-                                            placeholder="Company Name"/>
-                                    </div>
+                                            placeholder="Company"/>
+                                     </td>
+                                        </div>
+                                    </tr>
+                                    </table>
                                     <div class="col-12 login ">
                                         Message
                                         <div
@@ -202,6 +216,7 @@ export const ContactMe = () => {
                                             margin: '0 auto',
                                             padding: '10px'
                                         }}>
+                                           
                                             <div>
                                                 <input
                                                     value={subject}
