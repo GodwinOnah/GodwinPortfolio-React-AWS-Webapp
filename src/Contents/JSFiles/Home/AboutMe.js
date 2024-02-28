@@ -71,9 +71,9 @@ export const AboutMe = () => {
 
             {/* Education */}
             <div class="tab">
-                <h1>Education</h1>
-                <div class="table">
-                    <table>
+                <h1 class="shadow rounded">Education</h1>
+                <div class="table shadow rounded">
+                    <table class="shadow rounded">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -103,9 +103,9 @@ export const AboutMe = () => {
 
             {/* Trainninig */}
             <div class="tab">
-                <h1>Training</h1>
-                <div class="table">
-                    <table>
+                <h1 class="shadow rounded">Training</h1>
+                <div class="table shadow rounded">
+                    <table class="shadow rounded">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -143,8 +143,8 @@ export const AboutMe = () => {
 
             {/* Hobies */}
             <div class="tab">
-                <h1>Hobbies and Sport</h1>
-                <div class="hobbies">
+                <h1 class="shadow rounded">Hobbies and Sport</h1>
+                <div class="hobbies shadow rounded">
                     {noHobbyFound || hobbies
                         ?.map((hobby, index) => (
                             <div>
@@ -156,8 +156,8 @@ export const AboutMe = () => {
             <div></div>
 
             <div class="tab">
-                <h1>Photos</h1>
-                <div class="photos">
+                <h1 class="shadow rounded">Photos</h1>
+                <div class="photos shadow rounded">
                     <Pictures/>
                 </div>
             </div>

@@ -977,7 +977,7 @@ export const Admin = () => {
             draggable
             pauseOnHover
             theme='light'/>
-        <h1 style={{
+        <h1 class="shadow rounded" style={{
             color: 'gold',
             margin: '100px'
         }}>Welcome {adminName}</h1>

@@ -149,15 +149,16 @@ export const ContactMe = () => {
                                 draggable
                                 pauseOnHover
                                 theme='light'/>
-                            <div style={{backgroundColor:'skyblue'}}>
+                            <div class="shadow rounded" style={{backgroundColor:'skyblue'}}>
                                 <table class="table">
                                     <tr>
                                         <td>
-                                            <label for="name">Name
+                                            <label class="shadow rounded" for="name">Name
                                             </label>
                                         </td>
                                         <td>
                                             <input
+                                            class="shadow rounded"
                                                 name="name"
                                                 value={name}
                                                 onChange=
@@ -168,11 +169,12 @@ export const ContactMe = () => {
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="email">Email
+                                            <label class="shadow rounded" for="email">Email
                                             </label>
                                         </td>
                                         <td>
                                             <input
+                                            class="shadow rounded"
                                                 name="senderEmail"
                                                 value={email}
                                                 onChange=
@@ -182,7 +184,7 @@ export const ContactMe = () => {
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="companyName">Company
+                                            <label class="shadow rounded" for="companyName">Company
                                             </label>
                                         </td>
                                         <td>
@@ -197,11 +199,12 @@ export const ContactMe = () => {
 
                                     <tr>
                                         <td>
-                                            <label for="subject">Subject
+                                            <label class="shadow rounded" for="subject">Subject
                                             </label>
                                         </td>
                                         <td>
                                             <input
+                                            class="shadow rounded"
                                                 value={subject}
                                                 name="subject"
                                                 onChange=
@@ -212,11 +215,12 @@ export const ContactMe = () => {
 
                                     <tr>
                                         <td>
-                                            <label for="text">Message
+                                            <label class="shadow rounded" for="text">Message
                                             </label>
                                         </td>
                                         <td>
                                             <textarea
+                                            class="shadow rounded"
                                                 name="text"
                                                 style={{
                                                 width: '100%',
@@ -267,10 +271,10 @@ export const ContactMe = () => {
                         </marquee>
                     </div>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
+                        <Button class="shadow rounded" variant="secondary" onClick={handleClose}>
                             Cancel
                         </Button>
-                        <Button type="submit" variant="primary">
+                        <Button class="shadow rounded" type="submit" variant="primary">
                             Send
                         </Button>
                     </Modal.Footer>
