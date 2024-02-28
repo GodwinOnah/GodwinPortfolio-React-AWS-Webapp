@@ -21,6 +21,10 @@ export const Pictures = () => {
         })
     }, []);
 
+    pictures
+        ?.map((cv) =>
+        console.log(cv.photo))
+
     return (
         <div className="slide-container">
             <Fade>

@@ -103,7 +103,7 @@ export const HeroSection = () => {
                 }}>
                     <div class="profileSummarySection">
                         
-                        <div class="flex icons">
+                        <div class="flex icons shadow p-3  bg-white rounde">
                          
                             <a class="icons-icons" href=" https://wa.me/+447751776483" title='Whatsapp'>
                                 <strong
@@ -147,13 +147,13 @@ export const HeroSection = () => {
                             </a>
                            
                         </div>
-                        <p>
+                        <p class="shadow p-3  bg-white rounde">
                             <Profile/>
                         </p>
 
                     </div>
                     <div class="">
-                        <div class="profileImage">
+                        <div class="profileImage shadow p-3  bg-white rounde">
                             <img src={image} alt="Not an image"/>
                         </div>
                         <Typical
@@ -180,7 +180,7 @@ export const HeroSection = () => {
                         </div>
                     </div>
 
-                    <div class="div1 div2">
+                    <div class="shadow p-3  bg-white rounded">
                         <h2 class="header1">Projects</h2>
                         
                         <div>

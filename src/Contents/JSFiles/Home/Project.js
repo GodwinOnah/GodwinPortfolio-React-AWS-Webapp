@@ -25,14 +25,14 @@ export const Project = ({project}) => {
     }
 
     return (
-        <div class="d-flex containerL">
-            <div class="card cardL">
+        <div class="d-flex containerL ">
+            <div class="card cardL shadow p-3 mb-5 bg-white rounded">
                 <div class="title">
                     <h5>
                         <strong>{project["projecttitle"]}</strong>
                     </h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body shadow p-3  bg-white rounded">
                     <strong>{project["projectdescription"]}</strong>
                 </div>
                 <div class="d-flex justify-content-center">

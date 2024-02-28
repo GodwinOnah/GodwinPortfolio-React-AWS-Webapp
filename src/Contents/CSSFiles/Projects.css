@@ -5,4 +5,5 @@
     overflow-x: scroll;
     display: flex;
     padding: 0;
+    border: 0;
 }

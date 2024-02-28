@@ -14,6 +14,10 @@ export const Nav = () => {
     const [cvs,
         setCvs] = useState([]);
 
+        cvs
+        ?.map((cv) =>
+        console.log(cv.cv))
+
     useEffect(() => {
         fetch(`${process.env.REACT_APP_URL}/register`).then(res => {
             return res.json();
@@ -33,13 +37,13 @@ export const Nav = () => {
         }).catch(err => {
             toast.warning("Couldn't fetch data: make sure there is network or call the admin on: +447751776" +
                     "483")
-        })
+        })    
     }, []);
 
     return (
         <div >            
-                <nav class="navbar navbar-expand bg-body-tertiary  sticky-top">
-                    <div class="container-fluid navi">
+                <nav class="navbar navbar-expand bg-body-tertiary  sticky-top shadow p-3  bg-white rounde">
+                    <div class="container-fluid navi ">
                         <div id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item ">
@@ -62,15 +66,19 @@ export const Nav = () => {
                                         color: ''
                                     }}
                                         title='My history'>
-                                        About
+                                        About Me
                                     </Link>
                                 </li>
                                 <li class="nav-item navItem1" title='Want to hire me?'>
                                     <ContactMe/>
                                 </li>
                                 <li class="nav-item navItem1">
-                                    {cvs
-                                        ?.map((cv) => (<View item={`${process.env.REACT_APP_URL}/CV_images/` + cv.cv} what="Resume"/>))}
+                                    {
+                                  
+                                        cvs
+                                        ?.map((cv) => (<View item={`${process.env.REACT_APP_URL}/CV_images/` + cv.cv} what="CV"/>))
+                                    }
+                                    
                                 </li>
                                 <Link
                                     to="/Admin"

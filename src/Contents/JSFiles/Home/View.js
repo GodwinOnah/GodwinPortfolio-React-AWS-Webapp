@@ -32,20 +32,21 @@ export const View = ({item, what}) => {
                             {item
                                 .split(".")[0]
                                 .split("-")
-                                .join(" ")
+                                .join("")
                                 .split("_")
                                 .join(" ")
                                 .replace(/\d+/g, "")
-                                .replace("http://localhost:/certificates/", "")
-                                .replace("http://localhost:/CV images/", "")
-                                .replace("http://localhost:/photo images/", "")
+                                .replace(`${process.env.REACT_APP_URL}/certificates/`, "")
+                                .replace(`${process.env.REACT_APP_URL}/CV images/`, "")
+                                .replace(`${process.env.REACT_APP_URL}/photo images/`, "")
+                                .replace("https://", "")
                                 .replace("()", "")
 }
                         </strong>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div class="modal1">
+                    <div>
                         {string2 == "pdf" || "docx"
                             ? (
                                 <div>
@@ -66,7 +67,7 @@ export const View = ({item, what}) => {
                                         alt=""
                                         style={{
                                         width: '100%',
-                                        height: '500px'
+                                        height: '100%'
                                     }}/>
                                 </div>
                             )

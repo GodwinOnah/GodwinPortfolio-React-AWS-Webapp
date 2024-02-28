@@ -111,10 +111,10 @@ export const ContactMe = () => {
             cursor: "pointer"
         }}>
             <a onClick={handleShow}>
-                Contact
+                Contact Me
             </a>
 
-            <Modal show={show} onHide={handleClose} size="lg">
+            <Modal show={show} onHide={handleClose} size="">
                 <Modal.Header closeButton>
                     <Modal.Title>
                         <div class="d-flex">
@@ -137,7 +137,7 @@ export const ContactMe = () => {
                 </Modal.Header>
                 <form ref={form} onSubmit={sendEmail}>
                     <Modal.Body>
-                        <div class="modal1">
+                        <div class="">
                             <ToastContainer
                                 position='top-right'
                                 autoClose={4000}
@@ -149,86 +149,75 @@ export const ContactMe = () => {
                                 draggable
                                 pauseOnHover
                                 theme='light'/>
+                            <div style={{backgroundColor:'skyblue'}}>
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <label for="name">Name
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input
+                                                name="name"
+                                                value={name}
+                                                onChange=
+                                                {e=>SetName(e.target.value)}
+                                                type='text'/>
+                                        </td>
 
-                            <div class="container">
-                                <div class="row  ">
-                                    <table>
-                                        <tr>
-                                    <div class="col-12 login">
-                                        <td>
-                                        <label for="name">Name </label>
-                                        
-                                        </td>
-                                        <td>
-                                        <input
-                                            name="name"
-                                            value={name}
-                                            onChange=
-                                            {e=>SetName(e.target.value)}
-                                            type='text'
-                                            placeholder="Name"/>
-                                    
-                                        </td>
-                                        </div>
                                     </tr>
-
+                                    <tr>
+                                        <td>
+                                            <label for="email">Email
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input
+                                                name="senderEmail"
+                                                value={email}
+                                                onChange=
+                                                {e=>SetEmail(e.target.value)}
+                                                type='email'/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="companyName">Company
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input
+                                                name="companyName"
+                                                value={companyName}
+                                                onChange=
+                                                {e=>SetCompanyName(e.target.value)}
+                                                type='text'/>
+                                        </td>
+                                    </tr>
 
                                     <tr>
-                                    <div class="col-12 login">
                                         <td>
-                                    <label for="email">Email </label>
-                                    </td>
+                                            <label for="subject">Subject
+                                            </label>
+                                        </td>
                                         <td>
-                                        <input
-                                            name="senderEmail"
-                                            value={email}
-                                            onChange=
-                                            {e=>SetEmail(e.target.value)}
-                                            type='email'
-                                            placeholder="Email"/>
-                                    </td>
-                                        </div>
+                                            <input
+                                                value={subject}
+                                                name="subject"
+                                                onChange=
+                                                {e=>SetSubject(e.target.value)}
+                                                type='text'/>
+                                        </td>
                                     </tr>
 
-                                   <tr>
-                                    <div class="col-12 login">
+                                    <tr>
                                         <td>
-                                    <label for="companyName">Company </label>
-                                    </td>
+                                            <label for="text">Message
+                                            </label>
+                                        </td>
                                         <td>
-                                        <input
-                                            name="companyName"
-                                            value={companyName}
-                                            onChange=
-                                            {e=>SetCompanyName(e.target.value)}
-                                            type='text'
-                                            placeholder="Company"/>
-                                     </td>
-                                        </div>
-                                    </tr>
-                                    </table>
-                                    <div class="col-12 login ">
-                                        Message
-                                        <div
-                                            style={{
-                                            border: '1px solid blue',
-                                            width: 'fit-content',
-                                            margin: '0 auto',
-                                            padding: '10px'
-                                        }}>
-                                           
-                                            <div>
-                                                <input
-                                                    value={subject}
-                                                    name="subject"
-                                                    size="30"
-                                                    onChange=
-                                                    {e=>SetSubject(e.target.value)}
-                                                    type='text'
-                                                    placeholder="Subject"/>
-                                            </div>
                                             <textarea
-                                                name="message"
+                                                name="text"
                                                 style={{
                                                 width: '100%',
                                                 height: '150px',
@@ -237,23 +226,24 @@ export const ContactMe = () => {
                                                 value={message}
                                                 onChange=
                                                 {e=>SetMessage(e.target.value)}
-                                                type='text'
-                                                placeholder="Type  message here..."/>
-                                        </div>
-                                    </div>
-                                    <div >
-                                        <div class="col-12 login">
-                                            {sending && <strong
-                                                style={{
-                                                color: 'red'
-                                            }}>Sending message...</strong>}
-                                            {send && <strong
-                                                style={{
-                                                color: 'green'
-                                            }}>Message Sent</strong>}
-                                        </div>
+                                                type='text'/>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div >
+                                    <div class="">
+                                        {sending && <strong
+                                            style={{
+                                            color: 'red'
+                                        }}>Sending message...</strong>}
+                                        {send && <strong
+                                            style={{
+                                            color: 'green'
+                                        }}>Message Sent</strong>}
                                     </div>
                                 </div>
+
                             </div>
 
                         </div>
