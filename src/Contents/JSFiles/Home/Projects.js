@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import '../../../Contents/CSSFiles/Projects.css';
 import {Project} from './Project.js';
+import axios from 'axios';
 
 export const Projects = () => {
 
@@ -9,15 +10,12 @@ export const Projects = () => {
     const [noProjectFound,
         setNoProjectFound] = useState("");
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/projects`).then(res => {
-            return res.json();
-        }).then((data) => {
-            if (data) {
-                setProjects(data)
+        axios(`${process.env.REACT_APP_URL}/projects`).then((res) => {
+            if (res) {
+                setProjects(res.data)
             } else {
                 setNoProjectFound('No project data found. Check of database exist')
             }
-
             return
         }).catch(err => {
             setNoProjectFound('No project data found. Check of database exist');

@@ -3,6 +3,7 @@ import React from 'react';
 import '../../../Contents/CSSFiles/messages.css';
 import {toast} from "react-toastify";
 import {ViewMessage} from '../Home/ViewMessages';
+import axios from 'axios';
 
 export const Messages = () => {
     const [messages,
@@ -18,11 +19,9 @@ export const Messages = () => {
             .getItem('login')
         if (data != null) 
             setLoginStatus(JSON.parse(data));
-        fetch(`${process.env.REACT_APP_URL}/messages`).then((res) => {
-            return res.json();
-        }).then((data) => {
-            if (data) 
-                setMessages(data);
+        axios(`${process.env.REACT_APP_URL}/messages`).then((res) => {
+            if (res) 
+                setMessages(res.data);
                 // return
             }
         ).catch(err => {
@@ -33,10 +32,9 @@ export const Messages = () => {
     // Delete a Message
     const deleteMessage = ((id) => {
         if (window.confirm("Do you want to delete this item?")) {
-            fetch(`${process.env.REACT_APP_URL}/messages/` + id, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
-                toast.success(res);
+            axios(`${process.env.REACT_APP_URL}/messages/` + id, {method: 'DELETE'}).then(res => {
+                if(res)
+                toast.success(res.data);
                 window
                     .location
                     .reload();
@@ -49,10 +47,9 @@ export const Messages = () => {
     // Delete all Messages
     const deleteAllMessages = () => {
         if (window.confirm("Do you want to delete this item?")) {
-            fetch(`${process.env.REACT_APP_URL}/messages`, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
-                toast.success(res);
+            axios(`${process.env.REACT_APP_URL}/messages`, {method: 'DELETE'}).then(res => {
+                if(res)
+                toast.success(res.data);
                 window
                     .location
                     .reload();

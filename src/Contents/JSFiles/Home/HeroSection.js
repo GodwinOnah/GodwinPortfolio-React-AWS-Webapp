@@ -9,6 +9,7 @@ import {toast} from "react-toastify";
 import {FaWhatsapp, FaInstagram,FaLinkedin} from 'react-icons/fa';
 import {MdMarkEmailUnread} from "react-icons/md";
 import image from '../../Images/link2.jpeg';
+import axios from 'axios';
 
 export const HeroSection = () => {
 
@@ -43,10 +44,8 @@ export const HeroSection = () => {
 
     // Get Public user
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/register`).then(res => {
-            return res.json();
-        }).then((data) => {
-            data.map((user) => {
+        axios(`${process.env.REACT_APP_URL}/register`).then((res) => {
+            res.data.map((user) => {
                 window
                     .localStorage
                     .setItem('Admin', user.name);
@@ -58,13 +57,11 @@ export const HeroSection = () => {
 
     // Get Public Message
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/pmessages`).then((res) => {
-            return res.json();
-        }).then((data) => {
-            if (data.length > 1) 
+        axios(`${process.env.REACT_APP_URL}/pmessages`).then((res) => {
+            if (res.data.length > 1) 
                 setGreater(true)
-            if (data) 
-                setPMessages(data);
+            if (res) 
+                setPMessages(res.data);
             return
         }).catch(err => {
             console.log(err);
@@ -72,10 +69,9 @@ export const HeroSection = () => {
     }, []);
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/cvs`).then(res => {
-            return res.json();
-        }).then((data) => {
-            setCvs(data);
+        axios(`${process.env.REACT_APP_URL}/cvs`).then((res) => {
+            if(res)
+            setCvs(res.data);
         }).catch(err => {
             console.log(err);
         })
@@ -152,7 +148,7 @@ export const HeroSection = () => {
                         </p>
 
                     </div>
-                    <div class="">
+                    <div>
                         <div class="profileImage shadow p-3  bg-white rounde">
                             <img src={image} alt="Not an image"/>
                         </div>

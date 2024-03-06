@@ -2,6 +2,7 @@
 import {useState, useEffect} from 'react';
 import {Fade} from 'react-slideshow-image';
 import '../../../Contents/CSSFiles/HeroSection.css';
+import axios from 'axios';
 
 export const Pictures = () => {
 
@@ -11,10 +12,9 @@ export const Pictures = () => {
         setNoPhotoFound] = useState("");
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/photos`).then(res => {
-            return res.json();
-        }).then((data) => {
-            setPictures(data);
+        axios(`${process.env.REACT_APP_URL}/photos`).then((res) => {
+            if(res)
+            setPictures(res.data);
         }).catch(err => {
             setNoPhotoFound('No photo added. Check of database exist');
 

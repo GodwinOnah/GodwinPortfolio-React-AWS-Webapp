@@ -59,7 +59,7 @@ hr {
 }
 
 .profile {
-    margin-left: 5%;
+    margin-left: 10%;
     margin-right: 5%;
     text-align: center;
     justify-content: center;
@@ -103,6 +103,7 @@ hr {
 @media screen and (max-width:1142px) {
     .profile-Image {
         display: flex;
+        margin: 10px;
     }
 
     .profileImage img {
@@ -132,8 +133,9 @@ hr {
 
 }
 @media screen and (max-width:884px) {
-    .profile-Image {
+    .profileImage {
         display: flex;
+        margin: 10px;
     }
 
     .profileImage img {
@@ -157,8 +159,9 @@ hr {
         font-size: 25px;
     }
 
-    .profile-Image {
+    .profileImage {
         display: flex;
+        margin: 10px;
     }
 
     .profileImage img {
@@ -206,10 +209,12 @@ hr {
 @media screen and (max-width:582px) {
     .dIcons {
         font-size: 60px;
+        margin:10px;
     }
 
     .profileSummarySection {
         width: 95%;
+        margin-left: 10px;
     }
 
     .profileAndImageSection {
@@ -223,7 +228,7 @@ hr {
 
     .icons-icons {
         font-size: 25px;
-        margin: 7px;
+        margin: 10px;
         color: white;
     }
 

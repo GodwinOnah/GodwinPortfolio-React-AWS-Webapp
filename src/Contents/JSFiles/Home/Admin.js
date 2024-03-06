@@ -6,6 +6,8 @@ import {Messages} from './../Messages/Messages.js';
 import {useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
 import {CiSettings} from "react-icons/ci";
+import ProgressBar from "@ramonak/react-progress-bar";
+import { Poster } from './Poster';
 
 export const Admin = () => {
 
@@ -145,18 +147,17 @@ export const Admin = () => {
             toast.warning("Enter a phone number");
             return
         }
-        fetch(`${process.env.REACT_APP_URL}/phone`, {
+        axios(`${process.env.REACT_APP_URL}/phone`, {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({phone})
-        },).then(res => {
-            return res.text();
         }).then(res => {
+            if(res)
             setPhone("");
-            toast.success(res);
+            toast.success(res.data);
             window
                 .location
                 .reload();
@@ -167,11 +168,9 @@ export const Admin = () => {
 
     // Get Phone
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/phone`).then((res) => {
-            return res.json();
-        }).then((data) => {
-            if (data) 
-                setMyPhone(data);
+       axios(`${process.env.REACT_APP_URL}/phone`).then((res) => {
+            if (res) 
+                setMyPhone(res.data);
             return
         }).catch(err => {
             toast.warning(err);
@@ -181,10 +180,9 @@ export const Admin = () => {
     //  Delete Phone
     const deletePhone = ((id) => {
         if (window.confirm("Do you want to delete this item?")) {
-            fetch(`${process.env.REACT_APP_URL}/phone/` + id, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
-                toast.success(res);
+            axios(`${process.env.REACT_APP_URL}/phone/` + id, {method: 'DELETE'}).then(res => {
+                if(res)
+                toast.success(res.data);
                 window
                     .location
                     .reload();
@@ -197,10 +195,9 @@ export const Admin = () => {
     //  Delete all Phones
     const deleteAllPhone = (id) => {
         if (window.confirm("Do you want to delete all this item?")) {
-            fetch(`${process.env.REACT_APP_URL}/phone`, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
-                toast.success(res);
+            axios(`${process.env.REACT_APP_URL}/phone`, {method: 'DELETE'}).then(res => {
+                if(res)
+                toast.success(res.data);
                 window
                     .location
                     .reload();
@@ -217,7 +214,7 @@ export const Admin = () => {
             toast.warning("Enter a skill");
             return
         }
-        fetch(`${process.env.REACT_APP_URL}/skills`, {
+        axios(`${process.env.REACT_APP_URL}/skills`, {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -225,10 +222,8 @@ export const Admin = () => {
             },
             body: JSON.stringify({skill})
         }).then(res => {
-            return res.json();
-        }).then(data => {
             setSkill("");
-            toast.success(data);
+            toast.success(res.data);
             window
                 .location
                 .reload();
@@ -239,11 +234,9 @@ export const Admin = () => {
 
     // Get Skill
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/skills`).then((res) => {
-            return res.json();
-        }).then((data) => {
-            if (data) 
-                setSkills(data);
+        axios(`${process.env.REACT_APP_URL}/skills`).then((res) => {
+            if (res) 
+                setSkills(res.data);
             return
         }).catch(err => {
             setNoSkillFound("No Skill found. Admin check if database exist or call the admin on: +44775177648" +
@@ -254,10 +247,9 @@ export const Admin = () => {
     // Delete Skill
     const deleteSkill = ((id) => {
         if (window.confirm("Do you want to delete this item?")) {
-            fetch(`${process.env.REACT_APP_URL}/skills/` + id, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
-                toast.success(res);
+            axios(`${process.env.REACT_APP_URL}/skills/` + id, {method: 'DELETE'}).then(res => {
+                if(res)
+                toast.success(res.data);
                 window
                     .location
                     .reload();
@@ -270,10 +262,9 @@ export const Admin = () => {
     // Delete all Skills
     const deleteAllSkill = ((id) => {
         if (window.confirm("Do you want to delete this item?")) {
-            fetch(`${process.env.REACT_APP_URL}/skills`, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
-                toast.success(res);
+            axios(`${process.env.REACT_APP_URL}/skills`, {method: 'DELETE'}).then(res => {
+                if(res)
+                toast.success(res.data);
                 window
                     .location
                     .reload();
@@ -290,7 +281,7 @@ export const Admin = () => {
             toast.warning("Enter a message");
             return
         }
-        fetch(`${process.env.REACT_APP_URL}/pmessages`, {
+        axios(`${process.env.REACT_APP_URL}/pmessages`, {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -298,10 +289,8 @@ export const Admin = () => {
             },
             body: JSON.stringify({pmessage})
         }).then(res => {
-            return res.json();
-        }).then(data => {
             setPMessage("");
-            toast.success(data);
+            toast.success(res.data);
             window
                 .location
                 .reload();
@@ -312,11 +301,9 @@ export const Admin = () => {
 
     // Get Public Message
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/pmessages`).then((res) => {
-            return res.json();
-        }).then((data) => {
-            if (data) 
-                setPMessages(data);
+        axios(`${process.env.REACT_APP_URL}/pmessages`).then((res) => {
+            if (res) 
+                setPMessages(res.data);
             return
         }).catch(err => {
             setNoPMessageFound("No Skill found by this time. Admin check if database exist or call the admin on:" +
@@ -328,10 +315,9 @@ export const Admin = () => {
     // Delete public message
     const deletePMessage = ((id) => {
         if (window.confirm("Do you want to delete this item?")) {
-            fetch(`${process.env.REACT_APP_URL}/pmessages/` + id, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
-                toast.success(res);
+            axios(`${process.env.REACT_APP_URL}/pmessages/` + id, {method: 'DELETE'}).then(res => {
+                if(res)
+                toast.success(res.data);
                 window
                     .location
                     .reload();
@@ -344,10 +330,9 @@ export const Admin = () => {
     // Delete public message
     const deleteAllPMessage = ((id) => {
         if (window.confirm("Do you want to delete this item?")) {
-            fetch(`${process.env.REACT_APP_URL}/pmessages`, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
-                toast.success(res);
+            axios(`${process.env.REACT_APP_URL}/pmessages`, {method: 'DELETE'}).then(res => {
+                if(res)
+                toast.success(res.data);
                 window
                     .location
                     .reload();
@@ -364,18 +349,17 @@ export const Admin = () => {
             toast.warning("Enter a hobby");
             return
         }
-        fetch(`${process.env.REACT_APP_URL}/hobbies`, {
+        axios(`${process.env.REACT_APP_URL}/hobbies`, {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({hobby})
-        }).then(res => {
-            return res.json();
-        }).then(data => {
+        }).then(res => {           
             setHobby("");
-            toast.success(data);
+            if(res)
+            toast.success(res.data);
             window
                 .location
                 .reload();
@@ -386,11 +370,9 @@ export const Admin = () => {
 
     // Get Hobby
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/hobbies`).then((res) => {
-            return res.json();
-        }).then((data) => {
-            if (data) 
-                setHobbies(data);
+        axios(`${process.env.REACT_APP_URL}/hobbies`).then((res) => {
+            if (res) 
+                setHobbies(res.data);
             return
         }).catch(err => {
             setNoHobbyFound("No hobby found. Admin check if database exist or call the admin on: +44775177648" +
@@ -402,10 +384,9 @@ export const Admin = () => {
     // Delete hobby
     const deleteHobby = ((id) => {
         if (window.confirm("Do you want to delete this item?")) {
-            fetch(`${process.env.REACT_APP_URL}/hobbies/` + id, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
-                toast.success(res);
+           axios(`${process.env.REACT_APP_URL}/hobbies/` + id, {method: 'DELETE'}).then(res => {
+            if(res)    
+            toast.success(res.data);
                 window
                     .location
                     .reload();
@@ -418,10 +399,9 @@ export const Admin = () => {
     // Delete All hobbies
     const deleteAllHobby = ((id) => {
         if (window.confirm("Do you want to delete these items?")) {
-            fetch(`${process.env.REACT_APP_URL}/hobbies`, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
-                toast.success(res);
+            axios(`${process.env.REACT_APP_URL}/hobbies`, {method: 'DELETE'}).then(res => {
+                if(res)
+                toast.success(res.data);
                 window
                     .location
                     .reload();
@@ -443,7 +423,7 @@ export const Admin = () => {
             toast.warning("Enter a profile summary");
             return
         }
-        fetch(`${process.env.REACT_APP_URL}/profiles`, {
+       axios(`${process.env.REACT_APP_URL}/profiles`, {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -451,10 +431,9 @@ export const Admin = () => {
             },
             body: JSON.stringify(datax)
         }).then(res => {
-            return res.json();
-        }).then(data => {
             setProfile("");
-            toast.success(data);
+            if(res)
+            toast.success(res.data);
             window
                 .location
                 .reload();
@@ -465,12 +444,11 @@ export const Admin = () => {
 
     // Get Profile Summary
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/profiles`).then((res) => {
-            return res.json();
-        }).then((data) => {
-            if (data.length > 0) 
+        axios(`${process.env.REACT_APP_URL}/profiles`).then((res) => {
+            if (res.data.length > 0) 
                 setProfileAvailable(true);
-            setProfiles(data);
+                if(res)
+                setProfiles(res.data);
         }).catch(err => {
             setNoProfileFound("No profile summary added. Admin check if database exist or call the admin on: +4" +
                     "47751776483");
@@ -485,7 +463,7 @@ export const Admin = () => {
             profile
         };
         if (window.confirm("Do you want to update your profile?")) {
-            fetch(`${process.env.REACT_APP_URL}/profiles`, {
+            axios(`${process.env.REACT_APP_URL}/profiles`, {
                 method: 'PUT',
                 headers: {
                     "Access-Control-Allow-Origin": "*",
@@ -493,8 +471,7 @@ export const Admin = () => {
                 },
                 body: JSON.stringify(datax)
             }).then(res => {
-                return res.json()
-            }).then(data => {
+                if(res)
                 toast.success("Profile summary updated");
                 return true;
             }).catch(err => {
@@ -507,9 +484,8 @@ export const Admin = () => {
     // Delete Profile
     const deleteProfile = ((id) => {
         if (window.confirm("Do you want to delete this item?")) {
-            fetch(`${process.env.REACT_APP_URL}/profiles/` + id, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
+            axios(`${process.env.REACT_APP_URL}/profiles/` + id, {method: 'DELETE'}).then(res => {
+                if(res)
                 toast.success(res);
                 window
                     .location
@@ -535,35 +511,35 @@ export const Admin = () => {
             toast.warning('Enter a Project Title and description are compulsary fields');
             return;
         }
-        fetch(`${process.env.REACT_APP_URL}/projects`, {
+        axios(`${process.env.REACT_APP_URL}/projects`, {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(datax)
-        },).then(res => {
-            return res.text();
         }).then(res => {
+            if(res)
+            toast.success(res);
             setProjectLink("");
             setProjectTitle("");
             setGitHubLink("");
             setProjectDescription("");
-            toast.success(res);
             window
                 .location
                 .reload();
         }).catch(error => {
             toast.warning("Project not added? Call the admin on: +447751776483");
         });
+
+        // <Poster title={"projects"} data={datax}  setter={[ setProjectLink,setProjectLink,setGitHubLink,setProjectDescription]} timer={2000} />
     }
 
     // Delete Project
     const deleteProject = ((id) => {
         if (window.confirm("Do you want to delete this item?")) {
-            fetch(`${process.env.REACT_APP_URL}/projects/` + id, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
+            axios(`${process.env.REACT_APP_URL}/projects/` + id, {method: 'DELETE'}).then(res => {   
+                if(res)
                 toast.success(res);
                 window
                     .location
@@ -578,9 +554,8 @@ export const Admin = () => {
     // Delete All Projects
     const deleteAllProject = ((id) => {
         if (window.confirm("Do you want to delete this item?")) {
-            fetch(`${process.env.REACT_APP_URL}/projects`, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
+            axios(`${process.env.REACT_APP_URL}/projects`, {method: 'DELETE'}).then(res => {
+                res(res)
                 toast.success(res);
                 window
                     .location
@@ -593,14 +568,12 @@ export const Admin = () => {
     })
     // Get Projects
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/projects`).then(res => {
-            return res.json();
-        }).then((data) => {
-            if (data.length < 1) 
+        axios(`${process.env.REACT_APP_URL}/projects`).then((res) => {
+            if (res.data.length < 1) 
                 setNoProjectFound('No project data found. Check of database exist or call the admin on: +4477517764' +
                         '83');
-            if (data) 
-                setProjects(data);
+            if (res) 
+            setProjects(res.data);
             return
         }).catch(err => {
             toast.warning(err);
@@ -622,37 +595,42 @@ export const Admin = () => {
             return;
         }
 
-        fetch(`${process.env.REACT_APP_URL}/schools`, {
-            method: 'POST',
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(datax)
-        },).then(res => {
-            return res.text();
-        }).then(res => {
-            setHonor("");
-            setSchool("");
-            setCourse("");
-            setCourseLink("");
-            setGraduationYear("");
-            toast.success(res);
-            window
-                .location
-                .reload();
-        }).catch(error => {
-            toast.warning("School not added? Call the admin on: +447751776483");
-        });
+        // axios(`${process.env.REACT_APP_URL}/schools`, {
+        //     method: 'POST',
+        //     headers: {
+        //         "Access-Control-Allow-Origin": "*",
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify(datax)
+        // }).then(res => {
+        //     if(res)
+        //     toast.success(res);
+        //     setHonor("");
+        //     setSchool("");
+        //     setCourse("");
+        //     setCourseLink("");
+        //     setGraduationYear("");
+            
+        //     window
+        //         .location
+        //         .reload();
+        // }).catch(error => {
+        //     toast.warning("School not added? Call the admin on: +447751776483");
+        // });
+
+        <Poster 
+        title={'schools'} 
+        data={datax}  
+        // setter={[ setHonor,setSchool,setCourse,setCourseLink,setGraduationYear]} 
+        timer={2000} />
     }
 
     //  Delete School
     const deleteSchool = ((id) => {
         if (window.confirm("Do you want to delete this item?")) {
-            fetch(`${process.env.REACT_APP_URL}/schools/` + id, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
-                toast.success(res);
+           axios(`${process.env.REACT_APP_URL}/schools/` + id, {method: 'DELETE'}).then(res => {
+            if(res)    
+            toast.success(res);
                 window
                     .location
                     .reload();
@@ -666,9 +644,8 @@ export const Admin = () => {
     //  Delete All School
     const deleteAllSchool = ((id) => {
         if (window.confirm("Do you want to delete all these items?")) {
-            fetch(`${process.env.REACT_APP_URL}/schools`, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
+            axios(`${process.env.REACT_APP_URL}/schools`, {method: 'DELETE'}).then(res => {
+                if(res)
                 toast.success(res);
                 window
                     .location
@@ -682,11 +659,9 @@ export const Admin = () => {
 
     // Get Schools
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/schools`).then(res => {
-            return res.json();
-        }).then((data) => {
-            if (data) 
-                setSchools(data);
+        axios(`${process.env.REACT_APP_URL}/schools`).then((res) => {
+            if (res) 
+                setSchools(res.data);
             return
         }).catch(err => {
             setNoSchoolFound('No school data found. Check of database exist or call the admin on: +44775177648' +
@@ -733,12 +708,13 @@ export const Admin = () => {
             setTCompanyWebsite("");
             setCertificateFile(null);
             setTYear("");
+            if(res)
             toast.success("Trainig Added");
             window
                 .location
                 .reload();
         }).catch(error => {
-            toast.success("Training not Added");
+            toast.warning("Training not Added");
             toast.warning(error);
         });
     }
@@ -747,9 +723,8 @@ export const Admin = () => {
     const deleteTraining = ((id) => {
         if (window.confirm("Do you want to delete this item?")) {
             setDeletingTraining(true);
-            fetch(`${process.env.REACT_APP_URL}/trainings/` + id, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
+            axios(`${process.env.REACT_APP_URL}/trainings/` + id, {method: 'DELETE'}).then(res => {
+                if(res)
                 toast.success(res);
                 setDeletingTraining(false);
                 window
@@ -767,9 +742,8 @@ export const Admin = () => {
     const deleteAllTraining = () => {
         if (window.confirm("Do you want to delete all these item?")) {
             setDeletingAllTrainings(true);
-            fetch(`${process.env.REACT_APP_URL}/trainings`, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
+            axios(`${process.env.REACT_APP_URL}/trainings`, {method: 'DELETE'}).then(res => {
+                if(res)
                 toast.success(res);
                 setDeletingAllTrainings(false);
                 window
@@ -785,11 +759,9 @@ export const Admin = () => {
 
     // Get Training
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/trainings`).then(res => {
-            return res.json();
-        }).then((data) => {
-            if (data) 
-                setTrainings(data);
+        axios(`${process.env.REACT_APP_URL}/trainings`).then((res) => {
+            if (res) 
+                setTrainings(res.data);
             return
         }).catch(err => {
             setNoTrainingFound('No training data found. Check of database exist or call the admin on: +447751776' +
@@ -800,11 +772,10 @@ export const Admin = () => {
 
     //Get CV
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/cvs`).then(res => {
-            return res.json();
-        }).then((data) => {
-            setCvs(data);
-            if (data.length > 0) 
+        axios(`${process.env.REACT_APP_URL}/cvs`).then((res) => {
+           if(res)
+            setCvs(res.data);
+            if (res.data.length > 0) 
                 setIsCvPresent(true);
             }
         ).catch(err => {
@@ -815,13 +786,14 @@ export const Admin = () => {
     //  Delete CV
     const deleteCv = ((id) => {
         if (window.confirm("Do you want to delete this item?")) {
-            fetch(`${process.env.REACT_APP_URL}/cvs/` + id, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
+            axios(`${process.env.REACT_APP_URL}/cvs/` + id, {method: 'DELETE'}).then(res => {
+                if(res)
                 toast.success("CV deleted");
-                window
-                    .location
-                    .reload();
+                setTimeout(() => {
+                    window
+                        .location
+                        .reload();
+                }, 2000);
             }).catch(error => {
                 toast.warning("CV not deleted? Call the admin on: +447751776483");
                 toast.warning(error);
@@ -848,6 +820,7 @@ export const Admin = () => {
                 setProgressCv(Math.round(100 * progressEvent.loaded))
             }
         }).then(res => {
+            if(res)
             toast.success("CV Uplaoded");
             setCvUpload(false);
             setTimeout(() => {
@@ -864,10 +837,9 @@ export const Admin = () => {
 
     //Get Photo
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/photos`).then(res => {
-            return res.json();
-        }).then((data) => {
-            setPhotos(data);
+        axios(`${process.env.REACT_APP_URL}/photos`).then((res) => {
+            if(res)
+            setPhotos(res.data);
         }).catch(err => {
             toast.warning(err);
         })
@@ -880,7 +852,7 @@ export const Admin = () => {
         const formData = new FormData();
         formData.append('photo', photo)
 
-        if (formData == null) 
+        if (formData.has == null) 
             setMessage("No Photo attached");
         setPhotoUpload(true);
         axios.post(`${process.env.REACT_APP_URL}/photos`, formData, {
@@ -893,8 +865,7 @@ export const Admin = () => {
                 setProgressPhoto(Math.round(100 * progressEvent.loaded))
             }
         }).then(res => {
-            toast.success("Photo file Uplaoded successively");
-            setPhotoUpload(false);
+            toast.success("Photo file Uplaoded successively");  
             setTimeout(() => {
                 window
                     .location
@@ -902,7 +873,6 @@ export const Admin = () => {
             }, 2000);
         }).catch(error => {
             toast.success("Photo not Uplaoded");
-            setPhotoUpload(false);
             toast.warning(error);
         });
     }
@@ -910,9 +880,8 @@ export const Admin = () => {
     //  Delete Photo
     const deletePhoto = ((id) => {
         if (window.confirm("Do you want to delete this item?")) {
-            fetch(`${process.env.REACT_APP_URL}/photos/` + id, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
+            axios(`${process.env.REACT_APP_URL}/photos/` + id, {method: 'DELETE'}).then(res => {
+                if(res)
                 toast.success("Photo deleted");
                 window
                     .location
@@ -927,9 +896,8 @@ export const Admin = () => {
     //  Delete All Photo
     const deleteAllPhoto = () => {
         if (window.confirm("Do you want to delete this item?")) {
-            fetch(`${process.env.REACT_APP_URL}/photos`, {method: 'DELETE'}).then(res => {
-                return res.text();
-            }).then(res => {
+            axios(`${process.env.REACT_APP_URL}/photos`, {method: 'DELETE'}).then(res => {
+                if(res)
                 toast.success("All Photos deleted");
                 window
                     .location
@@ -946,7 +914,7 @@ export const Admin = () => {
 
         if (window.confirm("Do you want to go for page maintenance?")) {
 
-            fetch(`${process.env.REACT_APP_URL}/underconstruction`, {
+           axios(`${process.env.REACT_APP_URL}/underconstruction`, {
                 method: 'PUT',
                 headers: {
                     "Access-Control-Allow-Origin": "*",
@@ -954,8 +922,7 @@ export const Admin = () => {
                 },
                 body: JSON.stringify({underconstruction})
             }).then(res => {
-                return res.json()
-            }).then(data => {
+                if(res)
                 toast.success("Page under construction set");
                 return true;
             }).catch(err => {
@@ -1299,7 +1266,6 @@ export const Admin = () => {
                             {profileAvailable && <button class="btn btn-primary" onClick={updateProfile}>
                                 Update
                             </button>}
-
                         </div>
                     </div>
 }
@@ -1539,8 +1505,8 @@ export const Admin = () => {
                             placeholder="Company website"/>
                     </div>
                     <div class="col-12 addPro2">
-                        <strong>Upload Certificate:
-                        </strong><input
+                        <h6>Upload Certificate:
+                        </h6><input
                             type='file'
                             name="certificateImage"
                             onChange=
@@ -1613,7 +1579,7 @@ export const Admin = () => {
             <form post="" onSubmit={formSubmitCV}>
                 <div class="row addPro ">
                     <div class="col-12 addPro2">
-                        <div class="drop">
+                        <div class="drop flex">
                             <input
                                 type='file'
                                 name="cv"
@@ -1621,26 +1587,10 @@ export const Admin = () => {
                                 {(e)=>setCv(e.target.files[0])}
                                 placeholder="Upload CV"/>
                             <div>
-                                {progressCv && <div
-                                    class="progress"
-                                    role="progressbar"
-                                    aria-label="Example with label"
-                                    aria-valuenow={progressCv}
-                                    aria-valuemin="0"
-                                    aria-valuemax="100">
-                                    <div
-                                        class="progress-bar overflow-visible text-dark"
-                                        style={{
-                                        width: `${progressCv}`
-                                    }}>
-                                        <span>Uploading...</span>
-                                    </div>
-                                </div>}
+                            {cvUpload && <ProgressBar completed={progressCv} maxCompleted={100}/>}
                             </div>
-
                         </div>
                     </div>
-                    {cvUpload && <span>Uploading CV...</span>}
                     <div class="col-12 addPro2">
                         {!isCvPresent && loginStatus && <button class="btn btn-primary" type='submit'>Upload</button>}
                         {isCvPresent && loginStatus && <button disabled class="btn btn-primary" type='submit'>Uploaded</button>}
@@ -1672,30 +1622,16 @@ export const Admin = () => {
             <form post="" onSubmit={formSubmitPhoto}>
                 <div class="row addPro ">
                     <div class="col-12 addPro2">
-                        <div class="drop">
+                        <div class="drop flex">
                             <input
                                 type='file'
                                 name="photo"
                                 onChange=
                                 {(e)=>setPhoto(e.target.files[0])}
-                                placeholder="Upload Picture"/> {progressPhoto && <div
-                                class="progress"
-                                role="progressbar"
-                                aria-label="Example with label"
-                                aria-valuenow={progressPhoto}
-                                aria-valuemin="0"
-                                aria-valuemax="100">
-                                <div
-                                    class="progress-bar overflow-visible text-dark"
-                                    style={{
-                                    width: `${progressPhoto}`
-                                }}>
-                                    <span>Uploading...</span>
-                                </div>
-                            </div>}
-                            <div>
-                                {photoUpload && <span>Uploading Photo...</span>}
-                            </div>
+                                placeholder="Upload Picture"/> 
+                                <div>
+                                {photo && <ProgressBar completed={progressPhoto} maxCompleted={100}/>}
+                                </div>         
                         </div>
                     </div>
 
@@ -1711,7 +1647,6 @@ export const Admin = () => {
                     </div>
                 </div>
             </form>
-
         </div>
     </div> </>
           )

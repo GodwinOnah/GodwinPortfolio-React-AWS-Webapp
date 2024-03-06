@@ -7,6 +7,7 @@ import {View} from './../View.js'
 import {CiSettings} from "react-icons/ci";
 import {toast} from "react-toastify";
 import image2 from '../../../Images/HoUw.gif';
+import axios from 'axios';
 
 export const Nav = () => {
     const [data,
@@ -14,15 +15,10 @@ export const Nav = () => {
     const [cvs,
         setCvs] = useState([]);
 
-        cvs
-        ?.map((cv) =>
-        console.log(cv.cv))
-
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/register`).then(res => {
-            return res.json();
-        }).then((data) => {
-            SetData(data);
+        axios(`${process.env.REACT_APP_URL}/register`).then((res) => {
+            if(res)
+            SetData(res.data);
         }).catch(err => {
             toast.warning("Couldn't fetch data: make sure there is network or call the admin on: +447751776" +
                     "483")
@@ -30,10 +26,9 @@ export const Nav = () => {
     }, []);
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/cvs`).then(res => {
-            return res.json();
-        }).then((data) => {
-            setCvs(data);
+        axios(`${process.env.REACT_APP_URL}/cvs`).then((res) => {
+            if(res)
+            setCvs(res.data);
         }).catch(err => {
             toast.warning("Couldn't fetch data: make sure there is network or call the admin on: +447751776" +
                     "483")
@@ -72,7 +67,7 @@ export const Nav = () => {
                                 <li class="nav-item navItem1" title='Want to hire me?'>
                                     <ContactMe/>
                                 </li>
-                                <li class="nav-item navItem1">
+                                <li class="nav-item navItem1" >
                                     {
                                   
                                         cvs

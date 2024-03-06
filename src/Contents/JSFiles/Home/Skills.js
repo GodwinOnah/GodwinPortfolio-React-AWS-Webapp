@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../../Contents/CSSFiles/Skills.css';
 import {useState, useEffect} from 'react';
+import axios from 'axios';
 
 export const Skills = () => {
 
@@ -12,11 +13,9 @@ export const Skills = () => {
         setNoSkillFound] = useState("");
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/skills`).then((res) => {
-            return res.json();
-        }).then((data) => {
-            if (data) 
-                setSkills(data);
+        axios(`${process.env.REACT_APP_URL}/skills`).then((res) => {
+            if (res) 
+                setSkills(res.data);
             return
         }).catch(err => {
             setNoSkillFound("No Skill found. Admin check if database exist");

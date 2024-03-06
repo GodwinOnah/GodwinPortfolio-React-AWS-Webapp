@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../../Contents/CSSFiles/Skills.css';
 import {useState, useEffect} from 'react';
+import axios from 'axios';
 
 export const Profile = () => {
 
@@ -12,11 +13,9 @@ export const Profile = () => {
 
     // Get Profile Summary
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/profiles`).then((res) => {
-            return res.json();
-        }).then((data) => {
-            if (data) 
-                setProfiles(data);
+        axios(`${process.env.REACT_APP_URL}/profiles`).then((res) => {
+            if (res) 
+                setProfiles(res.data);
             return
         }).catch(err => {
             setNoProfileFound("No profile summary added. Admin check if database exist");

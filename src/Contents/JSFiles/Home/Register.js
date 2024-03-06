@@ -4,6 +4,7 @@ import {toast, ToastContainer} from "react-toastify";
 import {Login} from './Login.js';
 import {ForgottenPassword} from './ForgottenPassword.js';
 import bcrypt from 'bcryptjs-react';
+import axios from 'axios';
 
 export const Register = () => {
 
@@ -35,10 +36,9 @@ export const Register = () => {
     }, [loginStatus]);
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/underconstruction`).then(res => {
-            return res.json();
-        }).then((data) => {
-            setIsUnderConstruction(data);
+        axios(`${process.env.REACT_APP_URL}/underconstruction`).then((res) => {
+            if(res)
+            setIsUnderConstruction(res.data);
 
         }).catch(err => {
             console.log(err);
@@ -56,10 +56,9 @@ export const Register = () => {
 
     useEffect(() => {
 
-        fetch(`${process.env.REACT_APP_URL}/register`).then(res => {
-            return res.json();
-        }).then((data) => {
-            if (data.length > 0) 
+        axios(`${process.env.REACT_APP_URL}/register`).then((res) => {
+            if(res)
+            if (res.data.length > 0) 
                 setIsRegistered(true);
             }
         ).catch(err => {
@@ -91,15 +90,14 @@ export const Register = () => {
 
         setIsRegistering(true);
 
-        fetch(`${process.env.REACT_APP_URL}/register`, {
+        axios(`${process.env.REACT_APP_URL}/register`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(datax)
         }).then(res => {
-            return res.json()
-        }).then(data => {
+            if(res)
             SetName("");
             SetEmail("");
             setMaidenName("");

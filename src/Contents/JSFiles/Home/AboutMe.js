@@ -3,6 +3,7 @@ import React from 'react';
 import {View} from './View.js'
 import {Pictures} from './Pictures';
 import {useState, useEffect} from 'react';
+import axios from 'axios';
 
 export const AboutMe = () => {
 
@@ -23,11 +24,9 @@ export const AboutMe = () => {
 
     // Get Schools
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/schools`).then(res => {
-            return res.json();
-        }).then((data) => {
-            if (data) 
-                setSchools(data);
+        axios(`${process.env.REACT_APP_URL}/schools`).then((res) => {
+            if (res) 
+                setSchools(res.data);
             return
         }).catch(err => {
 
@@ -39,11 +38,9 @@ export const AboutMe = () => {
 
     // Get Trainings
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/trainings`).then(res => {
-            return res.json();
-        }).then((data) => {
-            if (data) 
-                setTrainings(data);
+        axios(`${process.env.REACT_APP_URL}/trainings`).then((res) => {
+            if (res) 
+                setTrainings(res.data);
             return
         }).catch(err => {
             setNoTrainingFound('No training data found. Check of database exist or call the admin on: +447751776' +
@@ -54,11 +51,9 @@ export const AboutMe = () => {
 
     // Get Hobbies
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/hobbies`).then(res => {
-            return res.json();
-        }).then((data) => {
-            if (data) 
-                setHobbies(data);
+        axios(`${process.env.REACT_APP_URL}/hobbies`).then((res) => {
+            if (res) 
+                setHobbies(res.data);
             return
         }).catch(err => {
             setNoHobbyFound('No hobby data found. Check of database exist or call the admin on: +447751776483');

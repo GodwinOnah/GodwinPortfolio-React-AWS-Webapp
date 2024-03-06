@@ -1,8 +1,9 @@
 import {toast, ToastContainer} from "react-toastify";
+import axios from 'axios';
 
-export const Poster = ({title, data, setter}) => {
+export const Poster = ({title, data, setter,timer}) => {
 
-    fetch(`${process.env.REACT_APP_URL}/` + title + "\'", {
+ axios(`${process.env.REACT_APP_URL}/` + title + "\'", {
         method: 'POST',
         headers: {
             "Access-Control-Allow-Origin": "*",
@@ -10,16 +11,17 @@ export const Poster = ({title, data, setter}) => {
         },
         body: JSON.stringify(data)
     }).then(res => {
-        return res.json();
-    }).then(data => {
+        if(res)
+        toast.success(res.data);
         setter
             ?.map((varx) => {
                 varx("");
             })
-        toast.success(data);
-        window
-            .location
-            .reload();
+        setTimeout(() => {
+            window
+                .location
+                .reload();
+        }, timer);
     }).catch(error => {
         toast.warning({title} + " not added");
         toast.warning(error);
