@@ -51,7 +51,7 @@ export const AboutMe = () => {
 
     // Get Hobbies
     useEffect(() => {
-        axios(`${process.env.REACT_APP_URL}/hobbies`).then((res) => {
+        axios.get(`${process.env.REACT_APP_URL}/hobbies`).then((res) => {
             if (res) 
                 setHobbies(res.data);
             return
@@ -124,7 +124,7 @@ export const AboutMe = () => {
                                         </td>
                                         <td>
                                             <a href='#'><View
-                                                item={`${process.env.REACT_APP_URL}/certificates/` + training.certificate}
+                                                item = {`${process.env.REACT_APP_URL}/certificates/` + training.certificate}
                                                 what="View"/></a>
                                         </td>
                                         <td>

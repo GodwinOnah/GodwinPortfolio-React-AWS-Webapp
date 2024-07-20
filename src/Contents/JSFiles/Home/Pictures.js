@@ -12,7 +12,7 @@ export const Pictures = () => {
         setNoPhotoFound] = useState("");
 
     useEffect(() => {
-        axios(`${process.env.REACT_APP_URL}/photos`).then((res) => {
+        axios.get(`${process.env.REACT_APP_URL}/photos`).then((res) => {
             if(res)
             setPictures(res.data);
         }).catch(err => {

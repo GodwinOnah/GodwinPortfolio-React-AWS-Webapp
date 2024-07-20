@@ -13,7 +13,7 @@ export const Skills = () => {
         setNoSkillFound] = useState("");
 
     useEffect(() => {
-        axios(`${process.env.REACT_APP_URL}/skills`).then((res) => {
+        axios.get(`${process.env.REACT_APP_URL}/skills`).then((res) => {
             if (res) 
                 setSkills(res.data);
             return

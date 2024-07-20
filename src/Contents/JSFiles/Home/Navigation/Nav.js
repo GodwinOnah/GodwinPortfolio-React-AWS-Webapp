@@ -16,7 +16,7 @@ export const Nav = () => {
         setCvs] = useState([]);
 
     useEffect(() => {
-        axios(`${process.env.REACT_APP_URL}/register`).then((res) => {
+       axios.get(`${process.env.REACT_APP_URL}/register`).then((res) => {
             if(res)
             SetData(res.data);
         }).catch(err => {
@@ -26,8 +26,9 @@ export const Nav = () => {
     }, []);
 
     useEffect(() => {
-        axios(`${process.env.REACT_APP_URL}/cvs`).then((res) => {
+      axios.get(`${process.env.REACT_APP_URL}/cvs`).then((res) => {
             if(res)
+            
             setCvs(res.data);
         }).catch(err => {
             toast.warning("Couldn't fetch data: make sure there is network or call the admin on: +447751776" +

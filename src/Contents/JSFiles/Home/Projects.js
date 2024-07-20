@@ -10,7 +10,7 @@ export const Projects = () => {
     const [noProjectFound,
         setNoProjectFound] = useState("");
     useEffect(() => {
-        axios(`${process.env.REACT_APP_URL}/projects`).then((res) => {
+       axios.get(`${process.env.REACT_APP_URL}/projects`).then((res) => {
             if (res) {
                 setProjects(res.data)
             } else {

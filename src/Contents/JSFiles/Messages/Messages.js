@@ -19,10 +19,9 @@ export const Messages = () => {
             .getItem('login')
         if (data != null) 
             setLoginStatus(JSON.parse(data));
-        axios(`${process.env.REACT_APP_URL}/messages`).then((res) => {
+        axios.get(`${process.env.REACT_APP_URL}/messages`).then((res) => {
             if (res) 
                 setMessages(res.data);
-                // return
             }
         ).catch(err => {
             setNoMessageFound("No message received at the moment. Admin check if database exist");
@@ -32,7 +31,7 @@ export const Messages = () => {
     // Delete a Message
     const deleteMessage = ((id) => {
         if (window.confirm("Do you want to delete this item?")) {
-            axios(`${process.env.REACT_APP_URL}/messages/` + id, {method: 'DELETE'}).then(res => {
+           fetch(`${process.env.REACT_APP_URL}/messages/` + id, {method: 'DELETE'}).then(res => {
                 if(res)
                 toast.success(res.data);
                 window
@@ -47,7 +46,7 @@ export const Messages = () => {
     // Delete all Messages
     const deleteAllMessages = () => {
         if (window.confirm("Do you want to delete this item?")) {
-            axios(`${process.env.REACT_APP_URL}/messages`, {method: 'DELETE'}).then(res => {
+            fetch(`${process.env.REACT_APP_URL}/messages`, {method: 'DELETE'}).then(res => {
                 if(res)
                 toast.success(res.data);
                 window
@@ -67,7 +66,6 @@ export const Messages = () => {
                         <th>ID</th>
                         <th>NAME</th>
                         <th>EMAIL</th>
-                        <th>PHONE</th>
                         <th>COMPANY</th>
                         <th>MESSAGE</th>
                         <th></th>
@@ -80,13 +78,6 @@ export const Messages = () => {
                                 <th>{index + 1}</th>
                                 <td>{message.name}</td>
                                 {loginStatus && <td>{message.email}</td>}
-                                {!loginStatus && <td>
-                                    <strong
-                                        style={{
-                                        color: 'red'
-                                    }}>Hidden</strong>
-                                </td>}
-                                {loginStatus && <td>{message.phone}</td>}
                                 {!loginStatus && <td>
                                     <strong
                                         style={{

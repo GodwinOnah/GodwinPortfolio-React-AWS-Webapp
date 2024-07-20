@@ -28,15 +28,13 @@ export const Register = () => {
         setIsUnderConstruction] = useState([]);
 
     useEffect(() => {
-        const data = window
-            .localStorage
-            .getItem('login')
+        const data = window.localStorage.getItem('login')
         if (data != null) 
             setLoginStatus(JSON.parse(data))
     }, [loginStatus]);
 
     useEffect(() => {
-        axios(`${process.env.REACT_APP_URL}/underconstruction`).then((res) => {
+        axios.get(`${process.env.REACT_APP_URL}/underconstruction`).then((res) => {
             if(res)
             setIsUnderConstruction(res.data);
 
@@ -56,7 +54,7 @@ export const Register = () => {
 
     useEffect(() => {
 
-        axios(`${process.env.REACT_APP_URL}/register`).then((res) => {
+        axios.get(`${process.env.REACT_APP_URL}/register`).then((res) => {
             if(res)
             if (res.data.length > 0) 
                 setIsRegistered(true);
@@ -70,12 +68,7 @@ export const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const hash = bcrypt.hashSync(password); //Hashing password here
-        const datax = {
-            name,
-            email,
-            maidenName,
-            hash
-        };
+        const datax = {name,email,maidenName,hash};
         if (!name || !email || !maidenName || !password || !confirmPassword) 
             return toast.warning("Enter all field");
         if (password !== confirmPassword) {
@@ -85,19 +78,18 @@ export const Register = () => {
 
         if (isRegistered) {
             return toast.warning("Only Admin can register");
-
         }
 
         setIsRegistering(true);
 
-        axios(`${process.env.REACT_APP_URL}/register`, {
+        fetch(`${process.env.REACT_APP_URL}/register`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(datax)
         }).then(res => {
-            if(res)
+            if(res.length!=0){
             SetName("");
             SetEmail("");
             setMaidenName("");
@@ -110,7 +102,7 @@ export const Register = () => {
                     .location
                     .reload();
             }, 2000);
-        }).catch(err => {
+        }}).catch(err => {
             toast.warning("Registeration failed");
             setIsRegistering(false);
 

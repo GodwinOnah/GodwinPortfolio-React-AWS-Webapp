@@ -13,7 +13,7 @@ export const Profile = () => {
 
     // Get Profile Summary
     useEffect(() => {
-        axios(`${process.env.REACT_APP_URL}/profiles`).then((res) => {
+        axios.get(`${process.env.REACT_APP_URL}/profiles`).then((res) => {
             if (res) 
                 setProfiles(res.data);
             return

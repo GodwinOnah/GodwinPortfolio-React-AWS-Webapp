@@ -44,7 +44,7 @@ export const HeroSection = () => {
 
     // Get Public user
     useEffect(() => {
-        axios(`${process.env.REACT_APP_URL}/register`).then((res) => {
+        axios.get(`${process.env.REACT_APP_URL}/register`).then((res) => {
             res.data.map((user) => {
                 window
                     .localStorage
@@ -57,7 +57,7 @@ export const HeroSection = () => {
 
     // Get Public Message
     useEffect(() => {
-        axios(`${process.env.REACT_APP_URL}/pmessages`).then((res) => {
+        axios.get(`${process.env.REACT_APP_URL}/pmessages`).then((res) => {
             if (res.data.length > 1) 
                 setGreater(true)
             if (res) 
@@ -69,7 +69,7 @@ export const HeroSection = () => {
     }, []);
 
     useEffect(() => {
-        axios(`${process.env.REACT_APP_URL}/cvs`).then((res) => {
+        axios.get(`${process.env.REACT_APP_URL}/cvs`).then((res) => {
             if(res)
             setCvs(res.data);
         }).catch(err => {

@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import {toast, ToastContainer} from "react-toastify";
 import bcrypt from 'bcryptjs-react';
 import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
 export const Login = () => {
 
@@ -24,10 +25,9 @@ export const Login = () => {
         SetData] = useState('');
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/register`).then(res => {
-            return res.json();
-        }).then((data) => {
-            SetData(data);
+        axios.get(`${process.env.REACT_APP_URL}/register`).then(res => {
+            if(res)
+            SetData(res.data);
         }).catch(err => {
             toast.warning(err);
         })

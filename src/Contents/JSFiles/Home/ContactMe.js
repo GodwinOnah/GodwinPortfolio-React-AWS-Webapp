@@ -6,6 +6,7 @@ import {toast, ToastContainer} from "react-toastify";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Typical from 'react-typical';
+import axios from 'axios';
 
 export const ContactMe = () => {
     const form = useRef();
@@ -34,11 +35,9 @@ export const ContactMe = () => {
     const myPhoneNumber = "(+447751776483)";
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/phone`).then((res) => {
-            return res.json();
-        }).then((data) => {
-            if (data) 
-                setMyPhone(data);
+        axios.get(`${process.env.REACT_APP_URL}/phone`).then((res) =>{
+            if (res) 
+                setMyPhone(res.data);
             return
         }).catch(err => {
             console.log(err);
@@ -72,6 +71,7 @@ export const ContactMe = () => {
         emailjs
             .sendForm('service_9n124vv', 'template_pmpo23n', form.current)
             .then((res) => {
+                if(res){
                 SetSending(false);
                 SetName("");
                 SetEmail("");
@@ -85,9 +85,10 @@ export const ContactMe = () => {
                 }, 2000);
                 window
                     .location
-                    .reload();
+                    .reload();}
+                    toast.success("Thank you for your message. You can check your email aswell");
             }, (error) => {
-                toast.success(error);
+                toast.warning(error);
             });
 
         //  Send message to database
