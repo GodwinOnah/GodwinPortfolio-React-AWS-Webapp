@@ -1,6 +1,6 @@
 services:   
   nodeappclient:
-    container_name: nodeclientappcontainer
+    container_name: nodeclientapp
     build: .
     image: nodeapp:v1
     ports: 
