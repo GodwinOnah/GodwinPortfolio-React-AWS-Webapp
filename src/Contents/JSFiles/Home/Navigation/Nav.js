@@ -39,7 +39,7 @@ export const Nav = () => {
     return (
         <div >            
                 <nav class="navbar navbar-expand bg-body-tertiary  sticky-top shadow p-3  bg-white rounde">
-                    <div class="container-fluid navi ">
+                    <div class="container-fluid navi">
                         <div id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item ">

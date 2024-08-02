@@ -31,9 +31,12 @@ export const ViewMessage = ({
         <div style={{
             cursor: "pointer"
         }}>
-            <button class = "btn btn-info" href="#" onClick={handleShow}>
+           {loginStatus && <button class = "btn btn-info" href="#" onClick={handleShow}>
                 View
-            </button>
+            </button>}
+            {!loginStatus && <button disabled class = "btn btn-info" >
+                View
+            </button>}
             <Modal show={show} onHide={handleClose} size="xl">
                 <Modal.Header>
                     <Modal.Title>Message from {name}</Modal.Title>
@@ -47,22 +50,20 @@ export const ViewMessage = ({
                         </div>
                         MESSAGE
                         <div class="card-body">
-                            {loginStatus && <strong>{message}</strong>}
-                            {!loginStatus && <strong>Sorry!! Only Admin can view message.
-                                <br/>
-                                Thanks.</strong>}
-                        </div>
-                        SENDER INFO: {loginStatus && <div class="flex justify-content-left">
+                            <strong>{message}</strong>
+                          </div>
+                          <div>
+                        SENDER INFO:<div class="flex justify-content-left">
                             <div>Sent by: {name}</div>
                             <div>Phone Number: {phone}</div>
                             <div>Sent from : {email}</div>
                             <div>Company: {companyname}</div>
                         </div>
-}
-                        {!loginStatus && <strong>Sorry!! Only Admin can view message.
+                        <strong>Sorry!! Only Admin can view message.
                             <br/>
-                            Thanks.</strong>}
+                            Thanks.</strong>
                     </div>
+                    </div>  
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

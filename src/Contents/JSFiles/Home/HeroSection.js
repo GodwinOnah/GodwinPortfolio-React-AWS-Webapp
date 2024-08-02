@@ -85,7 +85,7 @@ export const HeroSection = () => {
             <marquee scrollamount="5">
                 <strong
                     style={{
-                    color: 'yellow',
+                    color: 'Black',
                     fontSize: '15px'
                 }}>
                     {message1}
@@ -101,7 +101,7 @@ export const HeroSection = () => {
                         
                         <div class="flex icons shadow p-3  bg-white rounde">
                          
-                            <a class="icons-icons" href=" https://wa.me/+447751776483" title='Whatsapp'>
+                            <a class="icons-icons" target="blank" href="https://wa.me/+447751776483" title='Whatsapp'>
                                 <strong
                                     class="dIcons"
                                     style={{
@@ -170,14 +170,14 @@ export const HeroSection = () => {
                 <hr/>
                 <div >
                     <div class="div1">
-                        <h2 class="header1">Skills</h2>
+                        <h2 class="header1">Skills Section</h2>
                         <div>
                             <Skills/>
                         </div>
                     </div>
 
                     <div class="shadow p-3  bg-white rounded">
-                        <h2 class="header1">Projects</h2>
+                        <h2 class="header1">Projects Section</h2>
                         
                         <div>
                             <Projects/>

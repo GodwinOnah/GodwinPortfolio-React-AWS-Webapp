@@ -36,13 +36,13 @@ export const Admin = () => {
     const [pmessage,
         setPMessage] = useState("");
     const [pMessages,
-        setPMessages] = useState(null);
+        setPMessages] = useState([]);
     const [myPhone,
         setMyPhone] = useState([]);
     const [skills,
-        setSkills] = useState(null);
+        setSkills] = useState([]);
     const [hobbies,
-        setHobbies] = useState(null);
+        setHobbies] = useState([]);
     const [hobby,
         setHobby] = useState("");
     const [noHobbyFound,
@@ -84,7 +84,7 @@ export const Admin = () => {
     const [noTrainingFound,
         setNoTrainingFound] = useState("");
     const [profiles,
-        setProfiles] = useState(null);
+        setProfiles] = useState([]);
     const [profile,
         setProfile] = useState("");
     const [profileTitle,
@@ -280,7 +280,7 @@ export const Admin = () => {
     // PUBLIC MESSAGES Submit Public Message
     const formSubmitPMessage = (e) => {
         e.preventDefault();
-        const datax = {phone};
+        const datax = {pmessage};
         if (pmessage == "") {
             toast.warning("Enter a message");
             return
@@ -1040,12 +1040,12 @@ export const Admin = () => {
                     </div>
                     <div class="col-12 addPro2">
                         {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
-                        {loginStatus && <button
+                        {myPhone.length>0 ? loginStatus && <button
                             class="btn btn-danger"
                             style={{
-                            marginLeft: '10px'
-                        }}
-                            onClick={() => deleteAllPhone()}>Clear</button>}
+                            marginLeft: '10px'}}
+                            onClick={() => deleteAllPhone()}>Clear</button>:<button disabled class="btn btn-primary"  style={{
+                                marginLeft: '10px'}}>Clear</button>}
                         {!loginStatus && <button disabled class="btn btn-primary">Only Admin can edit this</button>}
                     </div>
                 </div>
@@ -1087,12 +1087,14 @@ export const Admin = () => {
                     </div>
                     <div class="col-12 addPro2">
                         {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
-                        {loginStatus && <button
+                        {skills.length>0 ? loginStatus && <button
                             class="btn btn-danger"
                             style={{
                             marginLeft: '10px'
                         }}
-                            onClick={() => deleteAllSkill()}>Clear</button>}
+                            onClick={() => deleteAllSkill()}>Clear</button>:<button disabled class="btn btn-primary"  style={{
+                                marginLeft: '10px'
+                            }}>Cleer</button>}
                         {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>}
                     </div>
                 </div>

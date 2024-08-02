@@ -5,9 +5,9 @@ export const Project = ({project}) => {
     const projectWebsite = project["projectlink"]
     const gitHubName = project["githubname"]
     const videoLink = project["videolink"]
-    const stringx = "Visit website"
-    const stringy = "GitHub"
-    const stringz = "Video"
+    const stringx = "View website"
+    const stringy = "GitHub link"
+    const stringz = "Sample video link"
     let websiteAvailable = true
     let gitHubAvailable = true
     let vdeoAvailable = true

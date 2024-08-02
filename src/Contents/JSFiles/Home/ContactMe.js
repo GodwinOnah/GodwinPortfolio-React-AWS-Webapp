@@ -26,13 +26,10 @@ export const ContactMe = () => {
         SetSending] = useState(false)
     const [send,
         SetSend] = useState(false)
-    const [data,
-        SetData] = useState({});
     const [show,
         setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const myPhoneNumber = "(+447751776483)";
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_URL}/phone`).then((res) =>{
@@ -259,17 +256,18 @@ export const ContactMe = () => {
                         color: 'blue',
                         fontWeight: 'bolder'
                     }}>
-                        <marquee scrollamount="2">
+                       {myPhone.length>0 && <marquee scrollamount="2">
                             <div class="d-flex">
-                                <strong>Phone(s):</strong>
-                                {myPhoneNumber}
-                                {myPhone
+                                <strong style={{color:'red'}}>{myPhone.length>1?"Phone(s):":"phone:"}</strong>
+                               { "("+ myPhone
                                     ?.map((phone) => (
-                                        <p>{",(" + phone.phone + ")"}</p>
-                                    ))
-}
+                                        phone.phone
+                                    ))+")"
+                                    
+                                    }
+
                             </div>
-                        </marquee>
+                        </marquee>}
                     </div>
                     <Modal.Footer>
                         <Button class="shadow rounded" variant="secondary" onClick={handleClose}>

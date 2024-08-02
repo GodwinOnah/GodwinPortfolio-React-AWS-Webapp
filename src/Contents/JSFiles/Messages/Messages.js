@@ -106,7 +106,7 @@ export const Messages = () => {
                                         {loginStatus && <button class="btn btn-danger" onClick={() => deleteMessage(message.id)}>
                                             <strong
                                                 style={{
-                                                color: 'gold'
+                                                color: 'black'
                                             }}
                                                 class="deleteMessageBtn"
                                                 title='Delete'>
@@ -116,14 +116,13 @@ export const Messages = () => {
 }
                                         {!loginStatus && <button
                                             class="btn btn-danger"
-                                            disabled
-                                            onClick={() => deleteMessage(message.id)}>
+                                            disabled>
                                             <strong
                                                 style={{
-                                                color: 'gold'
+                                                color: 'black'
                                             }}
                                                 class="deleteMessageBtn"
-                                                title='Delete'>
+                                                title='Only the admin can delete this item'>
                                                 X
                                             </strong>
                                         </button>
