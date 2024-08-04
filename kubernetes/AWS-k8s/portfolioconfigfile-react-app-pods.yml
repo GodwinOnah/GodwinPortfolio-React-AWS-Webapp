@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portfolio-react-app-pods
+  labels:
+    app: portfolio-react-app-pods
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: portfolio-react-app-pods
+  template:
+    metadata:
+      labels:
+        app: portfolio-react-app-pods
+    spec:
+      containers:
+      - name: portfolio-react-app-pods-container
+        image: daddykiki/godwinportfolio-react-app #image from docker hub
+        ports:
+        - containerPort: 80
+        imagePullPolicy: IfNotPresent
