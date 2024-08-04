@@ -25,6 +25,12 @@ export const Admin = () => {
         setProjectDescription] = useState("");
     const [phone,
         setPhone] = useState("");
+    const [myEmail,
+        setMyEmail] = useState("");
+    const [linkedIn,
+        setLinkedIn] = useState("");
+    const [instagramName,
+        setInstagramName] = useState("");
     const [progressTraining,
         setProgressTraining] = useState(0);
     const [progressCv,
@@ -93,6 +99,8 @@ export const Admin = () => {
         setNoProfileFound] = useState("");
     const [profileAvailable,
         setProfileAvailable] = useState(false);
+    const [phoneAvailable,
+        setPhoneAvailable] = useState(false);
     const [loginStatus,
         setLoginStatus] = useState(false);
     const [adminName,
@@ -145,9 +153,9 @@ export const Admin = () => {
     //  PHONE Submit Phone
     const formSubmitPhone = (e) => {
         e.preventDefault();
-        const datax = {phone}
-        if (phone === "") {
-            toast.warning("Enter a phone number");
+        const datax = {phone,myEmail,linkedIn,instagramName}
+        if (phone === ""||myEmail === ""||linkedIn === ""||instagramName === "") {
+            toast.warning("Enter complete contact details");
             return
         }
         fetch(`${process.env.REACT_APP_URL}/phone`, {
@@ -169,9 +177,38 @@ export const Admin = () => {
         });
     }
 
+     // Update Phone
+     const updatePhone = (e) => {
+        e.preventDefault();
+        const datax = {phone,myEmail,linkedIn,instagramName}
+        if (phone === ""||myEmail === ""||linkedIn === ""||instagramName === "") {
+            toast.warning("Enter complete contact details");
+            return
+        }
+        if (window.confirm("Do you want to update your contacts?")) {
+            fetch(`${process.env.REACT_APP_URL}/phone`, {
+                method: 'PUT',
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-Type": "application/Json"
+                },
+                body: JSON.stringify(datax)
+            }).then(res => {
+                if(res)
+                toast.success("Admin contacts updated");
+                return true;
+            }).catch(err => {
+                toast.warning("Contacts not updated? Call the admin on: " + admin_phone_numbers);
+                toast.warning(err);
+            })
+        }
+    }
+
     // Get Phone
     useEffect(() => {
        axios.get(`${process.env.REACT_APP_URL}/phone`).then((res) => {
+        if (res.data.length > 0) 
+        setPhoneAvailable(true);
             if (res) 
                 setMyPhone(res.data);
             return
@@ -194,21 +231,6 @@ export const Admin = () => {
             });
         }
     })
-
-    //  Delete all Phones
-    const deleteAllPhone = () => {
-        if (window.confirm("Do you want to delete all this item?")) {
-            axios.delete(`${process.env.REACT_APP_URL}/phone`).then(res => {
-                if(res)
-                toast.success(res.data);
-                window
-                    .location
-                    .reload();
-            }).catch(error => {
-                toast.warning("Phone not deleted? Call the admin on: " + admin_phone_numbers);
-            });
-        }
-    }
 
     // SKILLS Submit Skills
     const formSubmitSkill = (e) => {
@@ -459,7 +481,8 @@ export const Admin = () => {
     }, []);
 
     // Update Profile
-    const updateProfile = () => {
+    const updateProfile = (e) => {
+        e.preventDefault();
         const datax = {
             profileTitle,
             profile
@@ -1037,15 +1060,40 @@ export const Admin = () => {
                             onChange=
                             {(e)=>setPhone(e.target.value)}
                             placeholder="Add Phone"/>
+                        <input
+                            type='text'
+                            name="myEmail"
+                            value={myEmail}
+                            onChange=
+                            {(e)=>setMyEmail(e.target.value)}
+                            placeholder="Add Email"/>
+                        <input
+                            type='text'
+                            name="linkedIn"
+                            value={linkedIn}
+                            onChange=
+                            {(e)=>setLinkedIn(e.target.value)}
+                            placeholder="Add your LinkedIn ID"/>
+                        <input
+                            type='text'
+                            name="instagramName"
+                            value={instagramName}
+                            onChange=
+                            {(e)=>setInstagramName(e.target.value)}
+                            placeholder="Add Instagram ID"/>
                     </div>
                     <div class="col-12 addPro2">
-                        {loginStatus && <button class="btn btn-primary" type='submit'>Add</button>}
-                        {myPhone.length>0 ? loginStatus && <button
-                            class="btn btn-danger"
-                            style={{
-                            marginLeft: '10px'}}
-                            onClick={() => deleteAllPhone()}>Clear</button>:<button disabled class="btn btn-primary"  style={{
-                                marginLeft: '10px'}}>Clear</button>}
+                    {loginStatus && <div>
+                        <div class="col-12 addPro2">
+                            {!phoneAvailable && <button class="btn btn-primary" onClick={formSubmitPhone}>
+                                Add
+                            </button>}
+                            {phoneAvailable && <button class="btn btn-primary" onClick={updatePhone}>
+                                Update
+                            </button>}
+                        </div>
+                    </div>
+                       }
                         {!loginStatus && <button disabled class="btn btn-primary">Only Admin can edit this</button>}
                     </div>
                 </div>
@@ -1255,7 +1303,7 @@ export const Admin = () => {
                             </button>}
                         </div>
                     </div>
-}
+                       }
                     <div class="col-12 addPro2">
                         {!loginStatus && <button disabled class="btn btn-primary" type='submit'>Only Admin can edit this</button>
 }

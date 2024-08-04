@@ -15,8 +15,8 @@ export const HeroSection = () => {
 
     const [pMessages,
         setPMessages] = useState(null);
-    const [cvs,
-        setCvs] = useState([]);
+    const [phone,
+        setPhone] = useState([]);
     const [greater,
         setGreater] = useState(false);
     let message1 = "";
@@ -69,9 +69,9 @@ export const HeroSection = () => {
     }, []);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/cvs`).then((res) => {
+        axios.get(`${process.env.REACT_APP_URL}/phone`).then((res) => {
             if(res)
-            setCvs(res.data);
+            setPhone(res.data);
         }).catch(err => {
             console.log(err);
         })
@@ -98,10 +98,9 @@ export const HeroSection = () => {
                     marginTop: "5%"
                 }}>
                     <div class="profileSummarySection">
-                        
-                        <div class="flex icons shadow p-3  bg-white rounde">
-                         
-                            <a class="icons-icons" target="blank" href="https://wa.me/+447751776483" title='Whatsapp'>
+                    {phone && phone?.map((phone) => (
+                        <div class="flex icons shadow p-3  bg-white rounde">                      
+                            <a class="icons-icons" target="blank" href={`https://wa.me/${phone.phone}`} title='Whatsapp'>
                                 <strong
                                     class="dIcons"
                                     style={{
@@ -110,7 +109,7 @@ export const HeroSection = () => {
                             </a>
                             <a
                                 class="icons-icons"
-                                href="https://www.instagram.com/billions_deal/"
+                                href={`https://www.instagram.com/${phone.instagramname}/`}
                                 target="blank"
                                 title='Instagram'>
                                 <strong
@@ -121,9 +120,9 @@ export const HeroSection = () => {
                             </a>
                             <a
                                 class="icons-icons"
-                                href="https://www.linkedin.com/in/godwin-onah-120b8221a/"
+                                href={`${phone.linkedin}/`}
                                 target="blank"
-                                title='LinkedIn'>
+                                title='LinkedIn ID'>
                                 <strong
                                     class="dIcons"
                                     style={{
@@ -132,7 +131,7 @@ export const HeroSection = () => {
                             </a>
                             <a
                                 class="icons-icons"
-                                href="mailto:thisaremyfiles@gmail.com"
+                                href={`mailto:${phone.myemail}`}
                                 target="blank"
                                 title='Email'>
                                 <strong
@@ -141,8 +140,9 @@ export const HeroSection = () => {
                                     color: 'red'
                                 }}><MdMarkEmailUnread/></strong>
                             </a>
-                           
+
                         </div>
+                        ))}
                         <p class="shadow p-3  bg-white rounde">
                             <Profile/>
                         </p>
@@ -156,11 +156,11 @@ export const HeroSection = () => {
                             steps={[
                             "Hey!! I am GODWIN... 😎",
                             1000,
-                            'A React Expert',
+                            'A Full-stack Developer and business expert',
                             2500,
-                            'A frontend Developer',
+                            'Can work solely as a frontend Developer',
                             4000,
-                            'A Backend Developer',
+                            'A Devop engineer',
                             6000
                         ]}
                             loop={Infinity}
