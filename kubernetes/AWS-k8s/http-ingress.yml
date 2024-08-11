@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Ingress
+metadata:
+  name: http-godwinonah
+  namespace: stagging
+  annotations:
+    kubernete.io/ingress.class: nginx
+spec:
+  rules:
+    - host: godwinonah.portfolio.com
+      http:
+        paths:
+          - paths: /
+            backend:
+              serviceName: godwinonah
+              servicePort: 3000
