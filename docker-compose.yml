@@ -1,7 +1,7 @@
 services:   
   nodeappclient:
     container_name: godwin-portfolio-react-app
-    platform: linux/amd64
+    # platform: linux/amd64
     build: .
     image: godwin-portfolio-react-app:v1
     ports: 
@@ -9,4 +9,4 @@ services:
     stdin_open: true 
     tty: true 
     
-       
+      

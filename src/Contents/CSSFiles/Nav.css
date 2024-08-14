@@ -52,7 +52,8 @@
 
 .navi {
     background: midnightblue;
-    margin: -10px auto;
+    margin: 10px 70px;
+   
 
 }
 
@@ -64,4 +65,11 @@
 
 .logo2 {
     font-size: 50px;
+}
+
+.navbarSupportedContent{
+    margin: 0 auto;
+}
+.navbarSupportedContent li{
+ margin: 0 50px;
 }

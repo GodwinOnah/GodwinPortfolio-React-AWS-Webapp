@@ -6,14 +6,29 @@ import {ContactMe} from './../ContactMe.js';
 import {View} from './../View.js'
 import {CiSettings} from "react-icons/ci";
 import {toast} from "react-toastify";
-import image2 from '../../../Images/HoUw.gif';
+import image from '../../../Images/link2.jpeg';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 export const Nav = () => {
+    const navigate = useNavigate();
     const [data,
         SetData] = useState([]);
     const [cvs,
         setCvs] = useState([]);
+        const [loginStatus,
+            setLoginStatus] = useState(false);
+
+    const logout = () => {
+            const yes = window.localStorage.setItem('login', JSON.stringify(false));
+            navigate('/')
+            window.location.reload();
+        }
+    useEffect(() => {
+            const data = window.localStorage.getItem('login')
+            if (data != null) 
+                setLoginStatus(JSON.parse(data))
+        }, [loginStatus]);
 
     useEffect(() => {
        axios.get(`${process.env.REACT_APP_URL}/register`).then((res) => {
@@ -39,8 +54,11 @@ export const Nav = () => {
     return (
         <div >            
                 <nav class="navbar navbar-expand bg-body-tertiary  sticky-top shadow p-3  bg-white rounde">
+                    <div>
+                    <img src={image}  width={50} alt="Not an image"/>
+                    </div>
                     <div class="container-fluid navi">
-                        <div id="navbarSupportedContent">
+                        <div class="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item ">
                                     <Link
@@ -76,14 +94,30 @@ export const Nav = () => {
                                     }
                                     
                                 </li>
+                               {loginStatus && <li class="nav-item ">
+                                    <button
+                                        onClick={logout}
+                                        class="navItem1"
+                                        style={{
+                                            fontSize:'20px',
+                                        textDecoration: 'none',
+                                        background:'none',
+                                        border:'none'
+                                    }}
+                                        title='Logout'>
+                                        Logout
+                                    </button>
+                                </li>
+                            }
                                 <Link
-                                    to="/Admin"
+                                    to="/Register"
                                     class="navItem1"
                                     style={{
+                                        fontSize:'20px',
                                     textDecoration: 'none'
                                 }}
-                                    title='Visit admin today'>
-                                    <CiSettings/>Settings
+                                    title='Admin'>
+                                    <CiSettings/>
                                 </Link>
                             </ul>
 

@@ -999,16 +999,7 @@ export const Admin = () => {
 
                     </div>
                 </div>
-                <div class="messages">
-                    <Link
-                        to="/Register"
-                        style={{
-                        textDecoration: 'none',
-                        fontSize: '20px'
-                    }}>
-                        <button class="btn btn-primary">Become the Admin Here</button>
-                    </Link>
-                </div>
+               
             </div>
         </div>
 

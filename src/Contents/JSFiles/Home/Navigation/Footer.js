@@ -1,9 +1,24 @@
 import '../../../../Contents/CSSFiles/Footer.css';
 import image1 from '../../../Images/obandeedit.jpeg'
-import {FaFacebook, FaWhatsapp, FaInstagram, FaGithub, FaLinkedin} from 'react-icons/fa';
+import { FaWhatsapp, FaInstagram, FaGithub, FaLinkedin} from 'react-icons/fa';
 import {MdMarkEmailUnread} from "react-icons/md";
+import axios from 'axios';
+import {useState, useEffect} from 'react';
 
 export const Footer = () => {
+
+    const [phone,
+        setPhone] = useState([]);
+
+    useEffect(() => {
+            axios.get(`${process.env.REACT_APP_URL}/phone`).then((res) => {
+                if(res)
+                setPhone(res.data);
+            }).catch(err => {
+                console.log(err);
+            })
+        }, []);
+    
 
     return (
 
@@ -16,45 +31,57 @@ export const Footer = () => {
                     </a>
                     <span
                         style={{
-                        color: 'white'
+                            color: 'grey'
                     }}
                         class="mb-3 mb-md-0 ">&copy; 2024 Obande Development, Inc</span>
                 </div>
 
                 <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                    <div class="d-flex">
-                        <a class="icons-icons" href=" https://wa.me/+447751776483" title='Whatsapp'>
-                            <FaWhatsapp/>
-                        </a>
-                        <a
-                            class="icons-icons"
-                            href="https://www.instagram.com/billions_deal/"
-                            target="blank"
-                            title='Instagram'>
-                            <FaInstagram/>
-                        </a>
-                        <a
-                            class="icons-icons"
-                            href="https://github.com/GodwinOnah"
-                            target="blank"
-                            title='GitHub'>
-                            <FaGithub/>
-                        </a>
-                        <a
-                            class="icons-icons"
-                            href="https://www.linkedin.com/in/godwin-onah-120b8221a/"
-                            target="blank"
-                            title='LinkedIn'>
-                            <FaLinkedin/>
-                        </a>
-                        <a
-                            class="icons-icons"
-                            href="mailto:thisaremyfiles@gmail.com"
-                            target="blank"
-                            title='Email'>
-                            <MdMarkEmailUnread/>
-                        </a>
-                    </div>
+                {phone && phone?.map((phone) => (
+                        <div class="d-flex ">                      
+                            <a class="icons-icons" target="blank" href={`https://wa.me/${phone.phone}`} title='Whatsapp'>
+                                <strong
+                                    class="dIcons"
+                                    style={{
+                                    color: 'grey'
+                                }}><FaWhatsapp/></strong>
+                            </a>
+                            <a
+                                class="icons-icons"
+                                href={`https://www.instagram.com/${phone.instagramname}/`}
+                                target="blank"
+                                title='Instagram'>
+                                <strong
+                                    class="dIcons"
+                                    style={{
+                                        color: 'grey'
+                                }}><FaInstagram/></strong>
+                            </a>
+                            <a
+                                class="icons-icons"
+                                href={`${phone.linkedin}/`}
+                                target="blank"
+                                title='LinkedIn ID'>
+                                <strong
+                                    class="dIcons"
+                                    style={{
+                                        color: 'grey'
+                                }}><FaLinkedin/></strong>
+                            </a>
+                            <a
+                                class="icons-icons"
+                                href={`mailto:${phone.myemail}`}
+                                target="blank"
+                                title='Email'>
+                                <strong
+                                    class="dIcons"
+                                    style={{
+                                        color: 'grey'
+                                }}><MdMarkEmailUnread/></strong>
+                            </a>
+
+                        </div>
+                        ))}
                 </ul>
             </footer>
         </div>

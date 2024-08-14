@@ -5,8 +5,11 @@ import {Login} from './Login.js';
 import {ForgottenPassword} from './ForgottenPassword.js';
 import bcrypt from 'bcryptjs-react';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 export const Register = () => {
+
+    const navigate = useNavigate();
 
     const [name,
         SetName] = useState('');
@@ -110,7 +113,8 @@ export const Register = () => {
     };
 
     return (
-        <div style={{
+        loginStatus && navigate("/Admin") ||
+        !loginStatus && <div style={{
             cursor: "pointer"
         }}>
             <ToastContainer
@@ -127,7 +131,7 @@ export const Register = () => {
             <div class="">
                 <form onSubmit={handleSubmit}>
                     <div class="container">
-                        <div class="row  ">
+                    {!isRegistered &&   <div class="row  ">
                             <div class="col-12 login">
                                 <input
                                     value={name}
@@ -152,7 +156,7 @@ export const Register = () => {
                                     type='test'
                                     placeholder="Maiden Name"/>
                             </div>
-                        </div>
+                     
 
                         <div class="col-12 login">
                             <input
@@ -170,6 +174,8 @@ export const Register = () => {
                                 type='password'
                                 placeholder="Confirm Password"/>
                         </div>
+                        </div>
+      }
                         <div class="col-12 login">
                             {isRegistering && <strong>Registration going on...</strong>}
                         </div>
