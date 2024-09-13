@@ -8,23 +8,23 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: portfolio-react-app-pods-deployment
+  name: e-commerce-webapp-deployment
   namespace: stagging
   labels:
-    app: portfolio-react-app-pods
+    app:  e-commerce-webapi
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: portfolio-react-app-pods
+      app:  e-commerce-webapi
   template:
     metadata:
       labels:
-        app: portfolio-react-app-pods
+        app:  e-commerce-webapi
     spec:
       containers:
-        - name: portfolio-react-app-pods
-          image: daddykiki/godwin-portfolio-react-app-001 #image from docker hub
+        - name:  e-commerce-webapi-container
+          image: daddykiki/e-commerce-webapi #image from docker hub
           ports:
             - containerPort: 3000
           imagePullPolicy: Always
@@ -34,13 +34,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: portfolio-react-app-service
+  name:  e-commerce-webapi-service
   namespace: stagging
   labels:
-    app: portfolio-react-app-service
+    app:  e-commerce-webapi-service
 spec:
   selector:
-    app: portfolio-react-app-pods
+    app:  e-commerce-webapi
   ports:
   - name: http
     protocol: TCP

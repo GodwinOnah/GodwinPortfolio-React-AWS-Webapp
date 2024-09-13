@@ -8,5 +8,26 @@ services:
       - 3001:3000 # mapping from local port to container port
     stdin_open: true 
     tty: true 
-    
-      
+    networks:
+      - internalnet
+
+  jenkins:
+    image: jenkins/jenkins
+    container_name: jenkins-container
+#    user: root
+#    privileged: true
+    restart: always
+    ports:
+      - "8084:8080"
+      - "50000:50000"
+    volumes:
+      - react_app_v:/var/jenkins_home
+    networks:
+      - internalnet
+
+networks:
+  internalnet:
+    driver: bridge
+       
+volumes:
+  react_app_v:
