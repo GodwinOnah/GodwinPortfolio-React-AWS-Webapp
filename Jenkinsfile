@@ -31,6 +31,7 @@ pipeline {
         }
         stage('PUSH DOCKER IMAGE TO DOCKERHUB') {
             steps {
+                sh "docker tag godwin-portfolio:v1 daddkiki/godwin-portfolio-app1"
                 sh ""
                 
             }
