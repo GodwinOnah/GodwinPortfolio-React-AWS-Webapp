@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools{
+        nodejs "NodeJS"
+    }
 
     stages {
         stage('Git Checkout') {
@@ -22,7 +25,7 @@ pipeline {
         // }
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t godwin-portfolio:v1 ."
+                sh "docker-compose up -d --build"
                 
             }
         }
