@@ -25,13 +25,13 @@ pipeline {
         // }
         stage('Build Docker Image') {
             steps {
-                sh "docker-compose up -d --build"
+                sh "docker build -t godwin-portfolio:v1 ."
                 
             }
         }
         stage('PUSH DOCKER IMAGE TO DOCKERHUB') {
             steps {
-                sh "docker build -t godwin-portfolio:v1 ."
+                sh ""
                 
             }
         }
