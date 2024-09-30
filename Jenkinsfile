@@ -14,12 +14,12 @@ pipeline {
                 
             }
         }
-        stage('Build') {
-            steps {
-                sh "npm run build"
+        // stage('Build') {
+        //     steps {
+        //         sh "npm run build"
                 
-            }
-        }
+        //     }
+        // }
         stage('Build Docker Image') {
             steps {
                 sh "docker build -t godwin-portfolio:v1 ."
