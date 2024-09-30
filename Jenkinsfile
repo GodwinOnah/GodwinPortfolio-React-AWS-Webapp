@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/GodwinOnah/GodwinPortfolio-React-AWS-Webapp.git'
+                checkout scmGit(branches: [[name: 'main']], 
+                        userRemoteConfigs: [[url: 'https://github.com/GodwinOnah/GodwinPortfolio-React-AWS-Webapp.git']])
             }
         }
         stage('NPM Install') {
