@@ -30,7 +30,7 @@ pipeline {
         // }
         stage('Build Docker Image') {
             steps {
-                sh "/usr/bin/docker-compose up -d --no-color --wait --build"
+                sh "docker compose up -d --no-color --wait --build"
                 
             }
         }
