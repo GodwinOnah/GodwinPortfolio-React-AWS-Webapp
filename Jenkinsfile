@@ -14,6 +14,7 @@ pipeline {
         stage('Docker Prune') {
             steps {
                 sh "docker system prune -a --volumes -f"
+                sh "sudo service docker start"
                 
             }
         }
