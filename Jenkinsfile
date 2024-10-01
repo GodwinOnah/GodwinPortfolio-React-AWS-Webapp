@@ -11,12 +11,12 @@ pipeline {
                         userRemoteConfigs: [[url: 'https://github.com/GodwinOnah/GodwinPortfolio-React-AWS-Webapp.git']])
             }
         }
-        stage('NPM Install') {
-            steps {
-                sh "npm install -g npm@latest"
+        // stage('NPM Install') {
+        //     steps {
+        //         sh "npm install -g npm@latest"
                 
-            }
-        }
+        //     }
+        // }
         // stage('Build') {
         //     steps {
         //         sh "npm run build"
