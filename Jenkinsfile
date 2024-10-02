@@ -16,21 +16,10 @@ pipeline {
                 sh "docker system prune -a --volumes -f"              
             }
         }
-        // stage('NPM Install') {
-        //     steps {
-        //         sh "npm install -g npm@latest"
-                
-        //     }
-        // }
-        // stage('Build') {
-        //     steps {
-        //         sh "npm run build"
-                
-        //     }
-        // }
+        
         stage('Build Docker Image') {
             steps {
-                sh "docker-compose up -d --no-color --wait --build"
+                sh "docker build -t godwin-porfolio-app:v1 ."
                 
             }
         }
