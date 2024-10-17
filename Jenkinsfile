@@ -1,7 +1,17 @@
 pipeline {
     agent any
+
     tools{
         nodejs "NodeJS"
+    }
+
+    parameters{
+        booleanParam(name:'builtCompleted' defaultValue:false, description'')   
+    }
+
+    environment{
+        NEW_VERSION = '1.0.0'
+        GitHub_Repo_app_name='godwin-portfolio-react-app'
     }
 
     stages {
@@ -19,20 +29,34 @@ pipeline {
         
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t godwin-porfolio-app:v1 ."
+                sh "docker build -t godwin-porfolio-app:${NEW_VERSION} ."
                 
             }
         }
         stage('PUSH DOCKER IMAGE TO DOCKERHUB') {
             steps {
-                sh "docker tag godwin-portfolio:v1 daddkiki/godwin-portfolio-app1"
-                sh ""               
+                withCredentials([usernamePassword(credentialId:'godwin-portfolio-Cred',passwordVariable:'PASSWORD',usernameVariable:'USERNAME',)]){
+                sh"docker login -u $USERNAME -p $PASSWORD"
+                sh "docker tag godwin-portfolio-app:${NEW_VERSION} $USERNAME/${GitHub_Repo_app_name}"
+                sh "docker push" 
+                params.builtCompleted == true 
+                sh "docker logout" 
+                
+                }            
             }
         }
     }
         post {
             always {
-                sh "docker compose down -v --remove-orphans"
+               echo "Verion ${ NEW_VERSION} built"   
+            }
+            success{
+                 sh "docker system prune -a --volumes -f" 
+                 echo "Built successful"  
+            }
+            failure{
+                sh "docker system prune -a --volumes -f" 
+                echo "Built failed"  
             }
         }
     
