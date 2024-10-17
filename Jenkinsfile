@@ -35,7 +35,7 @@ pipeline {
         }
         stage('PUSH DOCKER IMAGE TO DOCKERHUB') {
             steps {
-                withCredentials([usernamePassword(credentialId:'godwin-portfolio-Cred',passwordVariable:'PASSWORD',usernameVariable:'USERNAME',)]){
+                withCredentials([usernamePassword(credentialsId:'godwin-portfolio-Cred',passwordVariable:'PASSWORD',usernameVariable:'USERNAME',)]){
                 sh"docker login -u $USERNAME -p $PASSWORD"
                 sh "docker tag godwin-portfolio-app:${NEW_VERSION} $USERNAME/${GitHub_Repo_app_name}"
                 sh "docker push" 
