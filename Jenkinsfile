@@ -6,7 +6,7 @@ pipeline {
     }
 
     parameters{
-        booleanParam(name:'builtCompleted', defaultValue:false, description'')   
+        booleanParam(name:'builtCompleted', defaultValue:false, description: '')   
     }
 
     environment{
