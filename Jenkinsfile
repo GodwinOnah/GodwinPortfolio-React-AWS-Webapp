@@ -29,7 +29,7 @@ pipeline {
         
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t godwin-porfolio-app ."
+                sh "docker build -t godwin-porfolio-app:${NEW_VERSION} ."
                 
             }
         }
@@ -37,7 +37,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId:'godwin-portfolio-Cred', passwordVariable:'PASSWORD', usernameVariable:'USERNAME',)]){
                 sh"docker login -u $USERNAME -p $PASSWORD"
-                sh "docker tag godwin-portfolio-app $USERNAME/${GitHub_Repo_app_name}"
+                sh "docker tag $(sudo docker images --filter=reference=godwin-porfolio-app:${NEW_VERSION} --format "{{.ID}}") $USERNAME/${GitHub_Repo_app_name}"
                 sh "docker push $USERNAME/${GitHub_Repo_app_name}" 
                 sh "docker logout" 
                 
