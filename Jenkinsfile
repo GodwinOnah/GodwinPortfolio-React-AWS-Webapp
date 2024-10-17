@@ -37,7 +37,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId:'godwin-portfolio-Cred', passwordVariable:'PASSWORD', usernameVariable:'USERNAME',)]){
                 sh"docker login -u $USERNAME -p $PASSWORD"
-                sh "docker tag $(sudo docker images --filter=reference=godwin-porfolio-app:${NEW_VERSION} --format "{{.ID}}") daddykiki/${GitHub_Repo_app_name}"
+                sh "docker tag $(sudo docker images --filter=reference=godwin-porfolio-app:${NEW_VERSION} --format "{{.ID}}") daddykiki/godwin-portfolio-react-app"
                 sh "docker push $USERNAME/${GitHub_Repo_app_name}" 
                 sh "docker logout" 
                 
