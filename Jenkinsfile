@@ -50,10 +50,10 @@ pipeline {
                echo "Verion ${ NEW_VERSION} built"   
             }
             success{
-                 echo "Built successful"  
+                 echo "Built successful."  
             }
             failure{
-                echo "Built failed"  
+                echo "Built failed."  
             }
         }
     
