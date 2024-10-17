@@ -38,7 +38,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId:'godwin-portfolio-Cred',passwordVariable:'PASSWORD',usernameVariable:'USERNAME',)]){
                 sh"docker login -u $USERNAME -p $PASSWORD"
                 sh "docker tag godwin-portfolio-app:${NEW_VERSION} $USERNAME/${GitHub_Repo_app_name}"
-                sh "docker push" 
+                sh "docker push $USERNAME/${GitHub_Repo_app_name}" 
                 sh "docker logout" 
                 
                 }            
@@ -50,11 +50,11 @@ pipeline {
                echo "Verion ${ NEW_VERSION} built"   
             }
             success{
-                 sh "docker system prune -a --volumes -f" 
+                //  sh "docker system prune -a --volumes -f" 
                  echo "Built successful"  
             }
             failure{
-                sh "docker system prune -a --volumes -f" 
+                // sh "docker system prune -a --volumes -f" 
                 echo "Built failed"  
             }
         }
