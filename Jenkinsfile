@@ -39,7 +39,6 @@ pipeline {
                 sh"docker login -u $USERNAME -p $PASSWORD"
                 sh "docker tag godwin-portfolio-app:${NEW_VERSION} $USERNAME/${GitHub_Repo_app_name}"
                 sh "docker push" 
-                params.builtCompleted == true 
                 sh "docker logout" 
                 
                 }            
